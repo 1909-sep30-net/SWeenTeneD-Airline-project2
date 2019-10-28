@@ -15,7 +15,6 @@ namespace Database
        //         Name = EAirport.Name,
        //         Location = EAirport.Location,
        //         Weather = EAirport.Weather,
-       //         DelayTime = EAirport.DelayTime
        //     };
        // }
 
@@ -28,7 +27,6 @@ namespace Database
        //         Name = BAirport.Name,
        //         Location = BAirport.Location,
        //         Weather = BAirport.Weather,
-       //         DelayTIme = BAirport.DelayTime
        //     };
        // }
 
@@ -77,28 +75,6 @@ namespace Database
         //        Company = BFlight.Company,
         //        DepartureTime = BFlight.DepartureTime,
         //        ArrivalTime = BFlight.ArrivalTime
-        //    };
-        //}
-
-        ////Map Entity --> Business
-        //public static Logic.Models.FlightLocation MapEToFlightLocation(Entities.FlightLocation EFlightLocation)
-        //{
-        //    return new Logic.Models.FlightLocation
-        //    {
-        //        FLID = EFlightLocation.FLID,
-        //        FlightID = EFlightLocation.FlightID,
-        //        ORI_DES = EFlightLocation.ORI_DES
-        //    };
-        //}
-
-        ////Map Business --> Entity
-        //public static Entities.FlightLocation MapFlightLocationToE(Logic.Models.FlightLocation BFlightLocation)
-        //{
-        //    return new Entities.FlightLocation
-        //    {
-        //        FLID = BFlightLocation.FLID,
-        //        FlightID = BFlightLocation.FlightID,
-        //        ORI_DES = BFlightLocation.ORI_DES
         //    };
         //}
 
