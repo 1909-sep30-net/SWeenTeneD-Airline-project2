@@ -1,0 +1,4 @@
+C:\revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.csprojAssemblyReference.cache
+C:\revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.MvcApplicationPartsAssemblyInfo.cache
+C:\revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.AssemblyInfoInputs.cache
+C:\revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.AssemblyInfo.cs

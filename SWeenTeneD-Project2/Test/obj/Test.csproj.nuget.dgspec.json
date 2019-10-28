@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Test\\Test.csproj": {}
+    "C:\\revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Test\\Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Database\\Database.csproj": {
+    "C:\\revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Database\\Database.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Database\\Database.csproj",
+        "projectUniqueName": "C:\\revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Database\\Database.csproj",
         "projectName": "Database",
-        "projectPath": "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Database\\Database.csproj",
-        "packagesPath": "C:\\Users\\Sam Lin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Database\\obj\\",
+        "projectPath": "C:\\revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Database\\Database.csproj",
+        "packagesPath": "C:\\Users\\tuduken\\.nuget\\packages\\",
+        "outputPath": "C:\\revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Database\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Sam Lin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tuduken\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -80,31 +80,31 @@
         }
       }
     },
-    "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Test\\Test.csproj": {
+    "C:\\revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Test\\Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Test\\Test.csproj",
+        "projectUniqueName": "C:\\revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Test\\Test.csproj",
         "projectName": "Test",
-        "projectPath": "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Test\\Test.csproj",
-        "packagesPath": "C:\\Users\\Sam Lin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Test\\obj\\",
+        "projectPath": "C:\\revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Test\\Test.csproj",
+        "packagesPath": "C:\\Users\\tuduken\\.nuget\\packages\\",
+        "outputPath": "C:\\revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Sam Lin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tuduken\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp2.1"
+          "netcoreapp3.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp2.1": {
+          "netcoreapp3.0": {
             "projectReferences": {
-              "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Database\\Database.csproj": {
-                "projectPath": "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Database\\Database.csproj"
+              "C:\\revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Database\\Database.csproj": {
+                "projectPath": "C:\\revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Database\\Database.csproj"
               }
             }
           }
@@ -116,24 +116,12 @@
         }
       },
       "frameworks": {
-        "netcoreapp2.1": {
+        "netcoreapp3.0": {
           "dependencies": {
-            "Microsoft.AspNetCore.App": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.1.1, )",
-              "autoReferenced": true
-            },
             "Microsoft.AspNetCore.Razor.Design": {
               "suppressParent": "All",
               "target": "Package",
               "version": "[2.1.2, )"
-            },
-            "Microsoft.NETCore.App": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.1.0, )",
-              "autoReferenced": true
             }
           },
           "imports": [
@@ -146,6 +134,14 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
