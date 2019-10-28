@@ -7,7 +7,7 @@ namespace Database
     public class FlightTicket
     {
         //PK
-        public int TicketID { get; set; }
+        public int FlightTicketID { get; set; }
 
         //FK
         public int FlightID { get; set; }

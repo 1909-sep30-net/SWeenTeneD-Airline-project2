@@ -88,19 +88,25 @@ namespace Database
 
                 entity.HasOne(e => e.Airport)
                     .WithMany(d => d.Flight)
+                    .HasPrincipalKey(p => p.Location)
                     .HasForeignKey(p => p.Origin)
                     .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasOne(e => e.Airport)
                     .WithMany(d => d.Flight)
+                    .HasPrincipalKey(p => p.Location)
                     .HasForeignKey(p => p.Destination)
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<FlightTicket>(entity => 
             {
-                entity.Property(e => e.TicketID)
-                    .UseIdentityColumn();
+                entity.Property(e => e.FlightTicketID)
+                    .UseIdentityColumn()
+                    .IsRequired();
+
+                entity.HasIndex(e => e.FlightTicketID)
+                    .IsUnique();
 
                 entity.HasOne(e => e.Flight)
                     .WithMany(d => d.FlightTicket)
