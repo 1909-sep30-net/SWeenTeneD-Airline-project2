@@ -1,8 +1,0 @@
-C:\Users\Sam Lin\Desktop\Revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.csprojAssemblyReference.cache
-C:\Users\Sam Lin\Desktop\Revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Sam Lin\Desktop\Revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.AssemblyInfoInputs.cache
-C:\Users\Sam Lin\Desktop\Revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.AssemblyInfo.cs
-C:\Users\Sam Lin\Desktop\Revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.TagHelpers.input.cache
-C:\Users\Sam Lin\Desktop\Revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.TagHelpers.output.cache
-C:\Users\Sam Lin\Desktop\Revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.dll
-C:\Users\Sam Lin\Desktop\Revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.pdb
