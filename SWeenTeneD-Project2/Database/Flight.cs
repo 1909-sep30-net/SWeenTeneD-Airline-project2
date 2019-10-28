@@ -15,5 +15,9 @@ namespace Database
         public DateTime DepartureTime { get; set; }
 
         public DateTime ArrivalTime { get; set; }
+
+        public virtual ICollection<FlightLocation> FlightLocation { get; set; }
+
+        public virtual ICollection<FlightTicket> FlightTicket { get; set; }
     }
 }

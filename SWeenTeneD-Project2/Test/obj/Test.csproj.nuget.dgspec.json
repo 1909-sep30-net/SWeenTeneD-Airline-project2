@@ -80,6 +80,58 @@
         }
       }
     },
+    "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Logic\\Logic.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Logic\\Logic.csproj",
+        "projectName": "Logic",
+        "projectPath": "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Logic\\Logic.csproj",
+        "packagesPath": "C:\\Users\\Sam Lin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Logic\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Sam Lin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.0": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Test\\Test.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -94,17 +146,20 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp2.1"
+          "netcoreapp3.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp2.1": {
+          "netcoreapp3.0": {
             "projectReferences": {
               "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Database\\Database.csproj": {
                 "projectPath": "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Database\\Database.csproj"
+              },
+              "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Logic\\Logic.csproj": {
+                "projectPath": "C:\\Users\\Sam Lin\\Desktop\\Revature\\SWeenTeneD-Airline-project2\\SWeenTeneD-Project2\\Logic\\Logic.csproj"
               }
             }
           }
@@ -116,24 +171,20 @@
         }
       },
       "frameworks": {
-        "netcoreapp2.1": {
+        "netcoreapp3.0": {
           "dependencies": {
-            "Microsoft.AspNetCore.App": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.1.1, )",
-              "autoReferenced": true
-            },
             "Microsoft.AspNetCore.Razor.Design": {
               "suppressParent": "All",
               "target": "Package",
               "version": "[2.1.2, )"
             },
-            "Microsoft.NETCore.App": {
-              "suppressParent": "All",
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[2.1.0, )",
-              "autoReferenced": true
+              "version": "[3.0.1, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL.Design": {
+              "target": "Package",
+              "version": "[1.1.0, )"
             }
           },
           "imports": [
@@ -146,6 +197,14 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }

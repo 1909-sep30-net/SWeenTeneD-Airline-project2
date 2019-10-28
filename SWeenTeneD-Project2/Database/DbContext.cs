@@ -7,7 +7,6 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Npgsql.EntityFrameworkCore;
-using Database;
 
 namespace Database
 {
@@ -50,6 +49,93 @@ namespace Database
                     .IsUnique();
 
             });
+
+            modelBuilder.Entity<Airport>(entity =>
+            {
+                entity.Property(e => e.AirportID)
+                    .UseIdentityColumn();
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasIndex(e => e.Name)
+                    .IsUnique();
+
+                entity.Property(e => e.Location)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.Weather)
+                    .IsRequired()
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.DelayTime)
+                    .IsRequired();
+            });
+
+            modelBuilder.Entity<Flight>(entity =>
+            {
+                entity.Property(e => e.FlightID)
+                    .UseIdentityColumn();
+
+                entity.Property(e => e.Company)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.DepartureTime)
+                    .IsRequired();
+
+                entity.Property(e => e.ArrivalTime)
+                    .IsRequired();
+            });
+
+            modelBuilder.Entity<FlightLocation>(entity =>
+            {
+                entity.Property(e => e.FLID)
+                    .UseIdentityColumn();
+
+                entity.HasOne(e => e.Flight)
+                    .WithMany(d => d.FlightLocation)
+                    .HasForeignKey(p => p.FlightID)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.Airport)
+                    .WithMany(d => d.FlightLocation)
+                    .HasForeignKey(p => p.ORI_DES)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<FlightTicket>(entity => 
+            {
+                entity.Property(e => e.TicketID)
+                    .UseIdentityColumn();
+
+                entity.HasOne(e => e.Flight)
+                    .WithMany(d => d.FlightTicket)
+                    .HasForeignKey(p => p.FlightID)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(e => e.Customer)
+                    .WithMany(d => d.FlightTicket)
+                    .HasForeignKey(p => p.CustomerID)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.Property(e => e.Price)
+                    .IsRequired();
+
+                entity.Property(e => e.Checkin)
+                    .IsRequired();
+
+                entity.Property(e => e.Luggage);
+                    
+
+            });
+
         }
     }
 

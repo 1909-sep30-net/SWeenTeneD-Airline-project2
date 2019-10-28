@@ -16,5 +16,7 @@ namespace Database
         public string Email { get; set; }
 
         public string Password { get; set; }
+
+        public virtual ICollection<FlightTicket> FlightTicket { get; set; }
     }
 }

@@ -21,6 +21,8 @@ namespace Database
 
         public int Luggage { get; set; }
 
+        public Customer Customer { get; set; }
 
+        public Flight Flight { get; set; }
     }
 }

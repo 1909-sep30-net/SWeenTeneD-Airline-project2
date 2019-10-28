@@ -13,5 +13,9 @@ namespace Database
 
         //FK
         public string ORI_DES { get; set; }
+
+        public Flight Flight { get; set; }
+
+        public Airport Airport { get; set; }
     }
 }

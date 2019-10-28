@@ -1,0 +1,8 @@
+C:\Users\Sam Lin\Desktop\Revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Logic\bin\Debug\netcoreapp3.0\Logic.deps.json
+C:\Users\Sam Lin\Desktop\Revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Logic\bin\Debug\netcoreapp3.0\Logic.dll
+C:\Users\Sam Lin\Desktop\Revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Logic\bin\Debug\netcoreapp3.0\Logic.pdb
+C:\Users\Sam Lin\Desktop\Revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Logic\obj\Debug\netcoreapp3.0\Logic.csprojAssemblyReference.cache
+C:\Users\Sam Lin\Desktop\Revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Logic\obj\Debug\netcoreapp3.0\Logic.AssemblyInfoInputs.cache
+C:\Users\Sam Lin\Desktop\Revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Logic\obj\Debug\netcoreapp3.0\Logic.AssemblyInfo.cs
+C:\Users\Sam Lin\Desktop\Revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Logic\obj\Debug\netcoreapp3.0\Logic.dll
+C:\Users\Sam Lin\Desktop\Revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Logic\obj\Debug\netcoreapp3.0\Logic.pdb
