@@ -16,8 +16,10 @@ namespace Database
 
         public DateTime ArrivalTime { get; set; }
 
-        public virtual ICollection<FlightLocation> FlightLocation { get; set; }
+        public string Origin { get; set; }
+        public string Destination { get; set; }
 
+        public Airport Airport { get; set; }
         public virtual ICollection<FlightTicket> FlightTicket { get; set; }
     }
 }

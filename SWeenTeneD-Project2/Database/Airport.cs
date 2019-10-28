@@ -16,8 +16,6 @@ namespace Database
 
         public string Weather { get; set; }
 
-        public int DelayTime { get; set; }
-
-        public virtual ICollection<FlightLocation> FlightLocation { get; set; } 
+        public ICollection<Flight> Flight { get; set; }
     }
 }

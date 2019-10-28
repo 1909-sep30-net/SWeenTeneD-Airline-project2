@@ -19,7 +19,6 @@ namespace Database
         public virtual DbSet<Customer> Customer { get; set;}
         public virtual DbSet<Airport> Airport { get; set; }
         public virtual DbSet<Flight> Flight { get; set; }
-        public virtual DbSet<FlightLocation> FlightLocation { get; set; }
         public virtual DbSet<FlightTicket> FlightTicket { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
@@ -70,8 +69,6 @@ namespace Database
                     .IsRequired()
                     .HasMaxLength(10);
 
-                entity.Property(e => e.DelayTime)
-                    .IsRequired();
             });
 
             modelBuilder.Entity<Flight>(entity =>
@@ -88,23 +85,15 @@ namespace Database
 
                 entity.Property(e => e.ArrivalTime)
                     .IsRequired();
-            });
 
-            modelBuilder.Entity<FlightLocation>(entity =>
-            {
-                entity.Property(e => e.FLID)
-                    .UseIdentityColumn();
-
-                entity.HasOne(e => e.Flight)
-                    .WithMany(d => d.FlightLocation)
-                    .HasForeignKey(p => p.FlightID)
-                    .IsRequired()
+                entity.HasOne(e => e.Airport)
+                    .WithMany(d => d.Flight)
+                    .HasForeignKey(p => p.Origin)
                     .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasOne(e => e.Airport)
-                    .WithMany(d => d.FlightLocation)
-                    .HasForeignKey(p => p.ORI_DES)
-                    .IsRequired()
+                    .WithMany(d => d.Flight)
+                    .HasForeignKey(p => p.Destination)
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
@@ -135,8 +124,9 @@ namespace Database
                     
 
             });
-
+            OnModelCreatingPartial(modelBuilder);
         }
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 
 }
