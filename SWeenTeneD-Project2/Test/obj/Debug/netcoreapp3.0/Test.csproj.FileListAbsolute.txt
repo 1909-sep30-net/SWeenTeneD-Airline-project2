@@ -2,3 +2,7 @@ C:\revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netco
 C:\revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.MvcApplicationPartsAssemblyInfo.cache
 C:\revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.AssemblyInfoInputs.cache
 C:\revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.AssemblyInfo.cs
+C:\revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.TagHelpers.input.cache
+C:\revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.TagHelpers.output.cache
+C:\revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.dll
+C:\revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.pdb
