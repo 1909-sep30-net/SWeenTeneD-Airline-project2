@@ -28,11 +28,11 @@ namespace Database
             modelBuilder.Entity<Customer>(entity =>
             {
                 entity.Property(c => c.CustomerID)
-                      .UseIdentityColumn();
+                    .UseIdentityColumn();
 
                 entity.Property(e => e.FirstName)
-                      .IsRequired()
-                      .HasMaxLength(30);
+                    .IsRequired()
+                    .HasMaxLength(30);
 
                 entity.Property(e => e.LastName)
                       .IsRequired()
@@ -40,9 +40,15 @@ namespace Database
 
                 entity.Property(e => e.Email)
                       .IsRequired();
-                      //%@% verified needed
+                //%@% verified needed
 
-                
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.HasIndex(e => e.Password)
+                    .IsUnique();
+
             });
         }
     }
