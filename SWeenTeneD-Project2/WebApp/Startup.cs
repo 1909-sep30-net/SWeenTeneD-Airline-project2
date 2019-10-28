@@ -27,7 +27,7 @@ namespace WebApp
         {
             string connectionString = Configuration.GetConnectionString("SWTD");
 
-            services.AddDbContext<DbContext>(options =>
+            services.AddDbContext<SWTDbContext>(options =>
             {
                 options.UseNpgsql(connectionString);
             });
