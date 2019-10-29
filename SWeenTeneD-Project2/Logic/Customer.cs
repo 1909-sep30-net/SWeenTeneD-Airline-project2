@@ -25,5 +25,13 @@ namespace SWeenTeneD_Project2
             Email = mail;
             Password = pw;
         }
+
+        public bool ValidCust(Customer c)
+        {
+            if (c.FirstName != null && c.LastName != null && c.Email != null && c.Password != null)
+                return true;
+            else
+                return false;
+        }
     }
 }

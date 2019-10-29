@@ -6,3 +6,4 @@ C:\revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netco
 C:\revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.TagHelpers.output.cache
 C:\revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.dll
 C:\revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.pdb
+C:\revature\SWeenTeneD-Airline-project2\SWeenTeneD-Project2\Test\obj\Debug\netcoreapp3.0\Test.RazorCoreGenerate.cache
