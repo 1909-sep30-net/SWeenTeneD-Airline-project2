@@ -17,5 +17,25 @@ namespace Logic.Models
         public string Weather { get; set; }
 
         public int DelayTime { get; set; }
+
+        public Airport()
+        {
+        }
+
+        public Airport(int airID, string airName, string airLocate, string airWeather)
+        {
+            AirportID = airID;
+            Name = airName;
+            Location = airLocate;
+            Weather = airWeather;
+        }
+
+        public bool ValidAirport(Airport air)
+        {
+            if (Name != null && Location != null && Weather != null)
+                return true;
+            else
+                return false;
+        }
     }
 }

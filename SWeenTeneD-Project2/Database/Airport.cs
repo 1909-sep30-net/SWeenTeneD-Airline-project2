@@ -17,6 +17,5 @@ namespace Database
         public string Weather { get; set; }
 
 
-        //public virtual ICollection<FlightLocation> FlightLocation { get; set; } 
     }
 }
