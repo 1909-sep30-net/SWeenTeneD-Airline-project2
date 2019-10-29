@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Logic.Models
+namespace SWeenTeneD_Project2
 {
-    //Business Customer
     public class Customer
     {
         //PK
@@ -16,5 +15,23 @@ namespace Logic.Models
         public string Email { get; set; }
 
         public string Password { get; set; }
+
+        public Customer() { }
+
+        public Customer(string fname, string lname, string mail, string pw)
+        {
+            FirstName = fname;
+            LastName = lname;
+            Email = mail;
+            Password = pw;
+        }
+
+        public bool ValidCust(Customer c)
+        {
+            if (c.FirstName != null && c.LastName != null && c.Email != null && c.Password != null)
+                return true;
+            else
+                return false;
+        }
     }
 }
