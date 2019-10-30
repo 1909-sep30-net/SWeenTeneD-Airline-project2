@@ -1,4 +1,4 @@
-using SWeenTeneD_Project2;
+using Logic;
 using System;
 using Xunit;
 
