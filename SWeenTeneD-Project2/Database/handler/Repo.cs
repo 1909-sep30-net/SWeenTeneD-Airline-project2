@@ -5,7 +5,8 @@ using Logic;
 
 namespace Database
 {
-    class Repo : IRepo
+    public class Repo : IRepo
     {
+
     }
 }
