@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Database
+namespace SWeenTeneD_Project2
 {
     public class Flight
     {
         //PK
-
         public int FlightID { get; set; }
 
         public string Company { get; set; }
@@ -16,11 +15,13 @@ namespace Database
 
         public DateTime ArrivalTime { get; set; }
 
-        public string Origin { get; set; }
-        public string Destination { get; set; }
+        public Flight() { }
 
-        public Airport Airport { get; set; }
-
-        public virtual ICollection<FlightTicket> FlightTicket { get; set; }
+        public Flight(string comp, DateTime leave, DateTime arrive)
+        {
+            Company = comp;
+            DepartureTime = leave;
+            ArrivalTime = arrive;
+        }
     }
 }
