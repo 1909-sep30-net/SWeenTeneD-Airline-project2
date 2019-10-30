@@ -17,5 +17,6 @@ namespace Database
         public string Weather { get; set; }
 
         public ICollection<Flight> Flight { get; set; }
+
     }
 }

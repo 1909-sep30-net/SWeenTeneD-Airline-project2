@@ -20,6 +20,7 @@ namespace Database
         public string Destination { get; set; }
 
         public Airport Airport { get; set; }
+
         public virtual ICollection<FlightTicket> FlightTicket { get; set; }
     }
 }
