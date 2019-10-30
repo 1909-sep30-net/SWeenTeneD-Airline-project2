@@ -37,5 +37,14 @@ namespace Logic.Models
             else
                 return false;
         }
+
+        public bool AirportDelay(Airport air)
+        {
+            if(Weather == "Rain" | Weather == "rain")
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

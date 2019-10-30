@@ -15,5 +15,24 @@ namespace Logic.Models
         public DateTime DepartureTime { get; set; }
 
         public DateTime ArrivalTime { get; set; }
+
+        public Flight() { }
+
+        public Flight(int Fid, string Fcompany, DateTime Depart, DateTime Arrive)
+        {
+            FlightID = Fid;
+            Company = Fcompany;
+            DepartureTime = Depart;
+            ArrivalTime = Arrive;
+        }
+
+        public bool ValidFlight(Flight flight)
+        {
+            if(Company != null && DepartureTime != null && ArrivalTime != null)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
