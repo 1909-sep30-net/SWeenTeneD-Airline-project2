@@ -23,9 +23,8 @@ namespace SWeenTeneD_Project2
 
         public FlightTicket() { }
 
-        public FlightTicket(int ticketID, int flightID, int customerID, double price, bool checkin, int luggage)
+        public FlightTicket(int flightID, int customerID, double price, bool checkin, int luggage)
         {
-            TicketID = ticketID;
             FlightID = flightID;
             CustomerID = customerID;
             Price = price;

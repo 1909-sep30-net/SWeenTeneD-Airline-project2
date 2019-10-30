@@ -17,9 +17,8 @@ namespace SWeenTeneD_Project2
 
         public Flight() { }
 
-        public Flight(int Fid, string Fcompany, DateTime Depart, DateTime Arrive)
+        public Flight(string Fcompany, DateTime Depart, DateTime Arrive)
         {
-            FlightID = Fid;
             Company = Fcompany;
             DepartureTime = Depart;
             ArrivalTime = Arrive;

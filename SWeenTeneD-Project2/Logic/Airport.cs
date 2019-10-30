@@ -22,9 +22,8 @@ namespace SWeenTeneD_Project2
         {
         }
 
-        public Airport(int airID, string airName, string airLocate, string airWeather)
+        public Airport(string airName, string airLocate, string airWeather)
         {
-            AirportID = airID;
             Name = airName;
             Location = airLocate;
             Weather = airWeather;
