@@ -18,14 +18,33 @@ namespace SWeenTeneD_Project2
 
         public int DelayTime { get; set; }
 
-        public Airport() { }
-
-        public Airport(string n, string loc, string skies, int delay)
+        public Airport()
         {
-            Name = n;
-            Location = loc;
-            Weather = skies;
-            DelayTime = delay;
+        }
+
+        public Airport(int airID, string airName, string airLocate, string airWeather)
+        {
+            AirportID = airID;
+            Name = airName;
+            Location = airLocate;
+            Weather = airWeather;
+        }
+
+        public bool ValidAirport(Airport air)
+        {
+            if (Name != null && Location != null && Weather != null)
+                return true;
+            else
+                return false;
+        }
+
+        public bool AirportDelay(Airport air)
+        {
+            if (Weather == "Rain" | Weather == "rain")
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
