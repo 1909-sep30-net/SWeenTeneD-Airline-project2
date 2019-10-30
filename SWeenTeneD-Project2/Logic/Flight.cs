@@ -17,11 +17,20 @@ namespace SWeenTeneD_Project2
 
         public Flight() { }
 
-        public Flight(string comp, DateTime leave, DateTime arrive)
+        public Flight(string Fcompany, DateTime Depart, DateTime Arrive)
         {
-            Company = comp;
-            DepartureTime = leave;
-            ArrivalTime = arrive;
+            Company = Fcompany;
+            DepartureTime = Depart;
+            ArrivalTime = Arrive;
+        }
+
+        public bool ValidFlight(Flight flight)
+        {
+            if (Company != null && DepartureTime != null && ArrivalTime != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

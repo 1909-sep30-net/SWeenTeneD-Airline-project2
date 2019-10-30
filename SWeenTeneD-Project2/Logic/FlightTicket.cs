@@ -15,7 +15,7 @@ namespace SWeenTeneD_Project2
         //FK
         public int CustomerID { get; set; }
 
-        public decimal Price { get; set; }
+        public double Price { get; set; }
 
         public bool Checkin { get; set; }
 
@@ -23,13 +23,22 @@ namespace SWeenTeneD_Project2
 
         public FlightTicket() { }
 
-        public FlightTicket(int flyID, int custID, decimal cost, bool check, int baggins)
+        public FlightTicket(int flightID, int customerID, double price, bool checkin, int luggage)
         {
-            FlightID = flyID;
-            CustomerID = custID;
-            Price = cost;
-            Checkin = check;
-            Luggage = baggins;
+            FlightID = flightID;
+            CustomerID = customerID;
+            Price = price;
+            Checkin = checkin;
+            Luggage = luggage;
+        }
+
+        public bool ValidFlightTicket(FlightTicket flightTicket)
+        {
+            if (Checkin != false)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
