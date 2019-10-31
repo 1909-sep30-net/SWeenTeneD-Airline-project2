@@ -11,6 +11,7 @@ using Logic;
 namespace Database
 {
     public class Repo : IRepo
+
     {
         private static SWTDbContext dbcontext;
         //Add logger;
