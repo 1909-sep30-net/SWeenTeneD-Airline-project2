@@ -9,29 +9,29 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ConsumerController : ControllerBase
+    public class FlightTicketController : ControllerBase
     {
-        // GET: api/Consumer
+        // GET: api/FlightTicket
         [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET: api/Consumer/5
+        // GET: api/FlightTicket/5
         [HttpGet("{id}", Name = "Get")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST: api/Consumer
+        // POST: api/FlightTicket
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT: api/Consumer/5
+        // PUT: api/FlightTicket/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {

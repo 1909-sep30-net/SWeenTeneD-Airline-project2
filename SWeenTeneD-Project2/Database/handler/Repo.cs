@@ -40,6 +40,11 @@ namespace Database
          * 
          */
 
+        /*
+         * 
+         * 
+         */
+
         /*public string UpdateCustomer ( info )
          * {
          *     var customer = DB.E.Customer(c => c.Info == info);
