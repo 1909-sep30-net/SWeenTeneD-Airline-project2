@@ -1,0 +1,208 @@
+[33mcommit 9ba46e55ebe1192737a1fc1983a7a8b5cd19d723[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: f5a72eb b033415
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Wed Oct 30 17:07:32 2019 -0500
+
+    Merge branch 'master' of https://github.com/1909-sep30-net/SWeenTeneD-Airline-project2
+
+[33mcommit f5a72eb136907e22add292991b11261a43ce1b28[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Wed Oct 30 17:06:48 2019 -0500
+
+    pseuodo code for repo added, try to connect to pipeline
+
+[33mcommit b0334152a1792da5bc1a25fe3d562479eaa48f16[m
+Author: Hsuan-Yu Lin(Sam Lin) <o100249243@gmail.com>
+Date:   Wed Oct 30 17:02:12 2019 -0500
+
+    Initialized pipeline with help
+    
+    [skip ci]
+
+[33mcommit bba37e25805278b63b51c24e600709a6ab9f2e93[m[33m ([m[1;31morigin/wesley[m[33m)[m
+Merge: 3682a4c fa5b393
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Wed Oct 30 15:49:40 2019 -0500
+
+    Merge branch 'master' of https://github.com/1909-sep30-net/SWeenTeneD-Airline-project2
+
+[33mcommit 3682a4c57f943c170c20303a4d030b87cf143e02[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Wed Oct 30 15:47:02 2019 -0500
+
+    Mapper modified
+
+[33mcommit fa5b393c3500fb2bb34b16ae8ba8bf0b2e820983[m
+Author: Wesley Tang <wesley.tang25@gmail.com>
+Date:   Wed Oct 30 15:30:51 2019 -0500
+
+    added logic library to UnitTest1
+
+[33mcommit 1329886bfccb87d41c4b080ca0d84f9931765130[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Wed Oct 30 15:26:20 2019 -0500
+
+    IRepo&Repo created, namespace: swee--- => Logic
+
+[33mcommit 140d971148d64d3939726ffee1ec24d298cb118d[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Wed Oct 30 15:17:42 2019 -0500
+
+    Constructor modified and duplicate DbContext deleted
+
+[33mcommit 35f915b6b6db53322801b82d7e3b3755095bda07[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Wed Oct 30 15:00:17 2019 -0500
+
+    logic model deleted
+
+[33mcommit ad811702920de52cff9a26f303084d223b9e12b6[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Wed Oct 30 14:17:06 2019 -0500
+
+    unneccessary files deleted
+
+[33mcommit 4d3a0661d7542fd6e6ad09cae8639411066fb89e[m
+Author: Topsunkist <44852759+Topsunkist@users.noreply.github.com>
+Date:   Wed Oct 30 14:14:55 2019 -0500
+
+    Tri (#3)
+    
+    * My push to my branch to be reviewed before merging
+    
+    * 10-28-19 3:28PM My commit in my branch
+    
+    * 3:33PM Added Mapper
+    
+    * 3:45PM commit, deleted FlightLocation, got rid of DelayTime in Airport, changed name of gitignore file to correct name
+    
+    * Added 2 aiport unit test, added validation method, and constructor in Airport class in logic.
+    
+    * Added more unit testing and added constructors and validation methods in the logic classes.
+
+[33mcommit 54ffa78907d1332d2fd5d5807da17dd60581b54d[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Wed Oct 30 14:11:12 2019 -0500
+
+    AngularApp deleted, unitest added
+
+[33mcommit 5f3c281bd8698444597605c78a423722659c916f[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Tue Oct 29 09:24:30 2019 -0500
+
+    deleted uneccessary files
+
+[33mcommit 589cd7f6f6a1c331619968eb29ab95b5fab7e073[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Tue Oct 29 09:07:13 2019 -0500
+
+    unitest and consturctor of Customer(Logic) added
+
+[33mcommit d72691729470de73fe37fab8560237271fcae7a6[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Mon Oct 28 20:16:26 2019 -0500
+
+    try to add AngularApp.dll
+
+[33mcommit 790abc1201a3919c755022a1f5a11af8e4e46d1b[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Mon Oct 28 19:59:00 2019 -0500
+
+    picture of webapp service added
+
+[33mcommit 800b8db4e6447c93a4a5efd3afb7af431f30c325[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Mon Oct 28 19:50:05 2019 -0500
+
+    Angular project created and connection to database success
+
+[33mcommit fd259ff5bb8d7badc955ffca5114bf6a1ee7cfdd[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Mon Oct 28 18:40:56 2019 -0500
+
+    delete uneccessary files
+
+[33mcommit 1b0e0afbd183d8fd1f1619b38a8bd2c8350b0fbe[m
+Merge: c66e82e 9b8eef9
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Mon Oct 28 18:31:50 2019 -0500
+
+    Merge branch 'master' of https://github.com/1909-sep30-net/SWeenTeneD-Airline-project2
+
+[33mcommit c66e82e16d7d7099e6bfdad2239232da09a8cbd4[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Mon Oct 28 18:26:04 2019 -0500
+
+    Connection Success, cloud database updated
+
+[33mcommit 7c328b14390e1566b5935cbfd6784bb203996fe2[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Mon Oct 28 16:36:55 2019 -0500
+
+    merge conflict fixed please CLONE again
+
+[33mcommit 9b8eef954b088640bf9840e15b8983dfb72f3ab4[m
+Author: Hsuan-Yu Lin(Sam Lin) <o100249243@gmail.com>
+Date:   Mon Oct 28 15:57:19 2019 -0500
+
+    new version of diagram for database and webapp
+
+[33mcommit abf2401233de8c76dc3b2f0d76526a4a94530e13[m
+Author: Hsuan-Yu Lin(Sam Lin) <o100249243@gmail.com>
+Date:   Mon Oct 28 15:56:41 2019 -0500
+
+    delete old database diagram
+
+[33mcommit 500a9126a9e254238aba7303e6cc82a3b07d299c[m
+Author: Hsuan-Yu Lin(Sam Lin) <o100249243@gmail.com>
+Date:   Mon Oct 28 15:56:14 2019 -0500
+
+    delete old diagram of database
+
+[33mcommit c6edcc6bb94df9c35a27ce6f485ecccc9b4ed379[m
+Author: Hsuan-Yu Lin(Sam Lin) <o100249243@gmail.com>
+Date:   Mon Oct 28 15:55:05 2019 -0500
+
+    file name corrected
+
+[33mcommit 6721a0f480db7ddfc34e2304745b5f6822d9d571[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Mon Oct 28 15:53:04 2019 -0500
+
+    Db schema and model adjusted
+
+[33mcommit de8f102077ebcf646fddb673ea7379d22f211f9c[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Mon Oct 28 15:02:28 2019 -0500
+
+    WebUI initialized
+
+[33mcommit 6297094d801912486fb0dfb8c34322a2e7d9654d[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Mon Oct 28 14:44:58 2019 -0500
+
+    try to build but failed because of .NET version conflict
+
+[33mcommit 0247943ec14df6471db9d2cc76995e160cd0008e[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Mon Oct 28 11:52:03 2019 -0500
+
+    test
+
+[33mcommit 22d63cfe6c97ea694476b202b61c2342175cedb8[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Mon Oct 28 11:41:41 2019 -0500
+
+    db model created working on EF code first
+
+[33mcommit 3663f03afc712ef3bd7b341dfb8d5f4a26d34986[m
+Author: Hsuan-Yu Lin <o100249243@gmail.com>
+Date:   Sat Oct 26 16:17:11 2019 -0500
+
+    Solution Initiallized
+
+[33mcommit 5ddeb7943051d0959d6dc8a955d9ee6ffb3b3113[m
+Author: Hsuan-Yu Lin(Sam Lin) <o100249243@gmail.com>
+Date:   Sat Oct 26 15:07:29 2019 -0500
+
+    Initial commit
