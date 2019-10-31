@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SWeenTeneD_Project2
+namespace Logic
 {
     public class Customer
     {
