@@ -7,7 +7,6 @@ namespace Database
     public class Flight
     {
         //PK
-
         public int FlightID { get; set; }
 
         public string Company { get; set; }
@@ -18,6 +17,7 @@ namespace Database
 
         public string Origin { get; set; }
         public string Destination { get; set; }
+        public int SeatAvailable { get; set; }
 
         public Airport Airport { get; set; }
 

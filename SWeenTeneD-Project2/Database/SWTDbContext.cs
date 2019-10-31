@@ -37,11 +37,10 @@ namespace Database
                       .HasMaxLength(30);
 
                 entity.Property(e => e.Email)
-                      .IsRequired();
+                      .HasMaxLength(50);
                 //%@% verified needed
 
                 entity.Property(e => e.Password)
-                    .IsRequired()
                     .HasMaxLength(30);
 
                 entity.HasIndex(e => e.Password)
@@ -97,6 +96,9 @@ namespace Database
                     .HasPrincipalKey(p => p.Location)
                     .HasForeignKey(p => p.Destination)
                     .OnDelete(DeleteBehavior.Cascade);
+
+                entity.Property(e => e.SeatAvailable)
+                    .IsRequired();
             });
 
             modelBuilder.Entity<FlightTicket>(entity => 
