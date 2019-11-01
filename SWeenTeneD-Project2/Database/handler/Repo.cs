@@ -16,12 +16,7 @@ namespace Database
 
     {
         private static SWTDbContext dbcontext;
-        //Add logger;
-
-        //public Repo( SWTDbContext d_dbContext )
-        //{
-        //    dbContext = d_dbContext;
-        //}
+        
 
         public string CreateCustomer(Logic.Customer customer)
         {
@@ -34,6 +29,7 @@ namespace Database
         }
 
 
+<<<<<<< HEAD
         public List<Logic.Customer> ReadCustomerList(Logic.Customer customer)
         {
             IQueryable<Customer> q_cusotmer = null;
@@ -61,8 +57,21 @@ namespace Database
             }
             return customerFind;
             //logger.Info();
+=======
+        //public IEnumerable<Customer> ReadCustomerList(Logic.Customer customer)
+        //{
+        //    IQueryable<Customer> cusotmerFind = dbcontext.Customer.Where(c => c.Info == info)
+        //                                       .AsNotracking();
+        //    if (IQ<customer> == null)
+        //    {
+        //        return null;
+        //        logger.Warn();
+        //    }
+        //    return IQ<customer>.Select(Mapper.Customer);
+        //    logger.Info();
+>>>>>>> 5e14af370df1f5255baedac40ab53805449c218c
 
-        }
+        //}
 
         public string UpdateCustomer(Logic.Customer customer)
           {
