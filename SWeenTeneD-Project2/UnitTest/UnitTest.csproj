@@ -22,8 +22,6 @@
 
   <ItemGroup>
 
-    <ProjectReference Include="..\AngularApp\AngularApp.csproj" />
-
     <ProjectReference Include="..\Database\Database.csproj" />
     <ProjectReference Include="..\Logic\Logic.csproj" />
   </ItemGroup>
