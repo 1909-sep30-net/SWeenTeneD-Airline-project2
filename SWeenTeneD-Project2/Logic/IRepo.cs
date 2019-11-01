@@ -6,6 +6,6 @@ namespace Logic
 {
     public interface IRepo
     {
-        public string CreateCustomer(Customer customer) { }
+        //public string CreateCustomer(Customer customer) { }
     }
 }

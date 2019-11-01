@@ -34,7 +34,7 @@ namespace Database
         }
 
 
-        public IEnumerable<Customer> ReadCustomerList(Logic.Customer customer)
+        /*public IEnumerable<Customer> ReadCustomerList(Logic.Customer customer)
         {
             IQueryable<Customer> cusotmerFind = dbcontext.Customer.Where(c => c.Info == info)
                                                .AsNotracking();
@@ -46,7 +46,7 @@ namespace Database
             return IQ<customer>.Select(Mapper.Customer);
             logger.Info();
 
-        }
+        }*/
 
 
 

@@ -1,6 +1,8 @@
 using Logic;
 using System;
 using Xunit;
+using Moq;
+using Database;
 
 namespace UnitTest
 {
@@ -8,6 +10,17 @@ namespace UnitTest
     {
         public DateTime DepartingTime = new DateTime(2019, 11, 20, 10, 30, 5);
         public DateTime ArrivalTime = new DateTime(2019, 11, 21, 9, 30, 0);
+        var stubRepo = new Repo();
+        
+        [Theory]
+        [InlineData("Tri", "Nguyen", "Tri@Broke.Everything", "TriBrokeEverything")]
+        public void TestMock(string fname, string lname, string email, string password)
+        {
+            var a = new Mock<Customer>();
+            Customer b = new Customer(fname, lname, email, password);
+            a.Setup(x => x = b);
+            Assert.True(true, a.Object.ValidCust(b).ToString());
+        }
 
 
         [Theory]
