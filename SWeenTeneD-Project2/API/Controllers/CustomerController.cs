@@ -20,38 +20,42 @@ namespace API.Controllers
         //private readonly CustomerL
 
         // GET: api/Customer
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "Customer", "GET GET" };
-        }
-
-
         //[HttpGet]
-        //public IActionResult GetAllCustomers(info){
-        //     IEnumerable<Logic.Customer> customers = Repo.ReadCustomerList(info);
-        //     IEnumerable<API.Models.APICustomer> apiCustomer = customers.Select( c=> new API.Models.APICustomer
-        //     {
-        //         //From APIModel = Logic
-        //         CustomerID = c.CustomerID,
-        //         FirstName = c.FirstName,
-        //       LastName = c.LastName,
-        //         Email = c.Email,
-        //         Password = c.Password
-
-
-        //     });
-        //     return apiCustomer;
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "Customer", "GET GET" };
         //}
+
+
+        [HttpGet("{firstname}", Name = "GetCustomer")]
+        public IEnumerable<API.Models.APICustomer> GetAllCustomers(string firstname)
+        {
+            Logic.Customer Lcus = new Logic.Customer();
+            Lcus.FirstName = firstname;
+            IEnumerable<Logic.Customer> customers = repo.ReadCustomerList(Lcus);
+            IEnumerable<API.Models.APICustomer> apiCustomer = customers.Select(c => new API.Models.APICustomer
+            {
+                //From APIModel = Logic
+                CustomerID = c.CustomerID,
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                Email = c.Email,
+                Password = c.Password
+
+
+            });
+
+            return apiCustomer;
+        }
 
 
 
         // GET: api/Customer/5
-        [HttpGet("{id}", Name = "GetCustomer")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        //[HttpGet("{id}", Name = "GetCustomer")]
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
         // POST: api/Customer
         //[HttpPost]
