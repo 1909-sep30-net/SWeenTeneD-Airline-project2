@@ -16,12 +16,7 @@ namespace Database
 
     {
         private static SWTDbContext dbcontext;
-        //Add logger;
-
-        //public Repo( SWTDbContext d_dbContext )
-        //{
-        //    dbContext = d_dbContext;
-        //}
+        
 
         public string CreateCustomer(Logic.Customer customer)
         {
@@ -33,58 +28,86 @@ namespace Database
             return $"{customer.FirstName} {customer.LastName} is created.";
         }
 
-
-        /*public IEnumerable<Customer> ReadCustomerList(Logic.Customer customer)
+        public List<Logic.Customer> ReadCustomerList(Logic.Customer customer)
         {
-            IQueryable<Customer> cusotmerFind = dbcontext.Customer.Where(c => c.Info == info)
-                                               .AsNotracking();
-            if (IQ<customer> == null)
+            IQueryable<Customer> q_cusotmer = null;
+
+            if (customer.FirstName != null)
+            {
+                q_cusotmer = dbcontext.Customer.Where(c => c.FirstName == customer.FirstName)
+                                    .AsNoTracking();
+            }
+            if (customer.LastName != null)
+            {
+                q_cusotmer = dbcontext.Customer.Where(c => c.LastName == customer.LastName)
+                    .AsNoTracking();
+            }
+            if (customer.Email != null)
+            {
+                q_cusotmer = dbcontext.Customer.Where(c => c.Email == customer.Email)
+                    .AsNoTracking();
+            }
+
+            List<Logic.Customer> customerFind = q_cusotmer.Select(Mapper.MapEToCustomer).ToList();
+            if (customerFind == null)
             {
                 return null;
-                logger.Warn();
+                //logger.Warn();
             }
-            return IQ<customer>.Select(Mapper.Customer);
-            logger.Info();
+            return customerFind;
+            //logger.Info();
+        }
 
-        }*/
+        public string UpdateCustomer(Logic.Customer customer)
+          {
 
 
+            Customer e_customer
+                = dbcontext.Customer.Find(customer.CustomerID);
 
-        /*
-         * 
-         * 
-         */
+            if (customer == null)
+            {
+                return "no such customer";
+            }
 
-        /*public string UpdateCustomer ( info )
-         * {
-         *     var customer = DB.E.Customer(c => c.Info == info);
-         *     if ( customer == null )
-         *     {
-         *         return "no such customer";
-         *     }
-         *     customer.infotochange = newInfo; may have multiple info
-         *     logger.Info();
-         *     DB.savechanges();
-         *     logger.Info();
-         *     
-         *     return "update success"
-         * }
-         */
+            if (customer.LastName != null) {
+                e_customer.LastName = customer.LastName;
+            }
+            if (customer.FirstName != null)
+            {
+                e_customer.LastName = customer.LastName;
+            }
+            if (customer.Email != null)
+            {
+                e_customer.Email = customer.Email;
+            }
+            if (customer.Password != null)
+            {
+                e_customer.Password = customer.Password;
+            }
+            
+            dbcontext.SaveChanges();
+            //logger.Info();
 
-        /*public string DeleteCustomer ( info )
-         * {
-         *     E.Cusotmer = DB.Customer.Where(c => c.Info == info);
-         *     if ( E.Cusotmer == null )
-         *     {
-         *        return "no such customer";
-         *     }
-         *     DB.Remove(context.Customer.Info(c => c.Info == info));
-         *     DB.SaveChanges();
-         *     logger.Info();
-         *     
-         *     return "delete success"
-         * }
-         */
+            return "update success";
+          }
+
+
+        public string DeleteCustomer(Logic.Customer customer)
+        {
+            Customer e_customer = dbcontext.Customer.Find(customer.CustomerID);
+            if (customer == null)
+            {
+                return "no such customer";
+            }
+
+            dbcontext.Remove(dbcontext.Customer.Find(customer.CustomerID));
+            dbcontext.SaveChanges();
+            //logger.info();
+
+            return "delete success";
+        }
+
 
 
         /*public CreateFlight( L.Flight )
