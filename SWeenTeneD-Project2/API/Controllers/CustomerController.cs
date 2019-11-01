@@ -4,19 +4,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Logic;
 using Database;
 
 namespace API.Controllers
 {
    
-    [Route("api/[controller]")]
+    [Route("~/api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
-
-        private static Repo repo;
         //REPO goes here
+        private static IRepo iRepo;
 
+        public CustomerController(IRepo repo)
+        {
+            iRepo = repo;
+        }
         //private readonly CustomerL
 
         // GET: api/Customer
@@ -26,13 +30,12 @@ namespace API.Controllers
         //    return new string[] { "Customer", "GET GET" };
         //}
 
-
         [HttpGet("{firstname}", Name = "GetCustomer")]
         public IEnumerable<API.Models.APICustomer> GetAllCustomers(string firstname)
         {
             Logic.Customer Lcus = new Logic.Customer();
             Lcus.FirstName = firstname;
-            IEnumerable<Logic.Customer> customers = repo.ReadCustomerList(Lcus);
+            IEnumerable<Logic.Customer> customers = iRepo.ReadCustomerList(Lcus);
             IEnumerable<API.Models.APICustomer> apiCustomer = customers.Select(c => new API.Models.APICustomer
             {
                 //From APIModel = Logic
@@ -62,25 +65,24 @@ namespace API.Controllers
         //public void Post([FromBody] string value)
         //{
         //}
-        
-          [HttpPost]
-          public ActionResult Create(Logic.Customer customer){
+        [Route("~/api/AddCustomer")]
+        [HttpPost]
+          public ActionResult Create([FromBody, Bind("CustomerID, FirstName, LastName, Email, Password")]Models.APICustomer customer){
 
             Logic.Customer cus = new Logic.Customer
             {
-                CustomerID = customer.CustomerID,
+                //CustomerID = customer.CustomerID,
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
                 Email = customer.Email,
                 Password = customer.Password
-
             };
 
             var newID = customer.CustomerID;
 
-            string a = repo.CreateCustomer(cus);
+            string a = iRepo.CreateCustomer(cus);
 
-            return CreatedAtRoute("Get", new { Id = newID}, customer);
+            return CreatedAtRoute("GetCustomer", new { id = cus.CustomerID }, customer);
             //return Ok();
 
         }

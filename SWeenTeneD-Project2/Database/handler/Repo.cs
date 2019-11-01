@@ -17,6 +17,10 @@ namespace Database
     {
         private static SWTDbContext dbcontext;
         
+        public Repo ( SWTDbContext dbContext )
+        {
+            dbcontext = dbContext;
+        }
 
         public string CreateCustomer(Logic.Customer customer)
         {
@@ -32,7 +36,7 @@ namespace Database
         {
             
 
-            if (customer == null)
+            if (customer.CustomerID <= 0 && customer.FirstName == null)
             {
                 return dbcontext.Customer.Select(Mapper.MapEToCustomer).ToList();
             }
@@ -56,13 +60,13 @@ namespace Database
                         .AsNoTracking();
                 }
 
-                List<Logic.Customer> customerFind = q_cusotmer.Select(Mapper.MapEToCustomer).ToList();
-                if (customerFind.Count < 1)
+                IEnumerable<Logic.Customer> customerFind = q_cusotmer.Select(Mapper.MapEToCustomer);
+                if (customerFind.ToList().Count < 1)
                 {
                     return null;
                     //logger.Warn();
                 }
-                return customerFind;
+                return customerFind.ToList();
             }
             else
             {
