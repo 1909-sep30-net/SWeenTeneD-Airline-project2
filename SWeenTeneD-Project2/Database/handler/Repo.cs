@@ -30,6 +30,7 @@ namespace Database
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         public List<Logic.Customer> ReadCustomerList(Logic.Customer customer)
         {
             IQueryable<Customer> q_cusotmer = null;
@@ -58,6 +59,8 @@ namespace Database
             return customerFind;
             //logger.Info();
 =======
+=======
+>>>>>>> 5e14af370df1f5255baedac40ab53805449c218c
         //public IEnumerable<Customer> ReadCustomerList(Logic.Customer customer)
         //{
         //    IQueryable<Customer> cusotmerFind = dbcontext.Customer.Where(c => c.Info == info)
@@ -69,6 +72,9 @@ namespace Database
         //    }
         //    return IQ<customer>.Select(Mapper.Customer);
         //    logger.Info();
+<<<<<<< HEAD
+>>>>>>> 5e14af370df1f5255baedac40ab53805449c218c
+=======
 >>>>>>> 5e14af370df1f5255baedac40ab53805449c218c
 
         //}

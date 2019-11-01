@@ -9,6 +9,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> 5e14af370df1f5255baedac40ab53805449c218c
 =======
  
 >>>>>>> 5e14af370df1f5255baedac40ab53805449c218c
