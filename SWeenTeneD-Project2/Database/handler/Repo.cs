@@ -28,14 +28,12 @@ namespace Database
             return $"{customer.FirstName} {customer.LastName} is created.";
         }
 
-
-<<<<<<< HEAD
-<<<<<<< HEAD
         public List<Logic.Customer> ReadCustomerList(Logic.Customer customer)
         {
             IQueryable<Customer> q_cusotmer = null;
 
-            if (customer.FirstName != null) {
+            if (customer.FirstName != null)
+            {
                 q_cusotmer = dbcontext.Customer.Where(c => c.FirstName == customer.FirstName)
                                     .AsNoTracking();
             }
@@ -44,40 +42,21 @@ namespace Database
                 q_cusotmer = dbcontext.Customer.Where(c => c.LastName == customer.LastName)
                     .AsNoTracking();
             }
-            if (customer.Email != null) 
+            if (customer.Email != null)
             {
                 q_cusotmer = dbcontext.Customer.Where(c => c.Email == customer.Email)
                     .AsNoTracking();
             }
 
             List<Logic.Customer> customerFind = q_cusotmer.Select(Mapper.MapEToCustomer).ToList();
-            if (customerFind == null )
+            if (customerFind == null)
             {
                 return null;
                 //logger.Warn();
             }
             return customerFind;
             //logger.Info();
-=======
-=======
->>>>>>> 5e14af370df1f5255baedac40ab53805449c218c
-        //public IEnumerable<Customer> ReadCustomerList(Logic.Customer customer)
-        //{
-        //    IQueryable<Customer> cusotmerFind = dbcontext.Customer.Where(c => c.Info == info)
-        //                                       .AsNotracking();
-        //    if (IQ<customer> == null)
-        //    {
-        //        return null;
-        //        logger.Warn();
-        //    }
-        //    return IQ<customer>.Select(Mapper.Customer);
-        //    logger.Info();
-<<<<<<< HEAD
->>>>>>> 5e14af370df1f5255baedac40ab53805449c218c
-=======
->>>>>>> 5e14af370df1f5255baedac40ab53805449c218c
-
-        //}
+        }
 
         public string UpdateCustomer(Logic.Customer customer)
           {
