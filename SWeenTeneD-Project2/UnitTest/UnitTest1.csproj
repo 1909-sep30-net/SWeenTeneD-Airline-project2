@@ -22,6 +22,10 @@
 
   <ItemGroup>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     <ProjectReference Include="..\Database\Database.csproj" />
     <ProjectReference Include="..\Logic\Logic.csproj" />
   </ItemGroup>

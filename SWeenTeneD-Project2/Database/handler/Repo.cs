@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using Logic;
+using Microsoft.EntityFrameworkCore;
 //IE: IEnumerable object
 //IQ: IQueryable object
 // E: Entity Model
@@ -11,32 +13,45 @@ using Logic;
 namespace Database
 {
     public class Repo : IRepo
+
     {
         private static SWTDbContext dbcontext;
         //Add logger;
 
-        /*public CreateCustomer( Logic.Customer customer )
-         * {
-         * 
-         *     Entity.Customer e_customer = Mapper.MapCustomer(customer);
-         *     dbContext.Add(e_customer);
-         *     dbContext.SaveChange();
-         *     logger.Info();
-         * }
-         */
+        //public Repo( SWTDbContext d_dbContext )
+        //{
+        //    dbContext = d_dbContext;
+        //}
 
-        /*public IEnumerable<Customer> ReadCustomerList( info )
-         * {
-         *     create IQ<customer> = DB.E.Customer.Where(c => c.Info == info)
-         *                                        .AsNotracking();
-         *     if ( IQ<customer> == null ) 
-         *     {
-         *         return null;
-         *         logger.Warn();
-         *     }
-         *     return IQ<customer>.Select(Mapper.Customer);
-         *     logger.Info();
-         * }
+        public string CreateCustomer(Logic.Customer customer)
+        {
+            Customer e_customer = Mapper.MapCustomerToE(customer);
+            dbcontext.Add(e_customer);
+            dbcontext.SaveChanges();
+            //logger.Info();
+
+            return $"{customer.FirstName} {customer.LastName} is created.";
+        }
+
+
+        public IEnumerable<Customer> ReadCustomerList(Logic.Customer customer)
+        {
+            IQueryable<Customer> cusotmerFind = dbcontext.Customer.Where(c => c.Info == info)
+                                               .AsNotracking();
+            if (IQ<customer> == null)
+            {
+                return null;
+                logger.Warn();
+            }
+            return IQ<customer>.Select(Mapper.Customer);
+            logger.Info();
+
+        }
+
+
+
+        /*
+         * 
          * 
          */
 
