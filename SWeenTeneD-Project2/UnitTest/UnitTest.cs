@@ -1,8 +1,9 @@
 using log = Logic;
 using System;
 using Xunit;
+using Database;
+using API;
 using Moq;
-using dat = Database;
 
 namespace UnitTest
 {
