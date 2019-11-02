@@ -39,6 +39,8 @@ namespace API
                 options.UseNpgsql(connectionString);
             });
             services.AddControllers();
+
+            services.AddScoped<IRepo, Repo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

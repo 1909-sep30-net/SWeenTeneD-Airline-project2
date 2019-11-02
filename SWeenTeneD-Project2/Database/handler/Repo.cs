@@ -17,6 +17,10 @@ namespace Database
     {
         private static SWTDbContext dbcontext;
         
+        public Repo ( SWTDbContext dbContext )
+        {
+            dbcontext = dbContext;
+        }
 
         public string CreateCustomer(Logic.Customer customer)
         {
@@ -30,31 +34,46 @@ namespace Database
 
         public List<Logic.Customer> ReadCustomerList(Logic.Customer customer)
         {
-            IQueryable<Customer> q_cusotmer = null;
+            
 
-            if (customer.FirstName != null)
+            if (customer.CustomerID <= 0 && customer.FirstName == null)
             {
-                q_cusotmer = dbcontext.Customer.Where(c => c.FirstName == customer.FirstName)
-                                    .AsNoTracking();
-            }
-            if (customer.LastName != null)
-            {
-                q_cusotmer = dbcontext.Customer.Where(c => c.LastName == customer.LastName)
-                    .AsNoTracking();
-            }
-            if (customer.Email != null)
-            {
-                q_cusotmer = dbcontext.Customer.Where(c => c.Email == customer.Email)
-                    .AsNoTracking();
+                return dbcontext.Customer.Select(Mapper.MapEToCustomer).ToList();
             }
 
-            List<Logic.Customer> customerFind = q_cusotmer.Select(Mapper.MapEToCustomer).ToList();
-            if (customerFind == null)
+            if (customer.CustomerID <= 0)
             {
-                return null;
-                //logger.Warn();
+                IQueryable<Customer> q_cusotmer = null;
+                if (customer.FirstName != null)
+                {
+                    q_cusotmer = dbcontext.Customer.Where(c => c.FirstName == customer.FirstName)
+                                        .AsNoTracking();
+                }
+                if (customer.LastName != null)
+                {
+                    q_cusotmer = dbcontext.Customer.Where(c => c.LastName == customer.LastName)
+                        .AsNoTracking();
+                }
+                if (customer.Email != null)
+                {
+                    q_cusotmer = dbcontext.Customer.Where(c => c.Email == customer.Email)
+                        .AsNoTracking();
+                }
+
+                IEnumerable<Logic.Customer> customerFind = q_cusotmer.Select(Mapper.MapEToCustomer);
+                if (customerFind.ToList().Count < 1)
+                {
+                    return null;
+                    //logger.Warn();
+                }
+                return customerFind.ToList();
             }
-            return customerFind;
+            else
+            {
+                List<Logic.Customer> customerFind = new List<Logic.Customer>();
+                customerFind.Add(Mapper.MapEToCustomer(dbcontext.Customer.Find(customer.CustomerID)));
+                return customerFind;
+            }
             //logger.Info();
         }
 
@@ -110,30 +129,68 @@ namespace Database
 
 
 
-        /*public CreateFlight( L.Flight )
-         * {
-         * 
-         *     E.Flight = Map.Mapper(L.Flight)
-         *     DB.Add(E.Flight);    
-         *     dbContext.SaveChange();
-         *     logger.Info();
-         * }
-         */
+        public string CreateFlight(Logic.Flight flight)
+        {
 
-        /*public IEnumerable<Flight> ReadFlightList( info )
-         * {
-         *     create IQ<Flight> = DB.E.Flight.Where(f => f.Info == info)
-         *                                        .AsNotracking();
-         *     if ( IQ<Flight> == null ) 
-         *     {
-         *         return null;
-         *         logger.Warn();
-         *     }
-         *     return IQ<Flight>.Select(Mapper.Flight);
-         *     logger.Info();
-         * }
-         * 
-         */
+            Flight e_flight = Mapper.MapFlightToE(flight);
+            dbcontext.Add(e_flight);
+            dbcontext.SaveChanges();
+            //logger.info();
+
+            return "New Flight Created!";
+        }
+
+
+        public List<Logic.Flight> ReadFlightList(Logic.Flight flight)
+        {
+            if ( flight == null )
+            {
+                return dbcontext.Flight.Select(Mapper.MapEtoFlight).ToList();
+            }
+            if (flight.FlightID <= 0)
+            {
+                IQueryable<Flight> e_flight = null;
+
+                if (flight.Company != null)
+                {
+                    e_flight = dbcontext.Flight.Where(f => f.Company == flight.Company)
+                                               .AsNoTracking();
+                }
+                if (flight.Origin != null)
+                {
+                    e_flight = dbcontext.Flight.Where(f => f.Origin == flight.Origin)
+                                               .AsNoTracking();
+                }
+                if (flight.Destination != null)
+                {
+                    e_flight = dbcontext.Flight.Where(f => f.Destination == flight.Destination)
+                                               .AsNoTracking();
+                }
+                if (flight.SeatAvailable > 0)
+                {
+                    e_flight = dbcontext.Flight.Where(f => f.SeatAvailable > flight.SeatAvailable)
+                                               .AsNoTracking();
+                }
+
+                List<Logic.Flight> flightFind = e_flight.Select(Mapper.MapEtoFlight).ToList();
+                if ( flightFind.Count < 1 )
+                {
+                    return null;
+                    //logger.Warn();
+                }
+                return flightFind;
+            }
+            else 
+            {
+                List<Logic.Flight> flightFind = new List<Logic.Flight>();
+                flightFind.Add(Mapper.MapEtoFlight(dbcontext.Flight.Find(flight.FlightID)));
+                return flightFind;
+            }
+            //logger.Info();
+
+        }
+         
+         
 
         /*public string UpdateFlight ( info )
          * {

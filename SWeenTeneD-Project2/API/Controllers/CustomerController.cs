@@ -4,25 +4,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Database;
 using Logic;
+using Database;
 
 namespace API.Controllers
 {
    
-    [Route("api/[controller]")]
+    [Route("~/api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
-
+        //REPO goes here
         private static IRepo iRepo;
 
         public CustomerController(IRepo repo)
         {
             iRepo = repo;
         }
-        //REPO goes here
-
         //private readonly CustomerL
 
         // GET: api/Customer
@@ -31,7 +29,6 @@ namespace API.Controllers
         //{
         //    return new string[] { "Customer", "GET GET" };
         //}
-
 
         [HttpGet("{firstname}", Name = "GetCustomer")]
         public IEnumerable<API.Models.APICustomer> GetAllCustomers(string firstname)
@@ -46,12 +43,7 @@ namespace API.Controllers
                 FirstName = c.FirstName,
                 LastName = c.LastName,
                 Email = c.Email,
-                Password = c.Password 
-
-            });
-
-            return apiCustomer;
-        }
+                Password = c.Password
 
         //[HttpGet("{firstname}", Name = "GetCustomer")]
         //public List<API.Models.APICustomer> GetCustomer(string firstname)
@@ -59,19 +51,10 @@ namespace API.Controllers
         //    Logic.Customer Lcus = new Logic.Customer();
         //    Lcus.FirstName = firstname;
 
-        //    List<Logic.Customer> customers = repo.ReadCustomerList(Lcus);
-        //    List<API.Models.APICustomer> apiCustomer = new List<API.Models.APICustomer>();
+            });
 
-        //    foreach (Logic.Customer cus in customers)
-        //    {
-        //        //CustomerID = cus.CustomerID,
-        //        //FirstName = cus.FirstName,
-        //        //LastName = cus.LastName,
-        //        //Email = cus.Email,
-        //        //Password = cus.Password
-        //        //CustomerID = cus.CustomerID,
-        //    }
-        //}
+            return apiCustomer;
+        }
 
 
 
@@ -100,7 +83,6 @@ namespace API.Controllers
                 LastName = customer.LastName,
                 Email = customer.Email,
                 Password = customer.Password
-
             };
           
            iRepo.CreateCustomer(cus);
