@@ -63,8 +63,8 @@ namespace API.Controllers
                 Email = customer.Email,
                 Password = customer.Password
             };
-          
-           iRepo.CreateCustomer(cus);
+
+            iRepo.CreateCustomer(cus);
 
             return CreatedAtRoute("GetCustomer", new { FirstName = cus.FirstName }, customer);
 
