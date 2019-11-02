@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using Logic;
+using Microsoft.EntityFrameworkCore;
 //IE: IEnumerable object
 //IQ: IQueryable object
 // E: Entity Model
@@ -14,89 +16,181 @@ namespace Database
 
     {
         private static SWTDbContext dbcontext;
-        //Add logger;
+        
+        public Repo ( SWTDbContext dbContext )
+        {
+            dbcontext = dbContext;
+        }
 
-        /*public CreateCustomer( Logic.Customer customer )
-         * {
-         * 
-         *     Entity.Customer e_customer = Mapper.MapCustomer(customer);
-         *     dbContext.Add(e_customer);
-         *     dbContext.SaveChange();
-         *     logger.Info();
-         * }
-         */
+        public string CreateCustomer(Logic.Customer customer)
+        {
+            Customer e_customer = Mapper.MapCustomerToE(customer);
+            dbcontext.Add(e_customer);
+            dbcontext.SaveChanges();
+            //logger.Info();
 
-        /*public IEnumerable<Customer> ReadCustomerList( info )
-         * {
-         *     create IQ<customer> = DB.E.Customer.Where(c => c.Info == info)
-         *                                        .AsNotracking();
-         *     if ( IQ<customer> == null ) 
-         *     {
-         *         return null;
-         *         logger.Warn();
-         *     }
-         *     return IQ<customer>.Select(Mapper.Customer);
-         *     logger.Info();
-         * }
-         * 
-         */
+            return $"{customer.FirstName} {customer.LastName} is created.";
+        }
 
-        /*public string UpdateCustomer ( info )
-         * {
-         *     var customer = DB.E.Customer(c => c.Info == info);
-         *     if ( customer == null )
-         *     {
-         *         return "no such customer";
-         *     }
-         *     customer.infotochange = newInfo; may have multiple info
-         *     logger.Info();
-         *     DB.savechanges();
-         *     logger.Info();
-         *     
-         *     return "update success"
-         * }
-         */
+        public List<Logic.Customer> ReadCustomerList(Logic.Customer customer)
+        {
+            
 
-        /*public string DeleteCustomer ( info )
-         * {
-         *     E.Cusotmer = DB.Customer.Where(c => c.Info == info);
-         *     if ( E.Cusotmer == null )
-         *     {
-         *        return "no such customer";
-         *     }
-         *     DB.Remove(context.Customer.Info(c => c.Info == info));
-         *     DB.SaveChanges();
-         *     logger.Info();
-         *     
-         *     return "delete success"
-         * }
-         */
+            if (customer.CustomerID <= 0 && customer.FirstName == null)
+            {
+                return dbcontext.Customer.Select(Mapper.MapEToCustomer).ToList();
+            }
+
+            if (customer.CustomerID <= 0)
+            {
+                IQueryable<Customer> q_cusotmer = null;
+                if (customer.FirstName != null)
+                {
+                    q_cusotmer = dbcontext.Customer.Where(c => c.FirstName == customer.FirstName)
+                                        .AsNoTracking();
+                }
+                if (customer.LastName != null)
+                {
+                    q_cusotmer = dbcontext.Customer.Where(c => c.LastName == customer.LastName)
+                        .AsNoTracking();
+                }
+                if (customer.Email != null)
+                {
+                    q_cusotmer = dbcontext.Customer.Where(c => c.Email == customer.Email)
+                        .AsNoTracking();
+                }
+
+                IEnumerable<Logic.Customer> customerFind = q_cusotmer.Select(Mapper.MapEToCustomer);
+                if (customerFind.ToList().Count < 1)
+                {
+                    return null;
+                    //logger.Warn();
+                }
+                return customerFind.ToList();
+            }
+            else
+            {
+                List<Logic.Customer> customerFind = new List<Logic.Customer>();
+                customerFind.Add(Mapper.MapEToCustomer(dbcontext.Customer.Find(customer.CustomerID)));
+                return customerFind;
+            }
+            //logger.Info();
+        }
+
+        public string UpdateCustomer(Logic.Customer customer)
+          {
 
 
-        /*public CreateFlight( L.Flight )
-         * {
-         * 
-         *     E.Flight = Map.Mapper(L.Flight)
-         *     DB.Add(E.Flight);    
-         *     dbContext.SaveChange();
-         *     logger.Info();
-         * }
-         */
+            Customer e_customer
+                = dbcontext.Customer.Find(customer.CustomerID);
 
-        /*public IEnumerable<Flight> ReadFlightList( info )
-         * {
-         *     create IQ<Flight> = DB.E.Flight.Where(f => f.Info == info)
-         *                                        .AsNotracking();
-         *     if ( IQ<Flight> == null ) 
-         *     {
-         *         return null;
-         *         logger.Warn();
-         *     }
-         *     return IQ<Flight>.Select(Mapper.Flight);
-         *     logger.Info();
-         * }
-         * 
-         */
+            if (customer == null)
+            {
+                return "no such customer";
+            }
+
+            if (customer.LastName != null) {
+                e_customer.LastName = customer.LastName;
+            }
+            if (customer.FirstName != null)
+            {
+                e_customer.LastName = customer.LastName;
+            }
+            if (customer.Email != null)
+            {
+                e_customer.Email = customer.Email;
+            }
+            if (customer.Password != null)
+            {
+                e_customer.Password = customer.Password;
+            }
+            
+            dbcontext.SaveChanges();
+            //logger.Info();
+
+            return "update success";
+          }
+
+
+        public string DeleteCustomer(Logic.Customer customer)
+        {
+            Customer e_customer = dbcontext.Customer.Find(customer.CustomerID);
+            if (customer == null)
+            {
+                return "no such customer";
+            }
+
+            dbcontext.Remove(dbcontext.Customer.Find(customer.CustomerID));
+            dbcontext.SaveChanges();
+            //logger.info();
+
+            return "delete success";
+        }
+
+
+
+        public string CreateFlight(Logic.Flight flight)
+        {
+
+            Flight e_flight = Mapper.MapFlightToE(flight);
+            dbcontext.Add(e_flight);
+            dbcontext.SaveChanges();
+            //logger.info();
+
+            return "New Flight Created!";
+        }
+
+
+        public List<Logic.Flight> ReadFlightList(Logic.Flight flight)
+        {
+            if ( flight == null )
+            {
+                return dbcontext.Flight.Select(Mapper.MapEtoFlight).ToList();
+            }
+            if (flight.FlightID <= 0)
+            {
+                IQueryable<Flight> e_flight = null;
+
+                if (flight.Company != null)
+                {
+                    e_flight = dbcontext.Flight.Where(f => f.Company == flight.Company)
+                                               .AsNoTracking();
+                }
+                if (flight.Origin != null)
+                {
+                    e_flight = dbcontext.Flight.Where(f => f.Origin == flight.Origin)
+                                               .AsNoTracking();
+                }
+                if (flight.Destination != null)
+                {
+                    e_flight = dbcontext.Flight.Where(f => f.Destination == flight.Destination)
+                                               .AsNoTracking();
+                }
+                if (flight.SeatAvailable > 0)
+                {
+                    e_flight = dbcontext.Flight.Where(f => f.SeatAvailable > flight.SeatAvailable)
+                                               .AsNoTracking();
+                }
+
+                List<Logic.Flight> flightFind = e_flight.Select(Mapper.MapEtoFlight).ToList();
+                if ( flightFind.Count < 1 )
+                {
+                    return null;
+                    //logger.Warn();
+                }
+                return flightFind;
+            }
+            else 
+            {
+                List<Logic.Flight> flightFind = new List<Logic.Flight>();
+                flightFind.Add(Mapper.MapEtoFlight(dbcontext.Flight.Find(flight.FlightID)));
+                return flightFind;
+            }
+            //logger.Info();
+
+        }
+         
+         
 
         /*public string UpdateFlight ( info )
          * {
