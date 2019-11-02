@@ -23,6 +23,10 @@
 
   <ItemGroup>
 
+
+    <ProjectReference Include="..\API\API.csproj" />
+
+
     <ProjectReference Include="..\Database\Database.csproj" />
     <ProjectReference Include="..\Logic\Logic.csproj" />
   </ItemGroup>

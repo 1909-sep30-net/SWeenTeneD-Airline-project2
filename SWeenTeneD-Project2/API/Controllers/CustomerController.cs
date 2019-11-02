@@ -4,63 +4,56 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Logic;
 using Database;
 
 namespace API.Controllers
 {
    
-    [Route("api/[controller]")]
+    [Route("~/api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
-
-        private static Repo repo;
         //REPO goes here
+        private static IRepo iRepo;
 
-        //private readonly CustomerL
-
-        // GET: api/Customer
-        [HttpGet]
-        public IEnumerable<string> Get()
+        public CustomerController(IRepo repo)
         {
-            return new string[] { "Customer", "GET GET" };
+            iRepo = repo;
         }
 
+        //GET: api/Customer/Customer's first name
+        [HttpGet("{firstname}", Name = "GetCustomer")]
+        public IEnumerable<API.Models.APICustomer> GetAllCustomers(string firstname)
+        {
+            Logic.Customer Lcus = new Logic.Customer();
+            Lcus.FirstName = firstname;
+            IEnumerable<Logic.Customer> customers = iRepo.ReadCustomerList(Lcus);
+            IEnumerable<API.Models.APICustomer> apiCustomer = customers.Select(c => new API.Models.APICustomer
+            {
+                //From APIModel = Logic
+                CustomerID = c.CustomerID,
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                Email = c.Email,
+                Password = c.Password
+            });
 
-        //[HttpGet]
-        //public IActionResult GetAllCustomers(info){
-        //     IEnumerable<Logic.Customer> customers = Repo.ReadCustomerList(info);
-        //     IEnumerable<API.Models.APICustomer> apiCustomer = customers.Select( c=> new API.Models.APICustomer
-        //     {
-        //         //From APIModel = Logic
-        //         CustomerID = c.CustomerID,
-        //         FirstName = c.FirstName,
-        //       LastName = c.LastName,
-        //         Email = c.Email,
-        //         Password = c.Password
-
-
-        //     });
-        //     return apiCustomer;
-        //}
-
-
+            return apiCustomer;
+        }
 
         // GET: api/Customer/5
-        [HttpGet("{id}", Name = "GetCustomer")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/Customer
-        //[HttpPost]
-        //public void Post([FromBody] string value)
+        //[HttpGet("{id}", Name = "GetCustomer")]
+        //public string Get(int id)
         //{
+        //    return "value";
         //}
-        
-          [HttpPost]
-          public ActionResult Create(Logic.Customer customer){
+
+        //POST: api/Customer
+
+        [HttpPost]
+        public ActionResult Create([FromBody, Bind("FirstName, LastName, Email, Password")]API.Models.APICustomer customer)
+        {
 
             Logic.Customer cus = new Logic.Customer
             {
@@ -69,28 +62,52 @@ namespace API.Controllers
                 LastName = customer.LastName,
                 Email = customer.Email,
                 Password = customer.Password
-
             };
 
-            var newID = customer.CustomerID;
+            iRepo.CreateCustomer(cus);
 
-            string a = repo.CreateCustomer(cus);
-
-            return CreatedAtRoute("Get", new { Id = newID}, customer);
-            //return Ok();
+            return CreatedAtRoute("GetCustomer", new { FirstName = cus.FirstName }, customer);
 
         }
 
-        // PUT: api/Customer/5
+        // PUT: api/Customer/First name of customer you want to edit
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(string id, [FromBody] API.Models.APICustomer Acustomer)
         {
+
+            Logic.Customer cus = new Logic.Customer();
+            cus.FirstName = id;
+            
+            IEnumerable<Logic.Customer> Lcustomers = iRepo.ReadCustomerList(cus);
+
+                //Remember to add try catch or some exception handling
+                //Right Now, can update but cannot update first name for some reason
+                Logic.Customer newCus = new Logic.Customer
+                {
+                    CustomerID = Acustomer.CustomerID,
+                    FirstName = Acustomer.FirstName,
+                    LastName = Acustomer.LastName,
+                    Email = Acustomer.Email,
+                    Password = Acustomer.Password
+                };
+
+                iRepo.UpdateCustomer(newCus);
+                return Ok();
+         
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/customer/CustomerID
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            Logic.Customer cus = new Logic.Customer();
+            cus.CustomerID = id;
+
+            IEnumerable<Logic.Customer> Lcustomers = iRepo.ReadCustomerList(cus);
+            iRepo.DeleteCustomer(cus);
+
+            return Ok();
+
         }
     }
 }

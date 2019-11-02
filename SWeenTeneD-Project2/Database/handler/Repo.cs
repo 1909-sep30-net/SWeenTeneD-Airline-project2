@@ -17,6 +17,11 @@ namespace Database
     {
         private static SWTDbContext dbcontext;
         
+        public Repo ( SWTDbContext dbContext )
+        {
+            dbcontext = dbContext;
+        }
+
 
         public string CreateCustomer(Logic.Customer customer)
         {
@@ -28,44 +33,57 @@ namespace Database
             return $"{customer.FirstName} {customer.LastName} is created.";
         }
 
+
         public List<Logic.Customer> ReadCustomerList(Logic.Customer customer)
         {
-            IQueryable<Customer> q_cusotmer = null;
-
-            if (customer.FirstName != null)
+            if (customer.CustomerID <= 0 && customer.FirstName == null)
             {
-                q_cusotmer = dbcontext.Customer.Where(c => c.FirstName == customer.FirstName)
-                                    .AsNoTracking();
-            }
-            if (customer.LastName != null)
-            {
-                q_cusotmer = dbcontext.Customer.Where(c => c.LastName == customer.LastName)
-                    .AsNoTracking();
-            }
-            if (customer.Email != null)
-            {
-                q_cusotmer = dbcontext.Customer.Where(c => c.Email == customer.Email)
-                    .AsNoTracking();
+                return dbcontext.Customer.Select(Mapper.MapEToCustomer).ToList();
             }
 
-            List<Logic.Customer> customerFind = q_cusotmer.Select(Mapper.MapEToCustomer).ToList();
-            if (customerFind == null)
+            if (customer.CustomerID <= 0)
             {
-                return null;
-                //logger.Warn();
+                IQueryable<Customer> q_cusotmer = null;
+                if (customer.FirstName != null)
+                {
+                    q_cusotmer = dbcontext.Customer.Where(c => c.FirstName == customer.FirstName)
+                                        .AsNoTracking();
+                }
+                if (customer.LastName != null)
+                {
+                    q_cusotmer = dbcontext.Customer.Where(c => c.LastName == customer.LastName)
+                        .AsNoTracking();
+                }
+                if (customer.Email != null)
+                {
+                    q_cusotmer = dbcontext.Customer.Where(c => c.Email == customer.Email)
+                        .AsNoTracking();
+                }
+
+                IEnumerable<Logic.Customer> customerFind = q_cusotmer.Select(Mapper.MapEToCustomer);
+                if (customerFind.ToList().Count < 1)
+                {
+                    //logger.Warn();
+                    return null;
+                }
+                return customerFind.ToList();
             }
-            return customerFind;
-            //logger.Info();
+            else
+            {
+                List<Logic.Customer> customerFind = new List<Logic.Customer>();
+                customerFind.Add(Mapper.MapEToCustomer(dbcontext.Customer.Find(customer.CustomerID)));
+                
+                //logger.Info();
+                return customerFind;
+            }
+            
         }
 
         public string UpdateCustomer(Logic.Customer customer)
           {
+            Customer e_customer = dbcontext.Customer.Find(customer.CustomerID);
 
-
-            Customer e_customer
-                = dbcontext.Customer.Find(customer.CustomerID);
-
-            if (customer == null)
+            if (e_customer == null)
             {
                 return "no such customer";
             }
@@ -75,7 +93,7 @@ namespace Database
             }
             if (customer.FirstName != null)
             {
-                e_customer.LastName = customer.LastName;
+                e_customer.FirstName = customer.FirstName;
             }
             if (customer.Email != null)
             {
@@ -96,185 +114,369 @@ namespace Database
         public string DeleteCustomer(Logic.Customer customer)
         {
             Customer e_customer = dbcontext.Customer.Find(customer.CustomerID);
-            if (customer == null)
+            if (e_customer == null)
             {
+                //logger.Warn("customer not found")
                 return "no such customer";
             }
 
             dbcontext.Remove(dbcontext.Customer.Find(customer.CustomerID));
             dbcontext.SaveChanges();
-            //logger.info();
 
+            //logger.info();
             return "delete success";
         }
 
+        public string CreateFlight(Logic.Flight flight)
+        {
+
+            Flight e_flight = Mapper.MapFlightToE(flight);
+            dbcontext.Add(e_flight);
+            dbcontext.SaveChanges();
+
+            //logger.info();
+            return "New Flight Created!";
+        }
+
+        public List<Logic.Flight> ReadFlightList(Logic.Flight flight)
+        {
+            if ( flight == null )
+            {
+                return dbcontext.Flight.Select(Mapper.MapEtoFlight).ToList();
+            }
+            if (flight.FlightID <= 0)
+            {
+                IQueryable<Flight> e_flight = null;
+
+                if (flight.Company != null)
+                {
+                    e_flight = dbcontext.Flight.Where(f => f.Company == flight.Company)
+                                               .AsNoTracking();
+                }
+                if (flight.Origin != null)
+                {
+                    e_flight = dbcontext.Flight.Where(f => f.Origin == flight.Origin)
+                                               .AsNoTracking();
+                }
+                if (flight.Destination != null)
+                {
+                    e_flight = dbcontext.Flight.Where(f => f.Destination == flight.Destination)
+                                               .AsNoTracking();
+                }
+                if (flight.SeatAvailable > 0)
+                {
+                    e_flight = dbcontext.Flight.Where(f => f.SeatAvailable > flight.SeatAvailable)
+                                               .AsNoTracking();
+                }
+
+                List<Logic.Flight> flightFind = e_flight.Select(Mapper.MapEtoFlight).ToList();
+                if ( flightFind.Count < 1 )
+                {
+                    //logger.Warn();
+                    return null;                  
+                }
+                return flightFind;
+            }
+            else 
+            {
+                List<Logic.Flight> flightFind = new List<Logic.Flight>
+                {
+                    Mapper.MapEtoFlight(dbcontext.Flight.Find(flight.FlightID))
+                };
+                //logger.Info();
+                return flightFind;
+            }
+        }
+
+        public string UpdateFlight(Logic.Flight flight)
+        {
+            Flight e_flight = dbcontext.Flight.Find(flight.FlightID);
+
+            if (e_flight == null)
+            {
+                //logger.Warn("Flight not Found")
+                return "no such Flight";
+            }
+
+            if (flight.Company != null)
+            {
+                e_flight.Company = flight.Company;
+            }
+            if (flight.Origin != null)
+            {
+                e_flight.Origin = flight.Origin;
+            }
+            if (flight.Destination != null)
+            {
+                e_flight.Destination = flight.Destination;
+            }
+            if (flight.DepartureTime != null)
+            {
+                e_flight.DepartureTime = flight.DepartureTime;
+            }
+            if (flight.ArrivalTime != null)
+            {
+                e_flight.ArrivalTime = flight.ArrivalTime;
+            }
+            if (flight.SeatAvailable > 0)
+            {
+                e_flight.SeatAvailable = flight.SeatAvailable;
+            }
+
+            dbcontext.SaveChanges();
+            //logger.Info();
+
+            return "update success";
+        }
 
 
-        /*public CreateFlight( L.Flight )
-         * {
-         * 
-         *     E.Flight = Map.Mapper(L.Flight)
-         *     DB.Add(E.Flight);    
-         *     dbContext.SaveChange();
-         *     logger.Info();
-         * }
-         */
+        public string DeleteFlight(Logic.Flight flight)
+        {
+            Flight e_flight = dbcontext.Flight.Find(flight.FlightID);
+            if (e_flight == null)
+            {
+                //logger.Warn("Flight not found.")
+                return "no such customer";
+            }
 
-        /*public IEnumerable<Flight> ReadFlightList( info )
-         * {
-         *     create IQ<Flight> = DB.E.Flight.Where(f => f.Info == info)
-         *                                        .AsNotracking();
-         *     if ( IQ<Flight> == null ) 
-         *     {
-         *         return null;
-         *         logger.Warn();
-         *     }
-         *     return IQ<Flight>.Select(Mapper.Flight);
-         *     logger.Info();
-         * }
-         * 
-         */
+            dbcontext.Remove(dbcontext.Customer.Find(flight.FlightID));
+            dbcontext.SaveChanges();
 
-        /*public string UpdateFlight ( info )
-         * {
-         *     var Flight = DB.E.Flight(f => f.Info == info);
-         *     if ( Flight == null )
-         *     {
-         *         return "no such Flight";
-         *     }
-         *     Flight.infotochange = newInfo; may have multiple info
-         *     logger.Info();
-         *     DB.savechanges();
-         *     logger.Info();
-         *     
-         *     return "update success"
-         * }
-         */
+            //logger.info();
+            return "delete success";
+        }
 
-        /*public string DeleteFlight ( info )
-         * {
-         *     E.Flight = DB.Flight.Where(f => f.Info == info);
-         *     if ( E.Flight == null )
-         *     {
-         *        return "no such Flight";
-         *     }
-         *     DB.Remove(context.Flight.Info(f => f.Info == info));
-         *     DB.SaveChanges();
-         *     logger.Info();
-         *     
-         *     return "delete success"
-         * }
-         */
+        public string CreateAirport(Logic.Airport airport)
+        {
+            Airport e_airport = Mapper.MapAirportToE(airport);
+            dbcontext.Add(e_airport);
+            dbcontext.SaveChanges();
 
-        /*public CreateAirport( Logic.Airport )
-         * {
-         *     E.Airport = Mapper.MapAirport(Airport);
-         *     DB.Add(E.Airport);
-         *     DB.SaveChange();
-         *     logger.Info();
-         * }
-         */
+            //logger.info();
+            return "New Flight Created!";
+        }
 
-        /*public IEnumerable<Airport> ReadAirportList( info )
-         * {
-         *     create IQ<Airport> = DB.E.Airport.Where(a => a.Info == info)
-         *                                        .AsNotracking();
-         *     if ( IQ<Airport> == null ) 
-         *     {
-         *         return null;
-         *         logger.Warn();
-         *     }
-         *     return IQ<Airport>.Select(Mapper.Airport);
-         *     logger.Info();
-         * }
-         * 
-         */
 
-        /*public string UpdateAirport ( info )
-         * {
-         *     var Airport = DB.E.Airport(a => a.Info == info);
-         *     if ( Airport == null )
-         *     {
-         *         return "no such Airport";
-         *     }
-         *     Airport.infotochange = newInfo; may have multiple info
-         *     logger.Info();
-         *     DB.savechanges();
-         *     logger.Info();
-         *     
-         *     return "update success"
-         * }
-         */
+        public List<Logic.Airport> ReadAirportList(Logic.Airport airport)
+        {
+            if (airport == null)
+            {
+                return dbcontext.Airport.Select(Mapper.MapEToAirport).ToList();
+            }
+            if (airport.AirportID <= 0)
+            {
+                IQueryable<Airport> e_airport = null;
 
-        /*public string DeleteAirport ( info )
-         * {
-         *     E.Airport = DB.Airport.Where(a => a.Info == info);
-         *     if ( E.Airport == null )
-         *     {
-         *        return "no such Airport";
-         *     }
-         *     DB.Remove(context.Airport.Info(a => a.Info == info));
-         *     DB.SaveChanges();
-         *     logger.Info();
-         *     
-         *     return "delete success"
-         * }
-         */
+                if (airport.Name != null)
+                {
+                    e_airport = dbcontext.Airport.Where(a => a.Name == airport.Name)
+                                               .AsNoTracking();
+                }
+                if (airport.Location != null)
+                {
+                    e_airport = dbcontext.Airport.Where(f => f.Location == airport.Location)
+                                               .AsNoTracking();
+                }
+                if (airport.Weather != null)
+                {
+                    e_airport = dbcontext.Airport.Where(f => f.Weather == airport.Weather)
+                                               .AsNoTracking();
+                }
 
-        /*public CreateFlightTicket( Logic.FlightTicket)
-         * {
-         * 
-         *     E.FlightTicket= Mapper.MapFlightTicket(FlightTicket);
-         *     DB.Add(FlightTicket);
-         *     DB.SaveChange();
-         *     logger.Info();
-         * }
-         */
+                List<Logic.Airport> airportFind = e_airport.Select(Mapper.MapEToAirport).ToList();
+                if (airportFind.Count < 1)
+                {
+                    //logger.Warn();
+                    return null;                    
+                }
+                return airportFind;
+            }
+            else
+            {
+                List<Logic.Airport> airportFind = new List<Logic.Airport>
+                {
+                    Mapper.MapEToAirport(dbcontext.Airport.Find(airport.AirportID))
+                };
+                //logger.Info();
+                return airportFind;
+            }
+            
 
-        /*public IEnumerable<FlightTicket> ReadFlightTicketList( info )
-         * {
-         *     create IQ<FlightTicket> = DB.E.FlightTicket.Where(f => f.Info == info)
-         *                                        .AsNotracking();
-         *     if ( IQ<FlightTicket> == null ) 
-         *     {
-         *         return null;
-         *         logger.Warn();
-         *     }
-         *     return IQ<FlightTicket>.Select(Mapper.FlightTicket);
-         *     logger.Info();
-         * }
-         * 
-         */
+        }
 
-        /*public string UpdateFlightTicket ( info )
-         * {
-         *     var FlightTicket = DB.E.FlightTicket(f => f.Info == info);
-         *     if ( FlightTicket == null )
-         *     {
-         *         return "no such FlightTicket";
-         *     }
-         *     FlightTicket.infotochange = newInfo; may have multiple info
-         *     logger.Info();
-         *     DB.savechanges();
-         *     logger.Info();
-         *     
-         *     return "update success"
-         * }
-         */
+        public string UpdateAirport(Logic.Airport airport)
+        {
+            Airport e_airport = dbcontext.Airport.Find(airport.AirportID);
 
-        /*public string DeleteFlightTicket ( info )
-         * {
-         *     E.FlightTicket = DB.FlightTicket.Where(f => f.Info == info);
-         *     if ( E.FlightTicket == null )
-         *     {
-         *        return "no such FlightTicket";
-         *     }
-         *     DB.Remove(context.FlightTicket.Info(f=> f.Info == info));
-         *     DB.SaveChanges();
-         *     logger.Info();
-         *     
-         *     return "delete success"
-         * }
-         */
+            if (e_airport == null)
+            {
+                //logger.Warn("airport not Found")
+                return "no such airport";
+            }
+
+            if (airport.Name != null)
+            {
+                e_airport.Name = airport.Name;
+            }
+            if (airport.Location != null)
+            {
+                e_airport.Location = airport.Location;
+            }
+            if (airport.Weather != null)
+            {
+                e_airport.Weather = airport.Weather;
+            }
+
+            dbcontext.SaveChanges();
+            //logger.Info();
+
+            return "update success";
+        }
+
+        public string DeleteAirport(Logic.Airport airport)
+        {
+            Airport e_Airport = dbcontext.Airport.Find(airport.AirportID);
+            if (e_Airport == null)
+            {
+                //logger.Warn("Airport not found.")
+                return "no such customer";
+            }
+
+            dbcontext.Remove(dbcontext.Customer.Find(airport.AirportID));
+            dbcontext.SaveChanges();
+
+            //logger.info();
+            return "delete success";
+        }
+
+        public string CreateFlightTicket(Logic.FlightTicket ticket)
+        {
+            FlightTicket e_ticket = Mapper.MapFlightTicketToE(ticket);
+            dbcontext.Add(e_ticket);
+            dbcontext.SaveChanges();
+
+            //logger.info();
+            return "New Ticket Created!";
+        }
+
+        public List<Logic.FlightTicket> ReadTicketList(Logic.FlightTicket ticket)
+        {
+            if (ticket == null)
+            {
+                return dbcontext.FlightTicket.Select(Mapper.MapEToFlightTicket).ToList();
+            }
+            if (ticket.TicketID <= 0)
+            {
+                IQueryable<FlightTicket> e_ticket = null;
+
+                if (ticket.FlightID > 0)
+                {
+                    e_ticket = dbcontext.FlightTicket.Where(a => a.FlightID == ticket.FlightID)
+                                               .AsNoTracking();
+                }
+                if (ticket.CustomerID > 0)
+                {
+                    e_ticket = dbcontext.FlightTicket.Where(f => f.CustomerID == ticket.CustomerID)
+                                               .AsNoTracking();
+                }
+                if (ticket.Luggage > 0)
+                {
+                    e_ticket = dbcontext.FlightTicket.Where(f => f.Luggage == ticket.Luggage)
+                                               .AsNoTracking();
+                }
+                if (ticket.Price > 0)
+                {
+                    e_ticket = dbcontext.FlightTicket.Where(f => f.Price == ticket.Price)
+                                               .AsNoTracking();
+                }
+                if (ticket.Checkin == true)
+                {
+                    e_ticket = dbcontext.FlightTicket.Where(f => f.Checkin == ticket.Checkin)
+                                               .AsNoTracking();
+                }
+
+                List<Logic.FlightTicket> ticketFind = e_ticket.Select(Mapper.MapEToFlightTicket).ToList();
+                if (ticketFind.Count < 1)
+                {
+                    //logger.Warn();
+                    return null;                  
+                }
+                return ticketFind;
+            }
+            else
+            {
+                List<Logic.FlightTicket> ticketFind = new List<Logic.FlightTicket>
+                {
+                    Mapper.MapEToFlightTicket(dbcontext.FlightTicket.Find(ticket.TicketID))
+                };
+                //logger.Info();
+                return ticketFind;
+            }
+        }
+
+        public string UpdateFlightTicket (Logic.Airport Airport)
+        {
+            Airport e_Airport = dbcontext.Airport.Find(Airport.AirportID);
+
+            if (e_Airport == null)
+            {
+                //logger.Warn("Airport not Found")
+                return "no such Airport";
+            }
+
+            if (Airport.Name != null)
+            {
+                e_Airport.Name = Airport.Name;
+            }
+            if (Airport.Location != null)
+            {
+                e_Airport.Location = Airport.Location;
+            }
+            if (Airport.Weather != null)
+            {
+                e_Airport.Weather = Airport.Weather;
+            }
+
+            dbcontext.SaveChanges();
+            //logger.Info();
+
+            return "update success";
+        }
+
+        public string DeleteFlightTicket(Logic.FlightTicket ticket)
+        {
+            FlightTicket e_ticket = dbcontext.FlightTicket.Find(ticket.TicketID);
+            if (e_ticket == null)
+            {
+                //logger.Warn("FlightTicket not found.")
+                return "no such ticket";
+            }
+            Flight e_flight = dbcontext.Flight.Find(ticket.FlightID);
+            e_flight.SeatAvailable++;
+            dbcontext.Remove(dbcontext.Customer.Find(ticket.TicketID));
+
+            dbcontext.SaveChanges();
+
+            //logger.info();
+            return "delete success";
+        }
+
+        public string CheckSeatAvailible(int flightID, int numTickets)
+        {
+            Flight e_flight = dbcontext.Flight.Find(flightID);
+
+            if (e_flight.SeatAvailable - numTickets < 0)
+            {
+                //logger.info("Seat is not enough")
+                return "Sorry the remaining number seat is not enough";
+            }
+            else
+            {
+                e_flight.SeatAvailable = e_flight.SeatAvailable = numTickets;
+                dbcontext.SaveChanges();
+                return "Great! we have enough seat available";
+            }
+
+        }
     }
 }

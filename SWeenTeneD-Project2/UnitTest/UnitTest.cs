@@ -8,6 +8,11 @@ namespace UnitTest
 {
     public class UnitTest
     {
+        //public UnitTest(IRepo repository)
+        //{
+        //    iRepo = repository;
+        //}
+
         public DateTime DepartingTime = new DateTime(2019, 11, 20, 10, 30, 5);
         public DateTime ArrivalTime = new DateTime(2019, 11, 21, 9, 30, 0);
         
@@ -111,7 +116,5 @@ namespace UnitTest
 
             Assert.False(a.ValidCust(a), "Customer Not Valid");
         }
-
-
     }
 }

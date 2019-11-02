@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Logic
@@ -7,6 +8,7 @@ namespace Logic
     public class Airport
     {
         //PK
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AirportID { get; set; }
 
         //FK
@@ -15,8 +17,6 @@ namespace Logic
         public string Location { get; set; }
 
         public string Weather { get; set; }
-
-        public int DelayTime { get; set; }
 
         public Airport()
         {
