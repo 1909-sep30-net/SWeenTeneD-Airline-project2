@@ -18,6 +18,7 @@ namespace UnitTest
             var repo = new Mock<log.IRepo>();
             var a = new log.Customer("tri", "nguyen", "Tri@Broke.Everything", "TriBrokeEverything");
             repo.Setup(x => x.CreateCustomer(a));
+            repo.Object.ReadCustomerList(a);
         }
 
 
