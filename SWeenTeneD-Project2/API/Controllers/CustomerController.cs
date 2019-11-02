@@ -72,16 +72,44 @@ namespace API.Controllers
 
         }
 
-        // PUT: api/Customer/5
+        // PUT: api/Customer/First name of customer you want to edit
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(string id, [FromBody] API.Models.APICustomer Acustomer)
         {
+
+            Logic.Customer cus = new Logic.Customer();
+            cus.FirstName = id;
+            
+            IEnumerable<Logic.Customer> Lcustomers = iRepo.ReadCustomerList(cus);
+
+                //Remember to add try catch or some exception handling
+                //Right Now, can update but cannot update first name for some reason
+                Logic.Customer newCus = new Logic.Customer
+                {
+                    CustomerID = Acustomer.CustomerID,
+                    FirstName = Acustomer.FirstName,
+                    LastName = Acustomer.LastName,
+                    Email = Acustomer.Email,
+                    Password = Acustomer.Password
+                };
+
+                iRepo.UpdateCustomer(newCus);
+                return Ok();
+         
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/customer/CustomerID
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            Logic.Customer cus = new Logic.Customer();
+            cus.CustomerID = id;
+
+            IEnumerable<Logic.Customer> Lcustomers = iRepo.ReadCustomerList(cus);
+            iRepo.DeleteCustomer(cus);
+
+            return Ok();
+
         }
     }
 }
