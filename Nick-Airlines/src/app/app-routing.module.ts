@@ -8,7 +8,7 @@ import {PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 const routes: Routes = [
 {path:'', component:RegisterComponent },
 {path:'login',component: LoginComponent },
-{path:'pagenotfound', component: PagenotfoundComponent}
+{path:'**', component: PagenotfoundComponent}
 
 ];
 
