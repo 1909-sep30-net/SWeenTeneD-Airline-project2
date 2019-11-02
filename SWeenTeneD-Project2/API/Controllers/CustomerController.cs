@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Database;
+using Logic;
 
 namespace API.Controllers
 {
@@ -14,7 +15,12 @@ namespace API.Controllers
     public class CustomerController : ControllerBase
     {
 
-        private static Repo repo;
+        private static IRepo iRepo;
+
+        public CustomerController(IRepo repo)
+        {
+            iRepo = repo;
+        }
         //REPO goes here
 
         //private readonly CustomerL
@@ -32,7 +38,7 @@ namespace API.Controllers
         {
             Logic.Customer Lcus = new Logic.Customer();
             Lcus.FirstName = firstname;
-            IEnumerable<Logic.Customer> customers = repo.ReadCustomerList(Lcus);
+            IEnumerable<Logic.Customer> customers = iRepo.ReadCustomerList(Lcus);
             IEnumerable<API.Models.APICustomer> apiCustomer = customers.Select(c => new API.Models.APICustomer
             {
                 //From APIModel = Logic
@@ -40,13 +46,32 @@ namespace API.Controllers
                 FirstName = c.FirstName,
                 LastName = c.LastName,
                 Email = c.Email,
-                Password = c.Password
-
+                Password = c.Password 
 
             });
 
             return apiCustomer;
         }
+
+        //[HttpGet("{firstname}", Name = "GetCustomer")]
+        //public List<API.Models.APICustomer> GetCustomer(string firstname)
+        //{
+        //    Logic.Customer Lcus = new Logic.Customer();
+        //    Lcus.FirstName = firstname;
+
+        //    List<Logic.Customer> customers = repo.ReadCustomerList(Lcus);
+        //    List<API.Models.APICustomer> apiCustomer = new List<API.Models.APICustomer>();
+
+        //    foreach (Logic.Customer cus in customers)
+        //    {
+        //        //CustomerID = cus.CustomerID,
+        //        //FirstName = cus.FirstName,
+        //        //LastName = cus.LastName,
+        //        //Email = cus.Email,
+        //        //Password = cus.Password
+        //        //CustomerID = cus.CustomerID,
+        //    }
+        //}
 
 
 
@@ -57,14 +82,16 @@ namespace API.Controllers
         //    return "value";
         //}
 
-        // POST: api/Customer
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
-        
-          [HttpPost]
-          public ActionResult Create(Logic.Customer customer){
+        //POST: api/Customer
+       //[HttpPost]
+       // public void Post([FromBody] string value)
+       // {
+       // }
+
+        //POST: api/Customer
+        [HttpPost]
+        public ActionResult Create([FromBody, Bind("FirstName, LastName, Email, Password")]API.Models.APICustomer customer)
+        {
 
             Logic.Customer cus = new Logic.Customer
             {
@@ -75,13 +102,10 @@ namespace API.Controllers
                 Password = customer.Password
 
             };
+          
+           iRepo.CreateCustomer(cus);
 
-            var newID = customer.CustomerID;
-
-            string a = repo.CreateCustomer(cus);
-
-            return CreatedAtRoute("Get", new { Id = newID}, customer);
-            //return Ok();
+            return CreatedAtRoute("GetCustomer", new { FirstName = cus.FirstName }, customer);
 
         }
 
