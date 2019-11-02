@@ -45,6 +45,11 @@ namespace API.Controllers
                 Email = c.Email,
                 Password = c.Password
 
+        //[HttpGet("{firstname}", Name = "GetCustomer")]
+        //public List<API.Models.APICustomer> GetCustomer(string firstname)
+        //{
+        //    Logic.Customer Lcus = new Logic.Customer();
+        //    Lcus.FirstName = firstname;
 
             });
 
@@ -60,30 +65,29 @@ namespace API.Controllers
         //    return "value";
         //}
 
-        // POST: api/Customer
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
-        [Route("~/api/AddCustomer")]
+        //POST: api/Customer
+       //[HttpPost]
+       // public void Post([FromBody] string value)
+       // {
+       // }
+
+        //POST: api/Customer
         [HttpPost]
-          public ActionResult Create([FromBody, Bind("CustomerID, FirstName, LastName, Email, Password")]Models.APICustomer customer){
+        public ActionResult Create([FromBody, Bind("FirstName, LastName, Email, Password")]API.Models.APICustomer customer)
+        {
 
             Logic.Customer cus = new Logic.Customer
             {
-                //CustomerID = customer.CustomerID,
+                CustomerID = customer.CustomerID,
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
                 Email = customer.Email,
                 Password = customer.Password
             };
+          
+           iRepo.CreateCustomer(cus);
 
-            var newID = customer.CustomerID;
-
-            string a = iRepo.CreateCustomer(cus);
-
-            return CreatedAtRoute("GetCustomer", new { id = cus.CustomerID }, customer);
-            //return Ok();
+            return CreatedAtRoute("GetCustomer", new { FirstName = cus.FirstName }, customer);
 
         }
 
