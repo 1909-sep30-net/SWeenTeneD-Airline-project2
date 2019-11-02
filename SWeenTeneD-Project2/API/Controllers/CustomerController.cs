@@ -21,15 +21,8 @@ namespace API.Controllers
         {
             iRepo = repo;
         }
-        //private readonly CustomerL
 
-        // GET: api/Customer
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "Customer", "GET GET" };
-        //}
-
+        //GET: api/Customer/Customer's first name
         [HttpGet("{firstname}", Name = "GetCustomer")]
         public IEnumerable<API.Models.APICustomer> GetAllCustomers(string firstname)
         {
@@ -45,12 +38,6 @@ namespace API.Controllers
                 Email = c.Email,
                 Password = c.Password
 
-        //[HttpGet("{firstname}", Name = "GetCustomer")]
-        //public List<API.Models.APICustomer> GetCustomer(string firstname)
-        //{
-        //    Logic.Customer Lcus = new Logic.Customer();
-        //    Lcus.FirstName = firstname;
-
             });
 
             return apiCustomer;
@@ -64,12 +51,6 @@ namespace API.Controllers
         //{
         //    return "value";
         //}
-
-        //POST: api/Customer
-       //[HttpPost]
-       // public void Post([FromBody] string value)
-       // {
-       // }
 
         //POST: api/Customer
         [HttpPost]
