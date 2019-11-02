@@ -341,9 +341,15 @@ namespace Database
                 //logger.Warn("Airport not found.")
                 return "no such customer";
             }
-
-            dbcontext.Remove(dbcontext.Customer.Find(airport.AirportID));
-            dbcontext.SaveChanges();
+            //try
+            //{
+                dbcontext.Remove(dbcontext.Customer.Find(airport.AirportID));
+                dbcontext.SaveChanges();
+            //}
+            //catch (System.ArgumentNullException e)
+            //{
+                Console.WriteLine("Oops null!", e);
+            //}
 
             //logger.info();
             return "delete success";
