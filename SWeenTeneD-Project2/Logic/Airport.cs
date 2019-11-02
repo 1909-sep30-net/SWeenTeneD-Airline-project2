@@ -18,8 +18,6 @@ namespace Logic
 
         public string Weather { get; set; }
 
-        public int DelayTime { get; set; }
-
         public Airport()
         {
         }
