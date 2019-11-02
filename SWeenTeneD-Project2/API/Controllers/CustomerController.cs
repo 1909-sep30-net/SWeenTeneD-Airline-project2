@@ -37,13 +37,10 @@ namespace API.Controllers
                 LastName = c.LastName,
                 Email = c.Email,
                 Password = c.Password
-
             });
 
             return apiCustomer;
         }
-
-
 
         // GET: api/Customer/5
         //[HttpGet("{id}", Name = "GetCustomer")]
@@ -53,6 +50,7 @@ namespace API.Controllers
         //}
 
         //POST: api/Customer
+
         [HttpPost]
         public ActionResult Create([FromBody, Bind("FirstName, LastName, Email, Password")]API.Models.APICustomer customer)
         {
