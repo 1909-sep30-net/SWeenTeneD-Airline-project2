@@ -26,7 +26,11 @@ namespace Database
             modelBuilder.Entity<Customer>(entity =>
             {
                 entity.Property(c => c.CustomerID)
-                    .UseIdentityColumn();
+                    .UseIdentityColumn(1,1)
+                    .IsRequired();
+
+                entity.HasIndex(c => c.CustomerID)
+                    .IsUnique();
 
                 entity.Property(e => e.FirstName)
                     .IsRequired()
@@ -51,7 +55,11 @@ namespace Database
             modelBuilder.Entity<Airport>(entity =>
             {
                 entity.Property(e => e.AirportID)
-                    .UseIdentityColumn();
+                    .UseIdentityColumn(1,1)
+                    .IsRequired();
+
+                entity.HasIndex(e => e.AirportID)
+                    .IsUnique();
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -73,7 +81,11 @@ namespace Database
             modelBuilder.Entity<Flight>(entity =>
             {
                 entity.Property(e => e.FlightID)
-                    .UseIdentityColumn();
+                    .UseIdentityColumn(1,1)
+                    .IsRequired();
+
+                entity.HasIndex(e => e.FlightID)
+                    .IsUnique();
 
                 entity.Property(e => e.Company)
                     .IsRequired()
@@ -104,7 +116,7 @@ namespace Database
             modelBuilder.Entity<FlightTicket>(entity => 
             {
                 entity.Property(e => e.FlightTicketID)
-                    .UseIdentityColumn()
+                    .UseIdentityColumn(1,1)
                     .IsRequired();
 
                 entity.HasIndex(e => e.FlightTicketID)

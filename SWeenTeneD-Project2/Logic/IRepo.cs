@@ -6,5 +6,13 @@ namespace Logic
 {
     public interface IRepo
     {
+
+        public string CreateCustomer(Customer customer);
+        public List<Customer> ReadCustomerList(Customer customer);
+        public string UpdateCustomer(Customer customer);
+        public string DeleteCustomer(Customer customer);
+
+        public string CreateFlight(Flight flight);
+
     }
 }

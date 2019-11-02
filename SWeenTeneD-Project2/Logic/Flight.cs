@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Logic
@@ -7,6 +8,7 @@ namespace Logic
     public class Flight
     {
         //PK
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int FlightID { get; set; }
 
         public string Company { get; set; }
