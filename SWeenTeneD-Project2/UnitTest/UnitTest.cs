@@ -9,25 +9,9 @@ namespace UnitTest
 {
     public class UnitTest
     {
-        //public UnitTest(IRepo repository)
-        //{
-        //    iRepo = repository;
-        //}
-
         public DateTime DepartingTime = new DateTime(2019, 11, 20, 10, 30, 5);
         public DateTime ArrivalTime = new DateTime(2019, 11, 21, 9, 30, 0);
         
-        [Fact]
-        public void TestMock()
-        {
-            //arrange
-            var repo = new Mock<log.IRepo>();
-            var a = new log.Customer("tri", "nguyen", "Tri@Broke.Everything", "TriBrokeEverything");
-            repo.Setup(x => x.CreateCustomer(a));
-            repo.Object.ReadCustomerList(a);
-        }
-
-
         [Theory]
         [InlineData("JFK Airport", "Arlington", "Rain")]
         public void CheckTrueValidAirport(string airName, string airLocate, string airWeather)
@@ -63,24 +47,6 @@ namespace UnitTest
 
             Assert.False(airport.AirportDelay(airport), "Weather is great.  No delay!");
         }
-
-
-        //May not work due to the constraints of DateTime
-        //[Theory]
-        //[InlineData("Korean Air", null, null)]
-        //public void CheckFalseValidFlight(string flightCom, DateTime flightDepart, DateTime flightArrive)
-        //{
-        //    log.Flight flight = new log.Flight(flightCom, flightDepart, flightArrive);
-
-        //    Assert.False(flight.ValidFlight(flight), "Invalid flight!");
-        //}
-
-        //TicketID = ticketID;
-        //    FlightID = flightID;
-        //    CustomerID = customerID;
-        //    Price = price;
-        //    Checkin = checkin;
-        //    Luggage = luggage;
 
         [Theory]
         [InlineData(2, 2, 150, true, 1)]
