@@ -13,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 namespace Database
 {
     public class Repo : IRepo
-
     {
         private static SWTDbContext dbcontext;
         
@@ -21,7 +20,6 @@ namespace Database
         {
             dbcontext = dbContext;
         }
-
 
         public string CreateCustomer(Logic.Customer customer)
         {
@@ -341,15 +339,8 @@ namespace Database
                 //logger.Warn("Airport not found.")
                 return "no such customer";
             }
-            //try
-            //{
-                dbcontext.Remove(dbcontext.Customer.Find(airport.AirportID));
-                dbcontext.SaveChanges();
-            //}
-            //catch (System.ArgumentNullException e)
-            //{
-                Console.WriteLine("Oops null!", e);
-            //}
+            dbcontext.Remove(dbcontext.Customer.Find(airport.AirportID));
+            dbcontext.SaveChanges();
 
             //logger.info();
             return "delete success";
