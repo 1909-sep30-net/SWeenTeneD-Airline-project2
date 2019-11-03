@@ -102,6 +102,7 @@ namespace UnitTest
         public DateTime DepartingTime1 = new DateTime(2019, 11, 20, 10, 30, 5);
         public DateTime ArrivalTime1 = new DateTime(2019, 11, 21, 9, 30, 0);
 
+        [Fact]
         public void CustomerTest()
         {
             APICustomer customer = new APICustomer
@@ -119,6 +120,7 @@ namespace UnitTest
             Assert.Equal("tri1234", customer.Password);
         }
 
+        [Fact]
         public void FlightTest()
         {
             APIFlight flight = new APIFlight
@@ -141,6 +143,7 @@ namespace UnitTest
             Assert.Equal(99, flight.SeatAvailable);
         }
 
+        [Fact]
         public void AirportTest()
         {
             APIAirport airport = new APIAirport
@@ -155,8 +158,9 @@ namespace UnitTest
             Assert.Equal("Fly", airport.Name);
             Assert.Equal("Dallas", airport.Location);
             Assert.Equal("Sunny", airport.Weather);
-        }
 
+        }
+        [Fact]
         public void FlightTicketTest()
         {
             APIFlightTicket ticket = new APIFlightTicket
@@ -184,6 +188,7 @@ namespace UnitTest
         public DateTime DepartingTime1 = new DateTime(2019, 11, 20, 10, 30, 5);
         public DateTime ArrivalTime1 = new DateTime(2019, 11, 21, 9, 30, 0);
 
+        [Fact]
         public void CustomerTest()
         {
             Customer customer = new Customer
@@ -201,6 +206,7 @@ namespace UnitTest
             Assert.Equal("tri1234", customer.Password);
         }
 
+        [Fact]
         public void FlightTest()
         {
             Flight flight = new Flight
@@ -223,6 +229,7 @@ namespace UnitTest
             Assert.Equal(99, flight.SeatAvailable);
         }
 
+        [Fact]
         public void AirportTest()
         {
             Airport airport = new Airport
@@ -239,6 +246,7 @@ namespace UnitTest
             Assert.Equal("Sunny", airport.Weather);
         }
 
+        [Fact]
         public void FlightTicketTest()
         {
             FlightTicket ticket = new FlightTicket
