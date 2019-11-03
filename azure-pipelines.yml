@@ -23,6 +23,13 @@ steps:
     extraProperties: |
         sonar.exclusions=**/lib/**
 
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk'
+  inputs:
+    packageType: sdk
+    version: 3.0.100
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
 # three different ways to solve the initial problem
 
 # - script:
