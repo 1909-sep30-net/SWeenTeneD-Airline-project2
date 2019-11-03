@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
   buildConfiguration: 'Release'
@@ -57,7 +57,7 @@ steps:
   inputs:
     command: 'test'
     projects: '**/*Test/*.csproj'
-    arguments: '-c $(buildConfiguration) --collect "XPlat Code Coverage"'
+    arguments: '-c $(buildConfiguration) --collect "Code Coverage"'
 
 - task: PublishCodeCoverageResults@1
   displayName: Publish code coverage
