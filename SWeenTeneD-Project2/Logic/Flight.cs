@@ -20,22 +20,17 @@ namespace Logic
         public string Destination { get; set; }
         public int SeatAvailable { get; set; }
 
-        public Flight() { }
+        public Flight(){}
 
-        public Flight(string Fcompany, DateTime Depart, DateTime Arrive)
+        public Flight(int flightId, string company, DateTime depart, DateTime arrive, string origin, string des, int seat)
         {
-            Company = Fcompany;
-            DepartureTime = Depart;
-            ArrivalTime = Arrive;
-        }
-
-        public bool ValidFlight(Flight flight)
-        {
-            if (Company != null && DepartureTime != null && ArrivalTime != null)
-            {
-                return true;
-            }
-            return false;
+            FlightID = flightId;
+            Company = company;
+            DepartureTime = depart;
+            ArrivalTime = arrive;
+            Origin = origin;
+            Destination = des;
+            SeatAvailable = seat;
         }
     }
 }

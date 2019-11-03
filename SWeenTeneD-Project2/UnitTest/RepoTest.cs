@@ -11,7 +11,7 @@ namespace UnitTest
     {
         private Mock<IRepo> repo = new Mock<IRepo>();
         private readonly Logic.Customer customer
-            = new Logic.Customer("tri", "nguyen", "Tri@Broke.Everything", "TriBrokeEverything");
+            = new Logic.Customer(1,"tri", "nguyen", "Tri@Broke.Everything", "TriBrokeEverything");
 
         [Fact]
         public void MockCreateCustomer()
@@ -27,6 +27,7 @@ namespace UnitTest
         {
             Logic.Customer tri = new Logic.Customer
             {
+                CustomerID = 1,
                 FirstName = "tri",
                 LastName = "nguyen",
                 Email = "Tri@Broke.Everything",
