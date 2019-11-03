@@ -66,14 +66,14 @@ namespace UnitTest
 
 
         //May not work due to the constraints of DateTime
-        [Theory]
-        [InlineData("Korean Air", null, null)]
-        public void CheckFalseValidFlight(string flightCom, DateTime flightDepart, DateTime flightArrive)
-        {
-            log.Flight flight = new log.Flight(flightCom, flightDepart, flightArrive);
+        //[Theory]
+        //[InlineData("Korean Air", null, null)]
+        //public void CheckFalseValidFlight(string flightCom, DateTime flightDepart, DateTime flightArrive)
+        //{
+        //    log.Flight flight = new log.Flight(flightCom, flightDepart, flightArrive);
 
-            Assert.False(flight.ValidFlight(flight), "Invalid flight!");
-        }
+        //    Assert.False(flight.ValidFlight(flight), "Invalid flight!");
+        //}
 
         //TicketID = ticketID;
         //    FlightID = flightID;
