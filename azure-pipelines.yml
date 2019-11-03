@@ -58,6 +58,7 @@ steps:
     command: 'test'
     projects: '**/*Test/*.csproj'
     arguments: '-c $(buildConfiguration) --collect "Code Coverage"'
+    continueOnError: true
 
 - task: PublishCodeCoverageResults@1
   displayName: Publish code coverage
