@@ -11,7 +11,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
-
     // Function to open icon when clicked
     openNav() 
     {
