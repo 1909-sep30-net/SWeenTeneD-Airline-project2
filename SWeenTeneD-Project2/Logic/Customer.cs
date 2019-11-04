@@ -10,6 +10,7 @@ namespace Logic
         //PK
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CustomerID { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -18,22 +19,15 @@ namespace Logic
 
         public string Password { get; set; }
 
-        public Customer() { }
+        public Customer(){}
 
-        public Customer(string fname, string lname, string mail, string pw)
+        public Customer(int customerId, string fname, string lname, string mail, string pw)
         {
+            CustomerID = customerId;
             FirstName = fname;
             LastName = lname;
             Email = mail;
             Password = pw;
-        }
-
-        public bool ValidCust(Customer c)
-        {
-            if (c.FirstName != null && c.LastName != null && c.Email != null && c.Password != null)
-                return true;
-            else
-                return false;
         }
     }
 }

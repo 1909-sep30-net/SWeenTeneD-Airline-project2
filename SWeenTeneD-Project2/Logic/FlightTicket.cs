@@ -23,24 +23,16 @@ namespace Logic
 
         public int Luggage { get; set; }
 
-        public FlightTicket() { }
+        public FlightTicket(){}
 
-        public FlightTicket(int flightID, int customerID, double price, bool checkin, int luggage)
+        public FlightTicket(int ticketId, int flightID, int customerID, double price, bool checkin, int luggage)
         {
+            TicketID = ticketId;
             FlightID = flightID;
             CustomerID = customerID;
             Price = price;
             Checkin = checkin;
             Luggage = luggage;
-        }
-
-        public bool ValidFlightTicket(FlightTicket flightTicket)
-        {
-            if (Checkin != false)
-            {
-                return true;
-            }
-            return false;
         }
     }
 }
