@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Database
@@ -10,9 +11,11 @@ namespace Database
         public int FlightTicketID { get; set; }
 
         //FK
+        [ForeignKey("FlightID")]
         public int FlightID { get; set; }
 
         //FK
+        [ForeignKey("CustomerID")]
         public int CustomerID { get; set; }
 
         public double Price { get; set; }
