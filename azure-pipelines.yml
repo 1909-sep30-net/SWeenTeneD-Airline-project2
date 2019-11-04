@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
   buildConfiguration: 'Release'
@@ -22,6 +22,13 @@ steps:
     projectName: 'SWeeTeneD-Airline'
     extraProperties: |
         sonar.exclusions=**/lib/**
+
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk'
+  inputs:
+    packageType: sdk
+    version: 3.0.100
+    installationPath: $(Agent.ToolsDirectory)/dotnet
 
 # three different ways to solve the initial problem
 
@@ -49,8 +56,9 @@ steps:
   displayName: dotnet test
   inputs:
     command: 'test'
-    projects: './GStoreApp'
-    arguments: '-c $(buildConfiguration) --collect "XPlat Code Coverage"'
+    projects: '**/*Test/*.csproj'
+    arguments: '-c $(buildConfiguration) --collect "Code Coverage"'
+    continueOnError: true
 
 - task: PublishCodeCoverageResults@1
   displayName: Publish code coverage

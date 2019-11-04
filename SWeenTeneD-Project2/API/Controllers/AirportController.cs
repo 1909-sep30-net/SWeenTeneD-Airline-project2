@@ -19,11 +19,11 @@ namespace API.Controllers
         }
 
         // GET: api/Airport
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        //[HttpGet]
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
 
         // GET: api/Airport/Airport's name
         [HttpGet("{name}", Name = "GetAirport")]
