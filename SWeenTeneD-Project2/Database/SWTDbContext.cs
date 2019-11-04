@@ -111,6 +111,9 @@ namespace Database
 
                 entity.Property(e => e.SeatAvailable)
                     .IsRequired();
+
+                entity.Property(e => e.Price)
+                    .IsRequired();
             });
 
             modelBuilder.Entity<FlightTicket>(entity => 
@@ -136,7 +139,7 @@ namespace Database
 
                 entity.Property(e => e.Price)
                     .IsRequired();
-
+                    
                 entity.Property(e => e.Checkin)
                     .IsRequired();
 
@@ -144,9 +147,7 @@ namespace Database
                     
 
             });
-            OnModelCreatingPartial(modelBuilder);
         }
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 
 }
