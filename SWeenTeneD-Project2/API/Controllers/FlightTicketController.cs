@@ -4,13 +4,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Logic;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("~/api/[controller]")]
     [ApiController]
     public class FlightTicketController : ControllerBase
     {
+        private static IRepo iRepo;
+
+        public FlightTicketController(IRepo repo)
+        {
+            iRepo = repo;
+        }
+
         // GET: api/FlightTicket
         [HttpGet]
         public IEnumerable<string> Get()
@@ -20,9 +28,38 @@ namespace API.Controllers
 
         // GET: api/FlightTicket/5
         [HttpGet("{id}", Name = "GetFlightTicket")]
-        public string Get(int id)
+        public IEnumerable<API.Models.APIFlightTicket> Get(int id)
         {
-            return "value";
+            Logic.FlightTicket LTicket = new Logic.FlightTicket();
+            LTicket.TicketID = id;
+            IEnumerable<Logic.FlightTicket> flightTickets = iRepo.ReadTicketList(LTicket);
+            IEnumerable<API.Models.APIFlightTicket> apiFlightTicket = flightTickets.Select(ft => new API.Models.APIFlightTicket
+            {
+                //APIModel = Logic
+                TicketID = ft.TicketID,
+                FlightID = ft.FlightID,
+                CustomerID = ft.CustomerID,
+                Price = ft.Price,
+                CheckIn = ft.Checkin,
+                Luggage = ft.Luggage
+
+            });
+            if (LTicket == null)
+            {
+                IEnumerable<Logic.FlightTicket> allFlightTickets = iRepo.ReadTicketList(null);
+                IEnumerable<API.Models.APIFlightTicket> nullAPI = allFlightTickets.Select(af => new API.Models.APIFlightTicket
+                {
+                    TicketID = af.TicketID,
+                    FlightID = af.FlightID,
+                    CustomerID = af.CustomerID,
+                    Price = af.Price,
+                    CheckIn = af.Checkin,
+                    Luggage = af.Luggage
+                });
+                return nullAPI;
+            }
+
+            return apiFlightTicket;
         }
 
         // POST: api/FlightTicket
