@@ -2,7 +2,6 @@ using System;
 using Xunit;
 using Database;
 using API.Models;
-using Moq;
 
 namespace UnitTest
 {
@@ -42,9 +41,11 @@ namespace UnitTest
                 ArrivalTime = ArrivalTime1,
                 Origin = "DFW",
                 Destination = "LAX",
-                SeatAvailable = 99
+                SeatAvailable = 99,
+                Price = 299.99
             };
-            Logic.Flight flight2 = new Logic.Flight(1, "AA", DepartingTime1, ArrivalTime1, "DFW", "LAX", 99);
+            Logic.Flight flight2
+                = new Logic.Flight(1, "AA", DepartingTime1, ArrivalTime1, "DFW", "LAX", 99, 299.99);
 
             Assert.Equal(flight1.FlightID, flight2.FlightID);
             Assert.Equal(flight1.Company, flight2.Company);
@@ -53,7 +54,7 @@ namespace UnitTest
             Assert.Equal(flight1.Origin, flight2.Origin);
             Assert.Equal(flight1.Destination, flight2.Destination);
             Assert.Equal(flight1.SeatAvailable, flight2.SeatAvailable);
-
+            Assert.Equal(flight1.Price, flight2.Price);
         }
 
         [Fact]
@@ -131,7 +132,8 @@ namespace UnitTest
                 ArrivalTime = ArrivalTime1,
                 Origin = "DEW",
                 Destination = "LAX",
-                SeatAvailable = 99
+                SeatAvailable = 99,
+                Price = 133.99
             };
 
             Assert.Equal(1, flight.FlightID);
@@ -141,6 +143,8 @@ namespace UnitTest
             Assert.Equal("DEW", flight.Origin);
             Assert.Equal("LAX", flight.Destination);
             Assert.Equal(99, flight.SeatAvailable);
+            Assert.Equal(133.99, flight.Price);
+
         }
 
         [Fact]
@@ -217,7 +221,8 @@ namespace UnitTest
                 ArrivalTime = ArrivalTime1,
                 Origin = "DEW",
                 Destination = "LAX",
-                SeatAvailable = 99
+                SeatAvailable = 99,
+                Price = 456.50
             };
 
             Assert.Equal(1, flight.FlightID);
@@ -227,6 +232,7 @@ namespace UnitTest
             Assert.Equal("DEW", flight.Origin);
             Assert.Equal("LAX", flight.Destination);
             Assert.Equal(99, flight.SeatAvailable);
+            Assert.Equal(456.50, flight.Price);
         }
 
         [Fact]

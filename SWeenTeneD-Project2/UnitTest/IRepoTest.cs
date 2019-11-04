@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace UnitTest
 {
-    public class RepoTest
+    public class IRepoTest
     {
         private Mock<IRepo> repo = new Mock<IRepo>();
         private readonly Logic.Customer customer

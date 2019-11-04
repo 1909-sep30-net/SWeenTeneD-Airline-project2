@@ -2,6 +2,8 @@
 # Created by https://www.gitignore.io/api/node,csharp,angular,visualstudio,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=node,csharp,angular,visualstudio,visualstudiocode
 
+*./Migrations/
+
 ### Angular ###
 ## Angular ##
 # compiled output
