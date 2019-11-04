@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import  {HeaderComponent} from '../header/header.component';
+
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit() {
   }
-    // Function to open icon when clicked
-    openNav() 
+
+  openNav() 
     {
        // Set nodes to variable
        let sidenav = document.getElementById("mySidenav")
@@ -33,11 +35,5 @@ export class HeaderComponent implements OnInit {
        document.getElementById("main").style.marginLeft = "0";
        document.getElementById("hide").style.display = "block";
     }
-
- opened= false;
-
-
-
-
 
 }
