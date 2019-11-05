@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import {RegisterComponent } from './register/register.component';
 import {LoginComponent } from './login/login.component';
 import {HomeComponent } from  './home/home.component';
-
 import {HeaderComponent} from './header/header.component';
 import {PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 

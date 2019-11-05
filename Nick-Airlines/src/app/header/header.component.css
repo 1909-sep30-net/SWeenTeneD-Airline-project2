@@ -1,1 +1,142 @@
+button{
+    margin-right: 3rem;
+}
 
+mat-sidenav-container{
+    height: 100%;
+}
+
+mat-idenav, mat-sidenav-content{
+    padding: 55px;
+}
+
+mat-sidenav{
+    background-color: green;
+    width: 200px;
+}
+
+.none{
+    text-decoration: none;
+}
+
+
+.centerr{
+
+    padding-left: 30rem;
+}
+
+
+.toolbar-color{
+    overflow: hidden;
+    background-color: #2f3b48;
+    height: 60px;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+  }
+  
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #3f5061;
+    overflow-x: hidden;
+    transition: 0.45s;
+    padding-top: 50px;
+  }
+  
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #f8f8f8;
+    display: block;
+    transition: 0.5s;
+  }
+
+  .sidenav .sidenav-bottom{
+      padding-top: 100%;
+  }
+  hr{
+    border: 2px solid #445769;
+  }
+  
+
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  .icon-color{
+      color: #98b5c8;
+  }
+
+
+
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  #main {
+    transition: margin-left .5s;
+    padding: 16px;
+    cursor: pointer;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
+
+  .navbar{
+      justify-content: space-between;
+  }
+
+  span{
+      padding-right: 1rem;
+      cursor: pointer;
+      color: #2f3b48;
+      
+  }
+  #o{
+    color: #98b5c8
+  }
+
+  .mat-person {
+    font-size: 33px;
+    padding-top: 19px;
+    padding-right: 2.0rem;
+    color: #98b5c8;
+    cursor: pointer;
+  }
+
+  .mat-logout {
+    font-size: 33px;
+    padding-top: 19px;
+    padding-right: 1.1rem;
+    color: #98b5c8;
+    cursor: pointer;
+  }
+
+  .mat-new-releases {
+    font-size: 33px;
+    padding-top: 19px;
+    padding-right: 1.9rem;
+    color: #98b5c8;
+    cursor: pointer;
+  }
+
+  .icon-size{
+    font-size: 33px;
+}
+
+mat-icon {
+cursor: pointer;
+}
