@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
 
        // Do operations with nodes
        sidenav.style.width = "200px";
-       sidenav.style.marginTop = "59px";
+       sidenav.style.marginTop = "64px";
        hidden.style.display  = "none";
        main.style.marginLeft = "200px";
     }
