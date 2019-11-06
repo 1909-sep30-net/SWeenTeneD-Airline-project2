@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Logic;
 
 namespace Database
 {
@@ -11,7 +12,6 @@ namespace Database
         {
             return new Logic.Airport
             {
-                AirportID = EAirport.AirportID,
                 Name = EAirport.Name,
                 Location = EAirport.Location,
                 Weather = EAirport.Weather,
@@ -23,7 +23,6 @@ namespace Database
         {
             return new Airport
             {
-                AirportID = BAirport.AirportID,
                 Name = BAirport.Name,
                 Location = BAirport.Location,
                 Weather = BAirport.Weather,
@@ -63,7 +62,11 @@ namespace Database
                 FlightID = EFlight.FlightID,
                 Company = EFlight.Company,
                 DepartureTime = EFlight.DepartureTime,
-                ArrivalTime = EFlight.ArrivalTime
+                ArrivalTime = EFlight.ArrivalTime,
+				Origin = EFlight.Origin,
+				Destination = EFlight.Destination,
+				Price = EFlight.Price,
+				SeatAvailable = EFlight.SeatAvailable
             };
         }
         //Map Business --> Entity
@@ -74,7 +77,11 @@ namespace Database
                 FlightID = BFlight.FlightID,
                 Company = BFlight.Company,
                 DepartureTime = BFlight.DepartureTime,
-                ArrivalTime = BFlight.ArrivalTime
+                ArrivalTime = BFlight.ArrivalTime,
+				Origin = BFlight.Origin,
+				Destination = BFlight.Destination,
+				Price = BFlight.Price,
+				SeatAvailable = BFlight.SeatAvailable
             };
         }
 

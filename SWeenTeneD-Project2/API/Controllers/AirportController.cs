@@ -35,7 +35,6 @@ namespace API.Controllers
             IEnumerable<API.Models.APIAirport> apiAirport = airports.Select(a => new API.Models.APIAirport
             {
                 //APIModel = Logic
-                AirportID = a.AirportID,
                 Name = a.Name,
                 Location = a.Location,
                 Weather = a.Weather
@@ -51,7 +50,6 @@ namespace API.Controllers
         {
             Logic.Airport air = new Logic.Airport
             {
-                AirportID = airport.AirportID,
                 Name = airport.Name,
                 Location = airport.Location,
                 Weather = airport.Weather
@@ -74,7 +72,6 @@ namespace API.Controllers
             //Need exception handling here, maybe implement in repo?
             Logic.Airport newAir = new Logic.Airport
             {
-                AirportID = Aairport.AirportID,
                 Name = Aairport.Name,
                 Location = Aairport.Location,
                 Weather = Aairport.Weather
@@ -84,12 +81,12 @@ namespace API.Controllers
             return Ok();
         }
 
-        // DELETE: api/airport/AirportID
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        // DELETE: api/airport/AirportName
+        [HttpDelete("{name}")]
+        public IActionResult Delete(string name)
         {
             Logic.Airport air = new Logic.Airport();
-            air.AirportID = id;
+            air.Name = name;
 
             IEnumerable<Logic.Airport> Lairports = iRepo.ReadAirportList(air);
             iRepo.DeleteAirport(air);

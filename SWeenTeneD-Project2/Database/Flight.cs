@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Database
@@ -15,7 +16,10 @@ namespace Database
 
         public DateTime ArrivalTime { get; set; }
 
+        [ForeignKey("Name")]
         public string Origin { get; set; }
+
+        [ForeignKey("Name")]
         public string Destination { get; set; }
         public int SeatAvailable { get; set; }
         public double Price { get; set; }

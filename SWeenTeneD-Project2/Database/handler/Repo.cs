@@ -153,13 +153,14 @@ namespace Database
                 }
                 if (flight.Origin != null)
                 {
-                    e_flight = dbcontext.Flight.Where(f => f.Origin == flight.Origin)
-                                               .AsNoTracking();
+                    e_flight = dbcontext.Flight.Where(e => e.Origin == flight.Origin)
+                                            .AsNoTracking();
                 }
                 if (flight.Destination != null)
                 {
-                    e_flight = dbcontext.Flight.Where(f => f.Destination == flight.Destination)
-                                               .AsNoTracking();
+                    e_flight = dbcontext.Flight.Where(e => e.Destination == flight.Destination)
+                                            .AsNoTracking();
+
                 }
                 if (flight.SeatAvailable > 0)
                 {
@@ -220,6 +221,10 @@ namespace Database
             {
                 e_flight.SeatAvailable = flight.SeatAvailable;
             }
+            if (flight.Price > 0)
+            {
+                e_flight.Price = flight.Price;
+            }
 
             dbcontext.SaveChanges();
             //logger.Info();
@@ -237,7 +242,7 @@ namespace Database
                 return "no such customer";
             }
 
-            dbcontext.Remove(dbcontext.Customer.Find(flight.FlightID));
+            dbcontext.Remove(dbcontext.Flight.Find(flight.FlightID));
             dbcontext.SaveChanges();
 
             //logger.info();
@@ -261,8 +266,6 @@ namespace Database
             {
                 return dbcontext.Airport.Select(Mapper.MapEToAirport).ToList();
             }
-            if (airport.AirportID <= 0)
-            {
                 IQueryable<Airport> e_airport = null;
 
                 if (airport.Name != null)
@@ -281,30 +284,12 @@ namespace Database
                                                .AsNoTracking();
                 }
 
-                List<Logic.Airport> airportFind = e_airport.Select(Mapper.MapEToAirport).ToList();
-                if (airportFind.Count < 1)
-                {
-                    //logger.Warn();
-                    return null;                    
-                }
-                return airportFind;
-            }
-            else
-            {
-                List<Logic.Airport> airportFind = new List<Logic.Airport>
-                {
-                    Mapper.MapEToAirport(dbcontext.Airport.Find(airport.AirportID))
-                };
-                //logger.Info();
-                return airportFind;
-            }
-            
-
+                return e_airport.Select(Mapper.MapEToAirport).ToList();        
         }
 
         public string UpdateAirport(Logic.Airport airport)
         {
-            Airport e_airport = dbcontext.Airport.Find(airport.AirportID);
+            Airport e_airport = dbcontext.Airport.Find(airport.Name);
 
             if (e_airport == null)
             {
@@ -333,13 +318,13 @@ namespace Database
 
         public string DeleteAirport(Logic.Airport airport)
         {
-            Airport e_Airport = dbcontext.Airport.Find(airport.AirportID);
+            Airport e_Airport = dbcontext.Airport.Find(airport.Name);
             if (e_Airport == null)
             {
                 //logger.Warn("Airport not found.")
                 return "no such customer";
             }
-            dbcontext.Remove(dbcontext.Customer.Find(airport.AirportID));
+            dbcontext.Remove(dbcontext.Airport.Find(airport.Name));
             dbcontext.SaveChanges();
 
             //logger.info();
@@ -411,27 +396,35 @@ namespace Database
             }
         }
 
-        public string UpdateFlightTicket (Logic.Airport Airport)
+        public string UpdateFlightTicket(Logic.FlightTicket ticket)
         {
-            Airport e_Airport = dbcontext.Airport.Find(Airport.AirportID);
+            FlightTicket e_ticket = dbcontext.FlightTicket.Find(ticket.TicketID);
 
-            if (e_Airport == null)
+            if (e_ticket == null)
             {
                 //logger.Warn("Airport not Found")
                 return "no such Airport";
             }
 
-            if (Airport.Name != null)
+            if (ticket.CustomerID > 0)
             {
-                e_Airport.Name = Airport.Name;
+                e_ticket.CustomerID = ticket.CustomerID;
             }
-            if (Airport.Location != null)
+            if (ticket.FlightID > 0)
             {
-                e_Airport.Location = Airport.Location;
+                e_ticket.FlightID = ticket.FlightID;
             }
-            if (Airport.Weather != null)
+            if (ticket.Checkin != e_ticket.Checkin)
             {
-                e_Airport.Weather = Airport.Weather;
+                e_ticket.Checkin = ticket.Checkin;
+            }
+            if (ticket.Luggage > 0)
+            {
+                e_ticket.Luggage = ticket.Luggage;
+            }
+            if (ticket.Price > 0)
+            {
+                e_ticket.Price = ticket.Price;
             }
 
             dbcontext.SaveChanges();
@@ -450,7 +443,7 @@ namespace Database
             }
             Flight e_flight = dbcontext.Flight.Find(ticket.FlightID);
             e_flight.SeatAvailable++;
-            dbcontext.Remove(dbcontext.Customer.Find(ticket.TicketID));
+            dbcontext.Remove(dbcontext.FlightTicket.Find(ticket.TicketID));
 
             dbcontext.SaveChanges();
 
@@ -474,6 +467,18 @@ namespace Database
                 return "Great! we have enough seat available";
             }
 
+        }
+
+        public int GetTicketId()
+        {
+            //test comment
+            return dbcontext.FlightTicket.Max(e => e.FlightTicketID);
+        }
+
+        public int GetFlightId()
+        {
+            //test comment
+            return dbcontext.Flight.Max(e => e.FlightID);
         }
     }
 }

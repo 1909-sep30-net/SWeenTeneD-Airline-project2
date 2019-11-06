@@ -127,7 +127,7 @@ namespace Logic
         /// </summary>
         /// <param name="Airport"></param>
         /// <returns>string</returns>
-        public string UpdateFlightTicket(Airport Airport);
+        public string UpdateFlightTicket(FlightTicket ticket);
 
         /// <summary>
         /// Function to delete single ticket in the database,
@@ -148,6 +148,18 @@ namespace Logic
         /// <param name="numTickets"></param>
         /// <returns>string</returns>
         public string CheckSeatAvailible(int flight, int numTickets);
+
+        /// <summary>
+        /// Returns max index of TicketID
+        /// </summary>
+        /// <returns></returns>
+        public int GetTicketId();
+
+        /// <summary>
+        /// Returns max index of FlightID
+        /// </summary>
+        /// <returns></returns>
+        public int GetFlightId();
 
     }
 }
