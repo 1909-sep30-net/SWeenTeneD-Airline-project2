@@ -60,7 +60,6 @@ steps:
     command: 'test'
     projects: '**/*Test/*.csproj'
     arguments: '-c $(buildConfiguration) --collect "Code Coverage"'
-    continueOnError: true
 
 - task: PublishCodeCoverageResults@1
   displayName: Publish code coverage
@@ -73,4 +72,19 @@ steps:
 
 - task: SonarCloudPublish@1
   displayName: Publish SonarCloud quality gate result
+
+- task: DotNetCoreCLI@2
+  displayName: dotnet publish + zip
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    zipAfterPublish: true
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: '免費試用版(9a56e737-3e9f-4bb8-bc24-e316a0047308)'
+    appType: 'webApp'
+    WebAppName: 'SWeenTeneD'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
   
