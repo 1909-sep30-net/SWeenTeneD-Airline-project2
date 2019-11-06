@@ -81,8 +81,8 @@ namespace API.Controllers
             return Ok();
         }
 
-        // DELETE: api/airport/AirportID
-        [HttpDelete("{id}")]
+        // DELETE: api/airport/AirportName
+        [HttpDelete("{name}")]
         public IActionResult Delete(string name)
         {
             Logic.Airport air = new Logic.Airport();

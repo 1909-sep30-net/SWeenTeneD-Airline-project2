@@ -85,7 +85,6 @@ namespace API.Controllers
             IEnumerable<Logic.Customer> Lcustomers = iRepo.ReadCustomerList(cus);
 
                 //Remember to add try catch or some exception handling
-                //Right Now, can update but cannot update first name for some reason
                 Logic.Customer newCus = new Logic.Customer
                 {
                     CustomerID = Acustomer.CustomerID,

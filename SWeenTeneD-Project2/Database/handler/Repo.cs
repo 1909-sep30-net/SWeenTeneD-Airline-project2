@@ -321,7 +321,7 @@ namespace Database
                 //logger.Warn("Airport not found.")
                 return "no such customer";
             }
-            dbcontext.Remove(dbcontext.Customer.Find(airport.Name));
+            dbcontext.Remove(dbcontext.Airport.Find(airport.Name));
             dbcontext.SaveChanges();
 
             //logger.info();
@@ -393,27 +393,37 @@ namespace Database
             }
         }
 
-        public string UpdateFlightTicket (Logic.Airport Airport)
+        public string UpdateFlightTicket (Logic.FlightTicket FlightTicket)
         {
-            Airport e_Airport = dbcontext.Airport.Find(Airport.Name);
+            FlightTicket e_FlightTicket = dbcontext.FlightTicket.Find(FlightTicket.TicketID);
 
-            if (e_Airport == null)
+            if (e_FlightTicket == null)
             {
                 //logger.Warn("Airport not Found")
                 return "no such Airport";
             }
 
-            if (Airport.Name != null)
+            if(FlightTicket.FlightID > 0)
             {
-                e_Airport.Name = Airport.Name;
+                e_FlightTicket.FlightID = FlightTicket.FlightID;
             }
-            if (Airport.Location != null)
+
+            if(FlightTicket.CustomerID > 0)
             {
-                e_Airport.Location = Airport.Location;
+                e_FlightTicket.CustomerID = FlightTicket.CustomerID;
             }
-            if (Airport.Weather != null)
+
+            if (FlightTicket.Price > 0)
             {
-                e_Airport.Weather = Airport.Weather;
+                e_FlightTicket.Price = FlightTicket.Price;
+            }
+            if (FlightTicket.Checkin != e_FlightTicket.Checkin)
+            {
+                e_FlightTicket.Checkin = FlightTicket.Checkin;
+            }
+            if (FlightTicket.Luggage > 0)
+            {
+                e_FlightTicket.Luggage = FlightTicket.Luggage;
             }
 
             dbcontext.SaveChanges();
@@ -456,6 +466,16 @@ namespace Database
                 return "Great! we have enough seat available";
             }
 
+        }
+
+        public int GetTicketId()
+        {
+            return dbcontext.FlightTicket.Max(e => e.FlightTicketID);
+        }
+
+        public int GetFlightId()
+        {
+            return dbcontext.Flight.Max(e => e.FlightID);
         }
     }
 }
