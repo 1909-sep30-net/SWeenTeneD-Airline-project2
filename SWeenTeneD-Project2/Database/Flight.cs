@@ -16,10 +16,10 @@ namespace Database
 
         public DateTime ArrivalTime { get; set; }
 
-        [ForeignKey("AirportID")]
+        [ForeignKey("Name")]
         public string Origin { get; set; }
 
-        [ForeignKey("AirportID")]
+        [ForeignKey("Name")]
         public string Destination { get; set; }
         public int SeatAvailable { get; set; }
         public double Price { get; set; }
