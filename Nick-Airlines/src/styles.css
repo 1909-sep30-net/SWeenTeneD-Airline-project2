@@ -52,7 +52,8 @@ body {
     background-color: #3f5061;
     overflow-x: hidden;
     transition: 0.45s;
-    padding-top: 50px;
+    padding-top: 54px;
+
   }
   
   .sidenav a {
@@ -67,6 +68,7 @@ body {
   .sidenav .sidenav-bottom{
       padding-top: 100%;
   }
+
   hr{
     border: 2px solid #445769;
   }
@@ -131,7 +133,9 @@ body {
     cursor: pointer;
   }
 
-  .mat-new-releases {
+
+.mat-new-releases {
+
     font-size: 33px;
     padding-top: 19px;
     padding-right: 1.9rem;
@@ -147,14 +151,16 @@ mat-icon {
 cursor: pointer;
 }
 
-mat-menu{
+mat-menu {
+
     overflow-x: hidden;
     overflow-y: hidden; 
  padding: 400px; 
 }
 
-.move-menu{ 
-    
+
+.move-menu { 
+
     overflow-x: hidden;
     overflow-y: hidden;
     background-color: red;
