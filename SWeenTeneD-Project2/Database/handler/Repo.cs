@@ -492,6 +492,16 @@ namespace Database
 
         public int GetTicketId()
         {
+            return dbcontext.FlightTicket.Max(e => e.FlightTicketID);
+        }
+
+        public int GetFlightId()
+        {
+            return dbcontext.Flight.Max(e => e.FlightID);
+        }
+
+        public int GetTicketId()
+        {
             //test comment
             return dbcontext.FlightTicket.Max(e => e.FlightTicketID);
         }
