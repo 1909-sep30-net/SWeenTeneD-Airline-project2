@@ -82,9 +82,7 @@ steps:
 
 - task: AzureRmWebAppDeployment@4
   inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: '9a56e737-3e9f-4bb8-bc24-e316a0047308'
+    azureSubscription: 'Free Trial(9a56e737-3e9f-4bb8-bc24-e316a0047308)'
     appType: 'webApp'
     WebAppName: 'SWeenTeneD'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
   
