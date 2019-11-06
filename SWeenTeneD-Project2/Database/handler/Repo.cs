@@ -41,20 +41,26 @@ namespace Database
 
             if (customer.CustomerID <= 0)
             {
-                IQueryable<Customer> q_cusotmer = null;
+                IQueryable<Customer> q_cusotmer = dbcontext.Customer.Select(c => c);
+
                 if (customer.FirstName != null)
                 {
-                    q_cusotmer = dbcontext.Customer.Where(c => c.FirstName == customer.FirstName)
+                    q_cusotmer = q_cusotmer.Where(c => c.FirstName == customer.FirstName)
                                         .AsNoTracking();
                 }
                 if (customer.LastName != null)
                 {
-                    q_cusotmer = dbcontext.Customer.Where(c => c.LastName == customer.LastName)
+                    q_cusotmer = q_cusotmer.Where(c => c.LastName == customer.LastName)
                         .AsNoTracking();
                 }
                 if (customer.Email != null)
                 {
-                    q_cusotmer = dbcontext.Customer.Where(c => c.Email == customer.Email)
+                    q_cusotmer = q_cusotmer.Where(c => c.Email == customer.Email)
+                        .AsNoTracking();
+                }
+                if (customer.Password != null)
+                {
+                    q_cusotmer = q_cusotmer.Where(c => c.Password == customer.Password)
                         .AsNoTracking();
                 }
 
@@ -144,28 +150,43 @@ namespace Database
             }
             if (flight.FlightID <= 0)
             {
-                IQueryable<Flight> e_flight = null;
+                IQueryable<Flight> e_flight = dbcontext.Flight.Select(f => f);
 
-                if (flight.Company != null)
+                if(flight.Company != null)
                 {
-                    e_flight = dbcontext.Flight.Where(f => f.Company == flight.Company)
+                    e_flight = e_flight.Where(f => f.Company == flight.Company)
                                                .AsNoTracking();
                 }
-                if (flight.Origin != null)
+                if(flight.DepartureTime != null)
                 {
-                    e_flight = dbcontext.Flight.Where(e => e.Origin == flight.Origin)
+                    e_flight = e_flight.Where(f => f.DepartureTime == flight.DepartureTime)
+                                               .AsNoTracking();
+                }
+                if(flight.ArrivalTime != null)
+                {
+                    e_flight = e_flight.Where(f => f.ArrivalTime == flight.ArrivalTime)
+                                               .AsNoTracking();
+                }
+                if(flight.Origin != null)
+                {
+                    e_flight = e_flight.Where(e => e.Origin == flight.Origin)
                                             .AsNoTracking();
                 }
-                if (flight.Destination != null)
+                if(flight.Destination != null)
                 {
-                    e_flight = dbcontext.Flight.Where(e => e.Destination == flight.Destination)
+                    e_flight = e_flight.Where(e => e.Destination == flight.Destination)
                                             .AsNoTracking();
 
                 }
-                if (flight.SeatAvailable > 0)
+                if(flight.SeatAvailable > 0)
                 {
-                    e_flight = dbcontext.Flight.Where(f => f.SeatAvailable > flight.SeatAvailable)
-                                               .AsNoTracking();
+                    e_flight = e_flight.Where(f => f.SeatAvailable == flight.SeatAvailable)
+                                            .AsNoTracking();
+                }
+                if(flight.Price > 0)
+                {
+                    e_flight = e_flight.Where(f => f.Price == flight.Price)
+                                            .AsNoTracking();
                 }
 
                 List<Logic.Flight> flightFind = e_flight.Select(Mapper.MapEtoFlight).ToList();
@@ -266,21 +287,21 @@ namespace Database
             {
                 return dbcontext.Airport.Select(Mapper.MapEToAirport).ToList();
             }
-                IQueryable<Airport> e_airport = null;
+                IQueryable<Airport> e_airport = dbcontext.Airport.Select(a => a);
 
                 if (airport.Name != null)
                 {
-                    e_airport = dbcontext.Airport.Where(a => a.Name == airport.Name)
+                    e_airport = e_airport.Where(a => a.Name == airport.Name)
                                                .AsNoTracking();
                 }
                 if (airport.Location != null)
                 {
-                    e_airport = dbcontext.Airport.Where(f => f.Location == airport.Location)
+                    e_airport = e_airport.Where(f => f.Location == airport.Location)
                                                .AsNoTracking();
                 }
                 if (airport.Weather != null)
                 {
-                    e_airport = dbcontext.Airport.Where(f => f.Weather == airport.Weather)
+                    e_airport = e_airport.Where(f => f.Weather == airport.Weather)
                                                .AsNoTracking();
                 }
 
@@ -349,31 +370,31 @@ namespace Database
             }
             if (ticket.TicketID <= 0)
             {
-                IQueryable<FlightTicket> e_ticket = null;
+                IQueryable<FlightTicket> e_ticket = dbcontext.FlightTicket.Select(t => t);
 
                 if (ticket.FlightID > 0)
                 {
-                    e_ticket = dbcontext.FlightTicket.Where(a => a.FlightID == ticket.FlightID)
+                    e_ticket = e_ticket.Where(t => t.FlightID == ticket.FlightID)
                                                .AsNoTracking();
                 }
                 if (ticket.CustomerID > 0)
                 {
-                    e_ticket = dbcontext.FlightTicket.Where(f => f.CustomerID == ticket.CustomerID)
+                    e_ticket = e_ticket.Where(f => f.CustomerID == ticket.CustomerID)
                                                .AsNoTracking();
                 }
                 if (ticket.Luggage > 0)
                 {
-                    e_ticket = dbcontext.FlightTicket.Where(f => f.Luggage == ticket.Luggage)
+                    e_ticket = e_ticket.Where(f => f.Luggage == ticket.Luggage)
                                                .AsNoTracking();
                 }
                 if (ticket.Price > 0)
                 {
-                    e_ticket = dbcontext.FlightTicket.Where(f => f.Price == ticket.Price)
+                    e_ticket = e_ticket.Where(f => f.Price == ticket.Price)
                                                .AsNoTracking();
                 }
                 if (ticket.Checkin == true)
                 {
-                    e_ticket = dbcontext.FlightTicket.Where(f => f.Checkin == ticket.Checkin)
+                    e_ticket = e_ticket.Where(f => f.Checkin == ticket.Checkin)
                                                .AsNoTracking();
                 }
 
@@ -458,13 +479,13 @@ namespace Database
             if (e_flight.SeatAvailable - numTickets < 0)
             {
                 //logger.info("Seat is not enough")
-                return "Sorry the remaining number seat is not enough";
+                return "No";
             }
             else
             {
                 e_flight.SeatAvailable = e_flight.SeatAvailable = numTickets;
                 dbcontext.SaveChanges();
-                return "Great! we have enough seat available";
+                return "Yes";
             }
 
         }

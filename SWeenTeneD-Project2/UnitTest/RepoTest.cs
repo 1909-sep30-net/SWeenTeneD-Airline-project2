@@ -32,7 +32,7 @@ namespace UnitTest
             ArrivalTime = new DateTime(2018, 1 , 2, 0, 0, 0),
             Origin = "DFW",
             Destination = "LAX",
-            SeatAvailable = 123,
+            SeatAvailable = 3,
             Price = 299.99
         };
 
@@ -211,27 +211,27 @@ namespace UnitTest
             Assert.NotNull(check);
         }
 
-        //[Fact]
-        //public void RepoReadFlight()
-        //{
-        //    DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
-        //                            .UseInMemoryDatabase("ReadFlight")
-        //                            .Options;
-        //    using SWTDbContext testContext = new SWTDbContext(options);
-        //    Repo repo = new Repo(testContext);
-        //    string create = repo.CreateFlight(flight);
+        [Fact]
+        public void RepoReadFlight()
+        {
+            DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
+                                    .UseInMemoryDatabase("ReadFlight")
+                                    .Options;
+            using SWTDbContext testContext = new SWTDbContext(options);
+            Repo repo = new Repo(testContext);
+            string create = repo.CreateFlight(flight);
 
-        //    Logic.Flight check = repo.ReadFlightList(flight).First();
+            Logic.Flight check = repo.ReadFlightList(flight).First();
 
-        //    Assert.Equal(1, check.FlightID);
-        //    Assert.Equal(flight.Company, check.Company);
-        //    Assert.Equal(flight.DepartureTime, check.DepartureTime);
-        //    Assert.Equal(flight.ArrivalTime, check.ArrivalTime);
-        //    Assert.Equal(flight.Origin, check.Origin);
-        //    Assert.Equal(flight.Destination, check.Destination);
-        //    Assert.Equal(flight.SeatAvailable, check.SeatAvailable);
-        //    Assert.Equal(flight.Price, check.Price);
-        //}
+            Assert.Equal(1, check.FlightID);
+            Assert.Equal(flight.Company, check.Company);
+            Assert.Equal(flight.DepartureTime, check.DepartureTime);
+            Assert.Equal(flight.ArrivalTime, check.ArrivalTime);
+            Assert.Equal(flight.Origin, check.Origin);
+            Assert.Equal(flight.Destination, check.Destination);
+            Assert.Equal(flight.SeatAvailable, check.SeatAvailable);
+            Assert.Equal(flight.Price, check.Price);
+        }
 
         [Fact]
         public void UpdateFlightTest()
@@ -364,24 +364,42 @@ namespace UnitTest
             Assert.Equal(newTicket.Price, price);
         }
 
-        //[Fact]
-        //public void DeleteTicketTest()
-        //{
-        //    DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
-        //              .UseInMemoryDatabase("DeleteTicket")
-        //              .Options;
-        //    using SWTDbContext testContext = new SWTDbContext(options);
-        //    Repo repo = new Repo(testContext);
+        [Fact]
+        public void DeleteTicketTest()
+        {
+            DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
+                      .UseInMemoryDatabase("DeleteTicket")
+                      .Options;
+            using SWTDbContext testContext = new SWTDbContext(options);
+            Repo repo = new Repo(testContext);
 
-        //    string create = repo.CreateFlightTicket(ticket);
+            string create = repo.CreateFlightTicket(ticket);
+            string createFlight = repo.CreateFlight(flight);
 
-        //    ticket.TicketID = 1;
+            ticket.TicketID = 1;
 
-        //    string delete = repo.DeleteFlightTicket(ticket);
+            string delete = repo.DeleteFlightTicket(ticket);
 
-        //    Assert.Equal("delete success", delete);
-        //}
+            Assert.Equal("delete success", delete);
+        }
 
+        [Fact]
+        public void CheckSeatAvailableTest()
+        {
+            DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
+                        .UseInMemoryDatabase("SeatAvailable")
+                        .Options;
+            using SWTDbContext testContext = new SWTDbContext(options);
+            Repo repo = new Repo(testContext);
+
+            string create = repo.CreateFlight(flight);
+
+            string yes = repo.CheckSeatAvailible(1, 2);
+            string no = repo.CheckSeatAvailible(1, 5);
+
+            Assert.Equal("Yes", yes);
+            Assert.Equal("No", no);
+        }
 
     }
 }
