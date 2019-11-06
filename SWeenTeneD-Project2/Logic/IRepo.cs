@@ -150,10 +150,16 @@ namespace Logic
         public string CheckSeatAvailible(int flight, int numTickets);
 
         /// <summary>
-        /// Function to get the currnet maximum ticket id from database
-        /// will return an integer
+        /// Returns max index of TicketID
         /// </summary>
         /// <returns></returns>
         public int GetTicketId();
+
+        /// <summary>
+        /// Returns max index of FlightID
+        /// </summary>
+        /// <returns></returns>
+        public int GetFlightId();
+
     }
 }

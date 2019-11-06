@@ -396,35 +396,27 @@ namespace Database
             }
         }
 
-        public string UpdateFlightTicket(Logic.FlightTicket ticket)
+        public string UpdateFlightTicket (Logic.Airport Airport)
         {
-            FlightTicket e_ticket = dbcontext.FlightTicket.Find(ticket.TicketID);
+            Airport e_Airport = dbcontext.Airport.Find(Airport.Name);
 
-            if (e_ticket == null)
+            if (e_Airport == null)
             {
                 //logger.Warn("Airport not Found")
                 return "no such Airport";
             }
 
-            if (ticket.CustomerID > 0)
+            if (Airport.Name != null)
             {
-                e_ticket.CustomerID = ticket.CustomerID;
+                e_Airport.Name = Airport.Name;
             }
-            if (ticket.FlightID > 0)
+            if (Airport.Location != null)
             {
-                e_ticket.FlightID = ticket.FlightID;
+                e_Airport.Location = Airport.Location;
             }
-            if (ticket.Checkin != e_ticket.Checkin)
+            if (Airport.Weather != null)
             {
-                e_ticket.Checkin = ticket.Checkin;
-            }
-            if (ticket.Luggage > 0)
-            {
-                e_ticket.Luggage = ticket.Luggage;
-            }
-            if (ticket.Price > 0)
-            {
-                e_ticket.Price = ticket.Price;
+                e_Airport.Weather = Airport.Weather;
             }
 
             dbcontext.SaveChanges();
@@ -467,11 +459,6 @@ namespace Database
                 return "Great! we have enough seat available";
             }
 
-        }
-
-        public int GetTicketId()
-        {
-            return dbcontext.FlightTicket.Max(e => e.FlightTicketID);
         }
     }
 }
