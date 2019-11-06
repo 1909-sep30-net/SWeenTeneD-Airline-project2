@@ -17,7 +17,7 @@ namespace UnitTest
         public void MockCreateCustomer()
         {           
             string message = "tri nguyen is created.";
-            repo.Setup(x => x.CreateCustomer(customer)).Returns("tri nguyen is created.");
+            repo.Setup(x => x.CreateCustomer(customer));
 
             Assert.Equal(message, repo.Object.CreateCustomer(customer));
         }
