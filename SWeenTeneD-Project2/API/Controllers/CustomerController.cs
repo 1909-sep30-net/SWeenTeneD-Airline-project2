@@ -106,7 +106,6 @@ namespace API.Controllers
             Logic.Customer cus = new Logic.Customer();
             cus.CustomerID = id;
 
-            //IEnumerable<Logic.Customer> Lcustomers = iRepo.ReadCustomerList(cus);
             await iRepo.DeleteCustomer(cus);
 
             return Ok();

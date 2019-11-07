@@ -27,7 +27,8 @@ namespace API.Controllers
 
         // GET: api/Airport/Airport's name
         [HttpGet("{name}", Name = "GetAirport")]
-        public async Task<IEnumerable<API.Models.APIAirport>>GetByName(string name)
+
+        public async Task<IEnumerable<API.Models.APIAirport>> GetByName(string name)
         {
             Logic.Airport LAir = new Logic.Airport();
             LAir.Name = name;
@@ -88,7 +89,6 @@ namespace API.Controllers
             Logic.Airport air = new Logic.Airport();
             air.Name = name;
 
-            //IEnumerable<Logic.Airport> Lairports = iRepo.ReadAirportList(air);
             await iRepo.DeleteAirport(air);
 
             return Ok();
