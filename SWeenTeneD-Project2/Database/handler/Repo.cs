@@ -520,5 +520,15 @@ namespace Database
         {
             return await dbcontext.Flight.MaxAsync(e => e.FlightID);
         }
+
+        //public async Task<string> GetAirportName()
+        //{
+        //    return await dbcontext.Airport.
+        //}
+
+        public async Task<int> GetCustomerId()
+        {
+            return await dbcontext.Customer.MaxAsync(e => e.CustomerID);
+        }
     }
 }

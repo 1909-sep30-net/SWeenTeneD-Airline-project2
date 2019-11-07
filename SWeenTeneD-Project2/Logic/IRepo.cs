@@ -162,5 +162,9 @@ namespace Logic
         /// <returns></returns>
         public Task<int> GetFlightId();
 
+        //public Task<string> GetAirportName();
+
+        public Task<int> GetCustomerId();
+
     }
 }
