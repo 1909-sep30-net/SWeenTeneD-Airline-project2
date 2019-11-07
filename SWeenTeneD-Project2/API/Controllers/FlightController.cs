@@ -27,7 +27,7 @@ namespace API.Controllers
             LFlight.FlightID = id;
 
             //Will add another method to check max element of FlightID
-            if(LFlight.FlightID <= 0 | LFlight.FlightID > await iRepo.GetFlightId())
+            if(LFlight.FlightID <= 0 || LFlight.FlightID > await iRepo.GetFlightId())
             {
                 IEnumerable<Logic.Flight> allFlights = await iRepo.ReadFlightList(null);
                 IEnumerable<API.Models.APIFlight> nullAPI = allFlights.Select(af => new API.Models.APIFlight

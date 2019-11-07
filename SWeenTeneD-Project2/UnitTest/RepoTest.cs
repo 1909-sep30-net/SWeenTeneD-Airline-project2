@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 using Xunit;
 using Database;
@@ -223,7 +222,13 @@ namespace UnitTest
             Repo repo = new Repo(testContext);
             string create = await repo.CreateFlight(flight);
 
-            List<Logic.Flight> check = await repo.ReadFlightList(flight);
+
+            Logic.Flight test = new Logic.Flight
+            {
+                FlightID = 1
+            };
+
+            List<Logic.Flight> check = await repo.ReadFlightList(test);
 
             Assert.Equal(1, check[0].FlightID);
             Assert.Equal(flight.Company, check[0].Company);
@@ -401,6 +406,78 @@ namespace UnitTest
 
             Assert.Equal("Yes", yes);
             Assert.Equal("No", no);
+        }
+
+        [Fact]
+        public async Task FullCustomerListTest()
+        {
+            DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
+            .UseInMemoryDatabase("FullCustomer")
+            .Options;
+            using SWTDbContext testContext = new SWTDbContext(options);
+            Repo repo = new Repo(testContext);
+
+            string create = await repo.CreateCustomer(customer);
+
+            List<Logic.Customer> find = await repo.ReadCustomerList(null);
+
+            int index = find.Count;
+
+            Assert.Equal(1, index);
+        }
+
+        [Fact]
+        public async Task FullTicketListTest()
+        {
+            DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
+            .UseInMemoryDatabase("FullTicket")
+            .Options;
+            using SWTDbContext testContext = new SWTDbContext(options);
+            Repo repo = new Repo(testContext);
+
+            string create = await repo.CreateFlightTicket(ticket);
+
+            List<Logic.FlightTicket> find = await repo.ReadTicketList(null);
+
+            int index = find.Count;
+
+            Assert.Equal(1, index);
+        }
+
+        [Fact]
+        public async Task FullAirportListTest()
+        {
+            DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
+            .UseInMemoryDatabase("FullAirport")
+            .Options;
+            using SWTDbContext testContext = new SWTDbContext(options);
+            Repo repo = new Repo(testContext);
+
+            string create = await repo.CreateAirport(airport);
+
+            List<Logic.Airport> find = await repo.ReadAirportList(null);
+
+            int index = find.Count;
+
+            Assert.Equal(1, index);
+        }
+
+        [Fact]
+        public async Task FullFlightListTest()
+        {
+            DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
+            .UseInMemoryDatabase("FullFlight")
+            .Options;
+            using SWTDbContext testContext = new SWTDbContext(options);
+            Repo repo = new Repo(testContext);
+
+            string create = await repo.CreateFlight(flight);
+
+            List<Logic.Flight> find = await repo.ReadFlightList(null);
+
+            int index = find.Count;
+
+            Assert.Equal(1, index);
         }
 
     }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Logic;
 using Microsoft.EntityFrameworkCore;
@@ -35,7 +33,7 @@ namespace Database
 
         public async Task<List<Logic.Customer>> ReadCustomerList(Logic.Customer customer)
         {
-            if (customer.CustomerID <= 0 && customer.FirstName == null)
+            if ( customer == null )
             {
                 List<Customer> customerList = await dbcontext.Customer.ToListAsync();
 
@@ -148,8 +146,7 @@ namespace Database
 
         public async Task<List<Logic.Flight>> ReadFlightList(Logic.Flight flight)
         {
-            int maxId = await GetFlightId();
-            if ( flight == null || flight.FlightID <= 0 || flight.FlightID > maxId )
+            if ( flight == null )
             {
                 List<Flight> flightFind = await dbcontext.Flight.ToListAsync();
 
@@ -291,7 +288,7 @@ namespace Database
 
         public async Task<List<Logic.Airport>> ReadAirportList(Logic.Airport airport)
         {
-            if (airport == null)
+            if (airport ==  null)
             {
                 List<Airport> airportFind = await dbcontext.Airport.ToListAsync();
 
@@ -521,14 +518,22 @@ namespace Database
             return await dbcontext.Flight.MaxAsync(e => e.FlightID);
         }
 
-        //public async Task<string> GetAirportName()
-        //{
-        //    return await dbcontext.Airport.
-        //}
-
         public async Task<int> GetCustomerId()
         {
             return await dbcontext.Customer.MaxAsync(e => e.CustomerID);
+        }
+
+        public async Task<string> GetAirPortName(string name)
+        {
+            Airport find = await dbcontext.Airport.FindAsync(name);
+            if (find == null)
+            {
+                return null;
+            }
+            else
+            {
+                return find.Name;
+            }
         }
     }
 }
