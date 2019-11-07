@@ -27,11 +27,11 @@ namespace API.Controllers
 
         // GET: api/Airport/Airport's name
         [HttpGet("{name}", Name = "GetAirport")]
-        public IEnumerable<API.Models.APIAirport>GetByName(string name)
+        public async Task<IEnumerable<API.Models.APIAirport>>GetByName(string name)
         {
             Logic.Airport LAir = new Logic.Airport();
             LAir.Name = name;
-            IEnumerable<Logic.Airport> airports = iRepo.ReadAirportList(LAir);
+            IEnumerable<Logic.Airport> airports = await iRepo.ReadAirportList(LAir);
             IEnumerable<API.Models.APIAirport> apiAirport = airports.Select(a => new API.Models.APIAirport
             {
                 //APIModel = Logic
@@ -46,7 +46,7 @@ namespace API.Controllers
 
         // POST: api/Airport
         [HttpPost]
-        public ActionResult Post([FromBody, Bind("Name, Location, Weather")] API.Models.APIAirport airport)
+        public async Task<ActionResult> Post([FromBody, Bind("Name, Location, Weather")] API.Models.APIAirport airport)
         {
             Logic.Airport air = new Logic.Airport
             {
@@ -55,19 +55,19 @@ namespace API.Controllers
                 Weather = airport.Weather
             };
 
-            iRepo.CreateAirport(air);
+            await iRepo.CreateAirport(air);
 
-            return CreatedAtRoute("GetAirport", new {Name = air.Name}, airport);
+            return CreatedAtRoute("GetAirport", new {name = air.Name}, air);
         }
 
         // PUT: api/Airport/Name of airport you want to edit
         [HttpPut("{id}")]
-        public IActionResult Put(string id, [FromBody] API.Models.APIAirport Aairport)
+        public async Task<IActionResult> Put(string id, [FromBody] API.Models.APIAirport Aairport)
         {
             Logic.Airport air = new Logic.Airport();
             air.Name = id;
 
-            IEnumerable<Logic.Airport> Lairports = iRepo.ReadAirportList(air);
+            IEnumerable<Logic.Airport> Lairports = await iRepo.ReadAirportList(air);
 
             //Need exception handling here, maybe implement in repo?
             Logic.Airport newAir = new Logic.Airport
@@ -77,19 +77,19 @@ namespace API.Controllers
                 Weather = Aairport.Weather
             };
 
-            iRepo.UpdateAirport(newAir);
+            await iRepo.UpdateAirport(newAir);
             return Ok();
         }
 
         // DELETE: api/airport/AirportName
         [HttpDelete("{name}")]
-        public IActionResult Delete(string name)
+        public async Task<IActionResult> Delete(string name)
         {
             Logic.Airport air = new Logic.Airport();
             air.Name = name;
 
-            IEnumerable<Logic.Airport> Lairports = iRepo.ReadAirportList(air);
-            iRepo.DeleteAirport(air);
+            //IEnumerable<Logic.Airport> Lairports = iRepo.ReadAirportList(air);
+            await iRepo.DeleteAirport(air);
 
             return Ok();
         }

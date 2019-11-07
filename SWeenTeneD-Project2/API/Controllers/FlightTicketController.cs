@@ -28,7 +28,7 @@ namespace API.Controllers
 
         // GET: api/FlightTicket/5
         [HttpGet("{id}", Name = "GetFlightTicket")]
-        public IEnumerable<API.Models.APIFlightTicket> Get(int id)
+        public async Task<IEnumerable<API.Models.APIFlightTicket>> Get(int id)
         {
             Logic.FlightTicket LTicket = new Logic.FlightTicket();
             LTicket.TicketID = id;
@@ -37,7 +37,7 @@ namespace API.Controllers
             //Read maximum ID from database and pass it as parameter for If
             if (LTicket.TicketID <= 0 | LTicket.TicketID > iRepo.GetTicketId())
             {
-                IEnumerable<Logic.FlightTicket> allFlightTickets = iRepo.ReadTicketList(null);
+                IEnumerable<Logic.FlightTicket> allFlightTickets = await iRepo.ReadTicketList(null);
                 IEnumerable<API.Models.APIFlightTicket> nullAPI = allFlightTickets.Select(af => new API.Models.APIFlightTicket
                 {
                     TicketID = af.TicketID,
@@ -50,7 +50,7 @@ namespace API.Controllers
                 return nullAPI;
             }
 
-            IEnumerable<Logic.FlightTicket> flightTickets = iRepo.ReadTicketList(LTicket);
+            IEnumerable<Logic.FlightTicket> flightTickets = await iRepo.ReadTicketList(LTicket);
             IEnumerable<API.Models.APIFlightTicket> apiFlightTicket = flightTickets.Select(ft => new API.Models.APIFlightTicket
             {
                 //APIModel = Logic
@@ -68,7 +68,7 @@ namespace API.Controllers
 
         // POST: api/FlightTicket
         [HttpPost]
-        public ActionResult Post([FromBody,Bind("FlightID, CustomerID, Price, CheckIn, Luggage")] API.Models.APIFlightTicket flightTicket)
+        public async Task<ActionResult> Post([FromBody,Bind("FlightID, CustomerID, Price, CheckIn, Luggage")] API.Models.APIFlightTicket flightTicket)
         {
             Logic.FlightTicket flight = new Logic.FlightTicket
             {
@@ -80,18 +80,23 @@ namespace API.Controllers
                 Luggage = flightTicket.Luggage
             };
             //iRepo.CheckSeatAvailible(flight.flightID, number of ticket customer choose);
-            return CreatedAtRoute("GetFlightTicket", new {TicketID = flight.TicketID}, flightTicket);
+
+            await iRepo.CheckSeatAvailible(flight.FlightID, 1);
+
+            await iRepo.CreateFlightTicket(flight);
+
+            return CreatedAtRoute("GetFlightTicket", new {id = flight.TicketID}, flight);
 
         }
 
         // PUT: api/FlightTicket/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] API.Models.APIFlightTicket AflightTicket)
+        public async Task<IActionResult> Put(int id, [FromBody] API.Models.APIFlightTicket AflightTicket)
         {
             Logic.FlightTicket fli = new Logic.FlightTicket();
             fli.TicketID = id;
 
-            IEnumerable<Logic.FlightTicket> LflightTickets = iRepo.ReadTicketList(fli);
+            IEnumerable<Logic.FlightTicket> LflightTickets = await iRepo.ReadTicketList(fli);
 
             Logic.FlightTicket newFli = new Logic.FlightTicket
             {
@@ -103,20 +108,21 @@ namespace API.Controllers
                 Luggage = AflightTicket.Luggage
             };
 
-            iRepo.UpdateFlightTicket(newFli);
+            await iRepo.UpdateFlightTicket(newFli);
             return Ok();
 
         }
 
+        //NOT WORKING AT THE MOMENT DUE TO ADDING SEAT++ IN REPO
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             Logic.FlightTicket fli = new Logic.FlightTicket();
             fli.TicketID = id;
 
-            IEnumerable<Logic.FlightTicket> LflightTickets = iRepo.ReadTicketList(fli);
-            iRepo.DeleteFlightTicket(fli);
+            //IEnumerable<Logic.FlightTicket> LflightTickets = iRepo.ReadTicketList(fli);
+            await iRepo.DeleteFlightTicket(fli);
 
             return Ok();
         }

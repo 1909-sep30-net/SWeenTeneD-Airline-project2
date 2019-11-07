@@ -462,21 +462,11 @@ namespace Database
             }
             else
             {
-                e_flight.SeatAvailable = e_flight.SeatAvailable = numTickets;
+                e_flight.SeatAvailable = e_flight.SeatAvailable - numTickets;
                 dbcontext.SaveChanges();
                 return "Great! we have enough seat available";
             }
 
-        }
-
-        public int GetTicketId()
-        {
-            return dbcontext.FlightTicket.Max(e => e.FlightTicketID);
-        }
-
-        public int GetFlightId()
-        {
-            return dbcontext.Flight.Max(e => e.FlightID);
         }
 
         public int GetTicketId()
