@@ -5,6 +5,7 @@ using System.Linq;
 using Xunit;
 using Database;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace UnitTest
 {
@@ -32,7 +33,7 @@ namespace UnitTest
             ArrivalTime = new DateTime(2018, 1 , 2, 0, 0, 0),
             Origin = "DFW",
             Destination = "LAX",
-            SeatAvailable = 123,
+            SeatAvailable = 3,
             Price = 299.99
         };
 
@@ -46,14 +47,14 @@ namespace UnitTest
         };
 
         [Fact]
-        public void RepoCreateCustomerTest()
+        public async Task RepoCreateCustomerTest()
         {
             DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
                                                             .UseInMemoryDatabase("CreateCustomer")
                                                             .Options;
             using SWTDbContext testContext = new SWTDbContext(options);
             Repo repo = new Repo(testContext);
-            string create = repo.CreateCustomer(customer);
+            string create = await repo.CreateCustomer(customer);
 
             Customer check = testContext.Customer.Select(c => c).First();
 
@@ -61,25 +62,26 @@ namespace UnitTest
         }
 
         [Fact]
-        public void RepoReadCustomerTest()
+        public async Task RepoReadCustomerTestAsync()
         {
             DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
                                                 .UseInMemoryDatabase("ReadCustomer")
                                                 .Options;
             using SWTDbContext testContext = new SWTDbContext(options);
             Repo repo = new Repo(testContext);
-            string create = repo.CreateCustomer(customer);
+            string create = await repo.CreateCustomer(customer);
 
-            Logic.Customer customerFind = repo.ReadCustomerList(customer).First();
+            List<Logic.Customer> customerFind = await repo.ReadCustomerList(customer);
+            Logic.Customer first = customerFind.First();
 
-            Assert.Equal(customer.FirstName, customerFind.FirstName);
-            Assert.Equal(customer.LastName, customerFind.LastName);
-            Assert.Equal(customer.Email, customerFind.Email);
-            Assert.Equal(customer.Password, customerFind.Password);
+            Assert.Equal(customer.FirstName, first.FirstName);
+            Assert.Equal(customer.LastName, first.LastName);
+            Assert.Equal(customer.Email, first.Email);
+            Assert.Equal(customer.Password, first.Password);
         }
 
         [Fact]
-        public void RepoUpdateCustomerTest()
+        public async Task RepoUpdateCustomerTest()
         {
             DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
                                                 .UseInMemoryDatabase("UpdateCustomer")
@@ -95,8 +97,8 @@ namespace UnitTest
                 Password = "4321"
             };
 
-            string create = repo.CreateCustomer(customer);
-            string update = repo.UpdateCustomer(newCustomer);
+            string create = await repo.CreateCustomer(customer);
+            string update = await repo.UpdateCustomer(newCustomer);
 
             string firstName = testContext.Customer.Select(c => c.FirstName).First();
             string lastName = testContext.Customer.Select(c => c.LastName).First();
@@ -110,7 +112,7 @@ namespace UnitTest
         }
 
         [Fact]
-        public void RepoDeleteCustomerTest()
+        public async Task RepoDeleteCustomerTest()
         {
             DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
                                                 .UseInMemoryDatabase("DeleteCustomer")
@@ -119,21 +121,21 @@ namespace UnitTest
             Repo repo = new Repo(testContext);
             customer.CustomerID = 1;
 
-            string create = repo.CreateCustomer(customer);
-            string delete = repo.DeleteCustomer(customer);
+            string create = await repo.CreateCustomer(customer);
+            string delete = await repo.DeleteCustomer(customer);
 
             Assert.Equal("delete success", delete);
         }
 
         [Fact]
-        public void RepoCreateAirportTest()
+        public async Task RepoCreateAirportTest()
         {
             DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
                                                 .UseInMemoryDatabase("CreateAirport")
                                                 .Options;
             using SWTDbContext testContext = new SWTDbContext(options);
             Repo repo = new Repo(testContext);
-            string create = repo.CreateAirport(airport);
+            string create = await repo.CreateAirport(airport);
 
             Airport check = testContext.Airport.Select(a => a).First();
 
@@ -141,24 +143,24 @@ namespace UnitTest
         }
 
         [Fact]
-        public void RepoReadAirportTest()
+        public async Task RepoReadAirportTest()
         {
             DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
                                                 .UseInMemoryDatabase("ReadAirport")
                                                 .Options;
             using SWTDbContext testContext = new SWTDbContext(options);
             Repo repo = new Repo(testContext);
-            string create = repo.CreateAirport(airport);
+            string create = await repo.CreateAirport(airport);
 
-            Logic.Airport airportFind = repo.ReadAirportList(airport).First();
+            List<Logic.Airport> airportFind = await repo.ReadAirportList(airport);
 
-            Assert.Equal(airport.Name, airportFind.Name);
-            Assert.Equal(airport.Location, airportFind.Location);
-            Assert.Equal(airport.Weather, airportFind.Weather);
+            Assert.Equal(airport.Name, airportFind[0].Name);
+            Assert.Equal(airport.Location, airportFind[0].Location);
+            Assert.Equal(airport.Weather, airportFind[0].Weather);
         }
 
         [Fact]
-        public void RepoUpdateAirportTest()
+        public async Task RepoUpdateAirportTest()
         {
             DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
                                                 .UseInMemoryDatabase("UpdateAirport")
@@ -172,8 +174,8 @@ namespace UnitTest
                 Weather = "Cloudy"
             };
 
-            string create = repo.CreateAirport(airport);
-            string update = repo.UpdateAirport(newAirport);
+            string create = await repo.CreateAirport(airport);
+            string update = await repo.UpdateAirport(newAirport);
 
             string location = testContext.Airport.Select(a => a.Location).First();
             string weather = testContext.Airport.Select(a => a.Weather).First();
@@ -183,65 +185,65 @@ namespace UnitTest
         }
 
         [Fact]
-        public void RepoDeleteAirportTest()
+        public async Task RepoDeleteAirportTest()
         {
             DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
                                                 .UseInMemoryDatabase("DeleteAirport")
                                                 .Options;
             using SWTDbContext testContext = new SWTDbContext(options);
             Repo repo = new Repo(testContext);
-            string create = repo.CreateAirport(airport);
-            string delete = repo.DeleteAirport(airport);
+            string create = await repo.CreateAirport(airport);
+            string delete = await repo.DeleteAirport(airport);
 
             Assert.Equal("delete success", delete);
         }
 
         [Fact]
-        public void RepoCreateFlight()
+        public async Task RepoCreateFlight()
         {
             DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
                                     .UseInMemoryDatabase("CreateFlight")
                                     .Options;
             using SWTDbContext testContext = new SWTDbContext(options);
             Repo repo = new Repo(testContext);
-            string create = repo.CreateFlight(flight);
+            string create = await repo.CreateFlight(flight);
 
             Flight check = testContext.Flight.Select(f => f).First();
 
             Assert.NotNull(check);
         }
 
-        //[Fact]
-        //public void RepoReadFlight()
-        //{
-        //    DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
-        //                            .UseInMemoryDatabase("ReadFlight")
-        //                            .Options;
-        //    using SWTDbContext testContext = new SWTDbContext(options);
-        //    Repo repo = new Repo(testContext);
-        //    string create = repo.CreateFlight(flight);
+        [Fact]
+        public async Task RepoReadFlight()
+        {
+            DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
+                                    .UseInMemoryDatabase("ReadFlight")
+                                    .Options;
+            using SWTDbContext testContext = new SWTDbContext(options);
+            Repo repo = new Repo(testContext);
+            string create = await repo.CreateFlight(flight);
 
-        //    Logic.Flight check = repo.ReadFlightList(flight).First();
+            List<Logic.Flight> check = await repo.ReadFlightList(flight);
 
-        //    Assert.Equal(1, check.FlightID);
-        //    Assert.Equal(flight.Company, check.Company);
-        //    Assert.Equal(flight.DepartureTime, check.DepartureTime);
-        //    Assert.Equal(flight.ArrivalTime, check.ArrivalTime);
-        //    Assert.Equal(flight.Origin, check.Origin);
-        //    Assert.Equal(flight.Destination, check.Destination);
-        //    Assert.Equal(flight.SeatAvailable, check.SeatAvailable);
-        //    Assert.Equal(flight.Price, check.Price);
-        //}
+            Assert.Equal(1, check[0].FlightID);
+            Assert.Equal(flight.Company, check[0].Company);
+            Assert.Equal(flight.DepartureTime, check[0].DepartureTime);
+            Assert.Equal(flight.ArrivalTime, check[0].ArrivalTime);
+            Assert.Equal(flight.Origin, check[0].Origin);
+            Assert.Equal(flight.Destination, check[0].Destination);
+            Assert.Equal(flight.SeatAvailable, check[0].SeatAvailable);
+            Assert.Equal(flight.Price, check[0].Price);
+        }
 
         [Fact]
-        public void UpdateFlightTest()
+        public async Task UpdateFlightTest()
         {
             DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
                                     .UseInMemoryDatabase("UpdateFlight")
                                     .Options;
             using SWTDbContext testContext = new SWTDbContext(options);
             Repo repo = new Repo(testContext);
-            string create = repo.CreateFlight(flight);
+            string create = await repo.CreateFlight(flight);
 
             Logic.Flight newFlight = new Logic.Flight
             {
@@ -255,7 +257,7 @@ namespace UnitTest
                 Price = 150.50
             };
 
-            string update = repo.UpdateFlight(newFlight);
+            string update = await repo.UpdateFlight(newFlight);
 
             string company = testContext.Flight.Select(f => f.Company).First();
             DateTime depart = testContext.Flight.Select(f => f.DepartureTime).First();
@@ -275,7 +277,7 @@ namespace UnitTest
         }
 
         [Fact]
-        public void DeleteFlightTest()
+        public async Task DeleteFlightTest()
         {
             DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
                                   .UseInMemoryDatabase("DeleteFlight")
@@ -285,14 +287,14 @@ namespace UnitTest
 
             flight.FlightID = 1;
 
-            string create = repo.CreateFlight(flight);
-            string delete = repo.DeleteFlight(flight);
+            string create = await repo.CreateFlight(flight);
+            string delete = await repo.DeleteFlight(flight);
 
             Assert.Equal("delete success", delete);
         }
 
         [Fact]
-        public void CreateTicketTest()
+        public async Task CreateTicketTest()
         {
             DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
                       .UseInMemoryDatabase("CreateTicket")
@@ -300,7 +302,7 @@ namespace UnitTest
             using SWTDbContext testContext = new SWTDbContext(options);
             Repo repo = new Repo(testContext);
 
-            string create = repo.CreateFlightTicket(ticket);
+            string create = await repo.CreateFlightTicket(ticket);
 
             FlightTicket check = testContext.FlightTicket.Select(f => f).First();
 
@@ -308,7 +310,7 @@ namespace UnitTest
         }
 
         [Fact] 
-        public void ReadTicketTest()
+        public async Task ReadTicketTest()
         {
             DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
                       .UseInMemoryDatabase("ReadTicket")
@@ -316,20 +318,20 @@ namespace UnitTest
             using SWTDbContext testContext = new SWTDbContext(options);
             Repo repo = new Repo(testContext);
 
-            string create = repo.CreateFlightTicket(ticket);
+            string create = await repo.CreateFlightTicket(ticket);
 
-            Logic.FlightTicket find = repo.ReadTicketList(ticket).First();
+            List<Logic.FlightTicket> find = await repo.ReadTicketList(ticket);
 
-            Assert.Equal(ticket.TicketID + 1, find.TicketID);
-            Assert.Equal(ticket.CustomerID, find.CustomerID);
-            Assert.Equal(ticket.FlightID, find.FlightID);
-            Assert.Equal(ticket.Price, find.Price);
-            Assert.Equal(ticket.Luggage, find.Luggage);
-            Assert.Equal(ticket.Checkin, find.Checkin);
+            Assert.Equal(ticket.TicketID + 1, find[0].TicketID);
+            Assert.Equal(ticket.CustomerID, find[0].CustomerID);
+            Assert.Equal(ticket.FlightID, find[0].FlightID);
+            Assert.Equal(ticket.Price, find[0].Price);
+            Assert.Equal(ticket.Luggage, find[0].Luggage);
+            Assert.Equal(ticket.Checkin, find[0].Checkin);
         }
 
         [Fact]
-        public void UpdateTicketTest()
+        public async Task UpdateTicketTest()
         {
             DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
                       .UseInMemoryDatabase("UpdateTicket")
@@ -337,7 +339,7 @@ namespace UnitTest
             using SWTDbContext testContext = new SWTDbContext(options);
             Repo repo = new Repo(testContext);
 
-            string create = repo.CreateFlightTicket(ticket);
+            string create = await repo.CreateFlightTicket(ticket);
 
             Logic.FlightTicket newTicket = new Logic.FlightTicket
             {
@@ -349,7 +351,7 @@ namespace UnitTest
                 Luggage = 2
             };
 
-            string update = repo.UpdateFlightTicket(newTicket);
+            string update = await repo.UpdateFlightTicket(newTicket);
 
             int cusId = testContext.FlightTicket.Select(f => f.CustomerID).First();
             int flightId = testContext.FlightTicket.Select(f => f.FlightID).First();
@@ -364,24 +366,42 @@ namespace UnitTest
             Assert.Equal(newTicket.Price, price);
         }
 
-        //[Fact]
-        //public void DeleteTicketTest()
-        //{
-        //    DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
-        //              .UseInMemoryDatabase("DeleteTicket")
-        //              .Options;
-        //    using SWTDbContext testContext = new SWTDbContext(options);
-        //    Repo repo = new Repo(testContext);
+        [Fact]
+        public async Task DeleteTicketTest()
+        {
+            DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
+                      .UseInMemoryDatabase("DeleteTicket")
+                      .Options;
+            using SWTDbContext testContext = new SWTDbContext(options);
+            Repo repo = new Repo(testContext);
 
-        //    string create = repo.CreateFlightTicket(ticket);
+            string create = await repo.CreateFlightTicket(ticket);
+            string createFlight = await repo.CreateFlight(flight);
 
-        //    ticket.TicketID = 1;
+            ticket.TicketID = 1;
 
-        //    string delete = repo.DeleteFlightTicket(ticket);
+            string delete = await repo.DeleteFlightTicket(ticket);
 
-        //    Assert.Equal("delete success", delete);
-        //}
+            Assert.Equal("delete success", delete);
+        }
 
+        [Fact]
+        public async Task CheckSeatAvailableTest()
+        {
+            DbContextOptions<SWTDbContext> options = new DbContextOptionsBuilder<SWTDbContext>()
+                        .UseInMemoryDatabase("SeatAvailable")
+                        .Options;
+            using SWTDbContext testContext = new SWTDbContext(options);
+            Repo repo = new Repo(testContext);
+
+            string create = await repo.CreateFlight(flight);
+
+            string yes = await repo.CheckSeatAvailible(1, 2);
+            string no = await repo.CheckSeatAvailible(1, 5);
+
+            Assert.Equal("Yes", yes);
+            Assert.Equal("No", no);
+        }
 
     }
 }
