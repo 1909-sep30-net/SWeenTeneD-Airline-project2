@@ -73,16 +73,4 @@ steps:
 - task: SonarCloudPublish@1
   displayName: Publish SonarCloud quality gate result
 
-- task: DotNetCoreCLI@2
-  displayName: dotnet publish + zip
-  inputs:
-    command: 'publish'
-    publishWebProjects: true
-    zipAfterPublish: true
-
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    azureSubscription: 'Free Trial(9a56e737-3e9f-4bb8-bc24-e316a0047308)'
-    appType: 'webApp'
-    WebAppName: 'SWeenTeneD'
   
