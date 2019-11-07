@@ -28,11 +28,11 @@ namespace API.Controllers
 
         //GET: api/Customer/Customer's first name
         [HttpGet("{firstname}", Name = "GetCustomer")]
-        public IEnumerable<API.Models.APICustomer> GetAllCustomers(string firstname)
+        public async Task<IEnumerable<API.Models.APICustomer>> GetAllCustomers(string firstname)
         {
             Logic.Customer Lcus = new Logic.Customer();
             Lcus.FirstName = firstname;
-            IEnumerable<Logic.Customer> customers = iRepo.ReadCustomerList(Lcus);
+            IEnumerable<Logic.Customer> customers = await iRepo.ReadCustomerList(Lcus);
             IEnumerable<API.Models.APICustomer> apiCustomer = customers.Select(c => new API.Models.APICustomer
             {
                 //From APIModel = Logic
@@ -56,7 +56,7 @@ namespace API.Controllers
         //POST: api/Customer
 
         [HttpPost]
-        public ActionResult Create([FromBody, Bind("FirstName, LastName, Email, Password")]API.Models.APICustomer customer)
+        public async Task<ActionResult> Create([FromBody, Bind("FirstName, LastName, Email, Password")]API.Models.APICustomer customer)
         {
 
             Logic.Customer cus = new Logic.Customer
@@ -68,21 +68,21 @@ namespace API.Controllers
                 Password = customer.Password
             };
 
-            iRepo.CreateCustomer(cus);
+            await iRepo.CreateCustomer(cus);
 
-            return CreatedAtRoute("GetCustomer", new { FirstName = cus.FirstName }, customer);
+            return CreatedAtRoute("GetCustomer", new { firstname = cus.FirstName }, cus);
 
         }
 
         // PUT: api/Customer/First name of customer you want to edit
         [HttpPut("{id}")]
-        public IActionResult Put(string id, [FromBody] API.Models.APICustomer Acustomer)
+        public async Task<IActionResult> Put(string id, [FromBody] API.Models.APICustomer Acustomer)
         {
 
             Logic.Customer cus = new Logic.Customer();
             cus.FirstName = id;
             
-            IEnumerable<Logic.Customer> Lcustomers = iRepo.ReadCustomerList(cus);
+            IEnumerable<Logic.Customer> Lcustomers = await iRepo.ReadCustomerList(cus);
 
                 //Remember to add try catch or some exception handling
                 Logic.Customer newCus = new Logic.Customer
@@ -94,20 +94,19 @@ namespace API.Controllers
                     Password = Acustomer.Password
                 };
 
-                iRepo.UpdateCustomer(newCus);
+                await iRepo.UpdateCustomer(newCus);
                 return Ok();
          
         }
 
         // DELETE: api/customer/CustomerID
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             Logic.Customer cus = new Logic.Customer();
             cus.CustomerID = id;
 
-            IEnumerable<Logic.Customer> Lcustomers = iRepo.ReadCustomerList(cus);
-            iRepo.DeleteCustomer(cus);
+            await iRepo.DeleteCustomer(cus);
 
             return Ok();
 
