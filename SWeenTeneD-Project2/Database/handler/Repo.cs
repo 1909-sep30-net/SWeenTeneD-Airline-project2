@@ -4,6 +4,7 @@ using System.Text;
 using System.Linq;
 using Logic;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 //IE: IEnumerable object
 //IQ: IQueryable object
 // E: Entity Model
@@ -21,27 +22,29 @@ namespace Database
             dbcontext = dbContext;
         }
 
-        public string CreateCustomer(Logic.Customer customer)
+        public async Task<string> CreateCustomer(Logic.Customer customer)
         {
             Customer e_customer = Mapper.MapCustomerToE(customer);
             dbcontext.Add(e_customer);
-            dbcontext.SaveChanges();
+            await dbcontext.SaveChangesAsync();
             //logger.Info();
 
             return $"{customer.FirstName} {customer.LastName} is created.";
         }
 
 
-        public List<Logic.Customer> ReadCustomerList(Logic.Customer customer)
+        public async Task<List<Logic.Customer>> ReadCustomerList(Logic.Customer customer)
         {
             if (customer.CustomerID <= 0 && customer.FirstName == null)
             {
-                return dbcontext.Customer.Select(Mapper.MapEToCustomer).ToList();
+                List<Customer> customerList = await dbcontext.Customer.ToListAsync();
+
+                return customerList.Select(Mapper.MapEToCustomer).ToList();
             }
 
             if (customer.CustomerID <= 0)
             {
-                IQueryable<Customer> q_cusotmer = dbcontext.Customer.Select(c => c);
+                IQueryable<Customer> q_cusotmer = dbcontext.Customer;
 
                 if (customer.FirstName != null)
                 {
@@ -64,18 +67,19 @@ namespace Database
                         .AsNoTracking();
                 }
 
-                IEnumerable<Logic.Customer> customerFind = q_cusotmer.Select(Mapper.MapEToCustomer);
-                if (customerFind.ToList().Count < 1)
+                List<Customer> customerFind = await q_cusotmer.ToListAsync();
+                List<Logic.Customer> resultCustomer = customerFind.Select(Mapper.MapEToCustomer).ToList();
+                if (resultCustomer.ToList().Count < 1)
                 {
                     //logger.Warn();
                     return null;
                 }
-                return customerFind.ToList();
+                return resultCustomer;
             }
             else
             {
                 List<Logic.Customer> customerFind = new List<Logic.Customer>();
-                customerFind.Add(Mapper.MapEToCustomer(dbcontext.Customer.Find(customer.CustomerID)));
+                customerFind.Add(Mapper.MapEToCustomer(await dbcontext.Customer.FindAsync(customer.CustomerID)));
                 
                 //logger.Info();
                 return customerFind;
@@ -83,9 +87,9 @@ namespace Database
             
         }
 
-        public string UpdateCustomer(Logic.Customer customer)
+        public async Task<string> UpdateCustomer(Logic.Customer customer)
           {
-            Customer e_customer = dbcontext.Customer.Find(customer.CustomerID);
+            Customer e_customer = await dbcontext.Customer.FindAsync(customer.CustomerID);
 
             if (e_customer == null)
             {
@@ -108,16 +112,16 @@ namespace Database
                 e_customer.Password = customer.Password;
             }
             
-            dbcontext.SaveChanges();
+            await dbcontext.SaveChangesAsync();
             //logger.Info();
 
             return "update success";
           }
 
 
-        public string DeleteCustomer(Logic.Customer customer)
+        public async Task<string> DeleteCustomer(Logic.Customer customer)
         {
-            Customer e_customer = dbcontext.Customer.Find(customer.CustomerID);
+            Customer e_customer = await dbcontext.Customer.FindAsync(customer.CustomerID);
             if (e_customer == null)
             {
                 //logger.Warn("customer not found")
@@ -131,22 +135,25 @@ namespace Database
             return "delete success";
         }
 
-        public string CreateFlight(Logic.Flight flight)
+        public async Task<string> CreateFlight(Logic.Flight flight)
         {
 
             Flight e_flight = Mapper.MapFlightToE(flight);
             dbcontext.Add(e_flight);
-            dbcontext.SaveChanges();
+            await dbcontext.SaveChangesAsync();
 
             //logger.info();
             return "New Flight Created!";
         }
 
-        public List<Logic.Flight> ReadFlightList(Logic.Flight flight)
+        public async Task<List<Logic.Flight>> ReadFlightList(Logic.Flight flight)
         {
-            if ( flight == null )
+            int maxId = await GetFlightId();
+            if ( flight == null || flight.FlightID <= 0 || flight.FlightID > maxId )
             {
-                return dbcontext.Flight.Select(Mapper.MapEtoFlight).ToList();
+                List<Flight> flightFind = await dbcontext.Flight.ToListAsync();
+
+                return flightFind.Select(Mapper.MapEtoFlight).ToList();
             }
             if (flight.FlightID <= 0)
             {
@@ -189,28 +196,29 @@ namespace Database
                                             .AsNoTracking();
                 }
 
-                List<Logic.Flight> flightFind = e_flight.Select(Mapper.MapEtoFlight).ToList();
-                if ( flightFind.Count < 1 )
+                List<Flight> flightFind = await e_flight.ToListAsync();
+                List<Logic.Flight> resultFlight = flightFind.Select(Mapper.MapEtoFlight).ToList();
+                if (resultFlight.Count < 1 )
                 {
                     //logger.Warn();
                     return null;                  
                 }
-                return flightFind;
+                return resultFlight;
             }
             else 
             {
                 List<Logic.Flight> flightFind = new List<Logic.Flight>
                 {
-                    Mapper.MapEtoFlight(dbcontext.Flight.Find(flight.FlightID))
+                    Mapper.MapEtoFlight(await dbcontext.Flight.FindAsync(flight.FlightID))
                 };
                 //logger.Info();
                 return flightFind;
             }
         }
 
-        public string UpdateFlight(Logic.Flight flight)
+        public async Task<string> UpdateFlight(Logic.Flight flight)
         {
-            Flight e_flight = dbcontext.Flight.Find(flight.FlightID);
+            Flight e_flight = await dbcontext.Flight.FindAsync(flight.FlightID);
 
             if (e_flight == null)
             {
@@ -247,16 +255,16 @@ namespace Database
                 e_flight.Price = flight.Price;
             }
 
-            dbcontext.SaveChanges();
+            await dbcontext.SaveChangesAsync();
             //logger.Info();
 
             return "update success";
         }
 
 
-        public string DeleteFlight(Logic.Flight flight)
+        public async Task<string> DeleteFlight(Logic.Flight flight)
         {
-            Flight e_flight = dbcontext.Flight.Find(flight.FlightID);
+            Flight e_flight = await dbcontext.Flight.FindAsync(flight.FlightID);
             if (e_flight == null)
             {
                 //logger.Warn("Flight not found.")
@@ -264,53 +272,62 @@ namespace Database
             }
 
             dbcontext.Remove(dbcontext.Flight.Find(flight.FlightID));
-            dbcontext.SaveChanges();
+            await dbcontext.SaveChangesAsync();
 
             //logger.info();
             return "delete success";
         }
 
-        public string CreateAirport(Logic.Airport airport)
+        public async Task<string> CreateAirport(Logic.Airport airport)
         {
             Airport e_airport = Mapper.MapAirportToE(airport);
             dbcontext.Add(e_airport);
-            dbcontext.SaveChanges();
+            await dbcontext.SaveChangesAsync();
 
             //logger.info();
             return "New Flight Created!";
         }
 
 
-        public List<Logic.Airport> ReadAirportList(Logic.Airport airport)
+        public async Task<List<Logic.Airport>> ReadAirportList(Logic.Airport airport)
         {
             if (airport == null)
             {
-                return dbcontext.Airport.Select(Mapper.MapEToAirport).ToList();
+                List<Airport> airportFind = await dbcontext.Airport.ToListAsync();
+
+                return airportFind.Select(Mapper.MapEToAirport).ToList();
             }
-                IQueryable<Airport> e_airport = dbcontext.Airport.Select(a => a);
+            IQueryable<Airport> e_airport = dbcontext.Airport.Select(a => a);
 
-                if (airport.Name != null)
-                {
-                    e_airport = e_airport.Where(a => a.Name == airport.Name)
-                                               .AsNoTracking();
-                }
-                if (airport.Location != null)
-                {
-                    e_airport = e_airport.Where(f => f.Location == airport.Location)
-                                               .AsNoTracking();
-                }
-                if (airport.Weather != null)
-                {
-                    e_airport = e_airport.Where(f => f.Weather == airport.Weather)
-                                               .AsNoTracking();
-                }
+            if (airport.Name != null)
+            {
+                e_airport = e_airport.Where(a => a.Name == airport.Name)
+                                           .AsNoTracking();
+            }
+            if (airport.Location != null)
+            {
+                e_airport = e_airport.Where(f => f.Location == airport.Location)
+                                           .AsNoTracking();
+            }
+            if (airport.Weather != null)
+            {
+                e_airport = e_airport.Where(f => f.Weather == airport.Weather)
+                                           .AsNoTracking();
+            }
 
-                return e_airport.Select(Mapper.MapEToAirport).ToList();        
+            List<Airport> airportFind2 = await e_airport.ToListAsync();
+            List<Logic.Airport> resultAirport = airportFind2.Select(Mapper.MapEToAirport).ToList();
+            if (resultAirport.Count < 1)
+            {
+                //logger.Warn();
+                return null;
+            }
+            return resultAirport;
         }
 
-        public string UpdateAirport(Logic.Airport airport)
+        public async Task<string> UpdateAirport(Logic.Airport airport)
         {
-            Airport e_airport = dbcontext.Airport.Find(airport.Name);
+            Airport e_airport = await dbcontext.Airport.FindAsync(airport.Name);
 
             if (e_airport == null)
             {
@@ -331,42 +348,44 @@ namespace Database
                 e_airport.Weather = airport.Weather;
             }
 
-            dbcontext.SaveChanges();
+            await dbcontext.SaveChangesAsync();
             //logger.Info();
 
             return "update success";
         }
 
-        public string DeleteAirport(Logic.Airport airport)
+        public async Task<string> DeleteAirport(Logic.Airport airport)
         {
-            Airport e_Airport = dbcontext.Airport.Find(airport.Name);
+            Airport e_Airport = await dbcontext.Airport.FindAsync(airport.Name);
             if (e_Airport == null)
             {
                 //logger.Warn("Airport not found.")
                 return "no such customer";
             }
             dbcontext.Remove(dbcontext.Airport.Find(airport.Name));
-            dbcontext.SaveChanges();
+            await dbcontext.SaveChangesAsync();
 
             //logger.info();
             return "delete success";
         }
 
-        public string CreateFlightTicket(Logic.FlightTicket ticket)
+        public async Task<string> CreateFlightTicket(Logic.FlightTicket ticket)
         {
             FlightTicket e_ticket = Mapper.MapFlightTicketToE(ticket);
             dbcontext.Add(e_ticket);
-            dbcontext.SaveChanges();
+            await dbcontext.SaveChangesAsync();
 
             //logger.info();
             return "New Ticket Created!";
         }
 
-        public List<Logic.FlightTicket> ReadTicketList(Logic.FlightTicket ticket)
+        public async Task<List<Logic.FlightTicket>> ReadTicketList(Logic.FlightTicket ticket)
         {
             if (ticket == null)
             {
-                return dbcontext.FlightTicket.Select(Mapper.MapEToFlightTicket).ToList();
+                List<FlightTicket> ticketFind = await dbcontext.FlightTicket.ToListAsync();
+
+                return ticketFind.Select(Mapper.MapEToFlightTicket).ToList();
             }
             if (ticket.TicketID <= 0)
             {
@@ -398,13 +417,14 @@ namespace Database
                                                .AsNoTracking();
                 }
 
-                List<Logic.FlightTicket> ticketFind = e_ticket.Select(Mapper.MapEToFlightTicket).ToList();
-                if (ticketFind.Count < 1)
+                List<FlightTicket> ticketFind2 = await e_ticket.ToListAsync();
+                List<Logic.FlightTicket> resultticket = ticketFind2.Select(Mapper.MapEToFlightTicket).ToList();
+                if (resultticket.Count < 1)
                 {
                     //logger.Warn();
-                    return null;                  
+                    return null;
                 }
-                return ticketFind;
+                return resultticket;
             }
             else
             {
@@ -417,9 +437,9 @@ namespace Database
             }
         }
 
-        public string UpdateFlightTicket(Logic.FlightTicket ticket)
+        public async Task<string> UpdateFlightTicket(Logic.FlightTicket ticket)
         {
-            FlightTicket e_ticket = dbcontext.FlightTicket.Find(ticket.TicketID);
+            FlightTicket e_ticket = await dbcontext.FlightTicket.FindAsync(ticket.TicketID);
 
             if (e_ticket == null)
             {
@@ -448,15 +468,15 @@ namespace Database
                 e_ticket.Price = ticket.Price;
             }
 
-            dbcontext.SaveChanges();
+            await dbcontext.SaveChangesAsync();
             //logger.Info();
 
             return "update success";
         }
 
-        public string DeleteFlightTicket(Logic.FlightTicket ticket)
+        public async Task<string> DeleteFlightTicket(Logic.FlightTicket ticket)
         {
-            FlightTicket e_ticket = dbcontext.FlightTicket.Find(ticket.TicketID);
+            FlightTicket e_ticket = await dbcontext.FlightTicket.FindAsync(ticket.TicketID);
             if (e_ticket == null)
             {
                 //logger.Warn("FlightTicket not found.")
@@ -466,15 +486,15 @@ namespace Database
             e_flight.SeatAvailable++;
             dbcontext.Remove(dbcontext.FlightTicket.Find(ticket.TicketID));
 
-            dbcontext.SaveChanges();
+            await dbcontext.SaveChangesAsync();
 
             //logger.info();
             return "delete success";
         }
 
-        public string CheckSeatAvailible(int flightID, int numTickets)
+        public async Task<string> CheckSeatAvailible(int flightID, int numTickets)
         {
-            Flight e_flight = dbcontext.Flight.Find(flightID);
+            Flight e_flight = await dbcontext.Flight.FindAsync(flightID);
 
             if (e_flight.SeatAvailable - numTickets < 0)
             {
@@ -483,33 +503,21 @@ namespace Database
             }
             else
             {
-                e_flight.SeatAvailable = e_flight.SeatAvailable = numTickets;
-                dbcontext.SaveChanges();
+                e_flight.SeatAvailable = e_flight.SeatAvailable - numTickets;
+                await dbcontext.SaveChangesAsync();
                 return "Yes";
             }
 
         }
 
-        public int GetTicketId()
+        public async Task<int> GetTicketId()
         {
-            return dbcontext.FlightTicket.Max(e => e.FlightTicketID);
+            return await dbcontext.FlightTicket.MaxAsync(e => e.FlightTicketID);
         }
 
-        public int GetFlightId()
+        public async Task<int> GetFlightId()
         {
-            return dbcontext.Flight.Max(e => e.FlightID);
-        }
-
-        public int GetTicketId()
-        {
-            //test comment
-            return dbcontext.FlightTicket.Max(e => e.FlightTicketID);
-        }
-
-        public int GetFlightId()
-        {
-            //test comment
-            return dbcontext.Flight.Max(e => e.FlightID);
+            return await dbcontext.Flight.MaxAsync(e => e.FlightID);
         }
     }
 }

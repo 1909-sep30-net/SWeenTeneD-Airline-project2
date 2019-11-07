@@ -28,15 +28,15 @@ namespace API.Controllers
         //Should return a specific flight, if ID does not exist then print all
         // GET: api/Flight/5
         [HttpGet("{id}", Name = "GetFlight")]
-        public IEnumerable<API.Models.APIFlight> Get(int id)
+        public async Task<IEnumerable<API.Models.APIFlight>> Get(int id)
         {
             Logic.Flight LFlight = new Logic.Flight();
             LFlight.FlightID = id;
 
             //Will add another method to check max element of FlightID
-            if(LFlight.FlightID <= 0 | LFlight.FlightID > iRepo.GetFlightId())
+            if(LFlight.FlightID <= 0 | LFlight.FlightID > await iRepo.GetFlightId())
             {
-                IEnumerable<Logic.Flight> allFlights = iRepo.ReadFlightList(null);
+                IEnumerable<Logic.Flight> allFlights = await iRepo.ReadFlightList(null);
                 IEnumerable<API.Models.APIFlight> nullAPI = allFlights.Select(af => new API.Models.APIFlight
                 {
                     FlightID = af.FlightID,
@@ -51,7 +51,7 @@ namespace API.Controllers
                 return nullAPI;
             }
 
-            IEnumerable<Logic.Flight> flights = iRepo.ReadFlightList(LFlight);
+            IEnumerable<Logic.Flight> flights = await iRepo.ReadFlightList(LFlight);
             IEnumerable<API.Models.APIFlight> apiFlights = flights.Select(f => new API.Models.APIFlight
             {
                 FlightID = f.FlightID,
@@ -71,7 +71,7 @@ namespace API.Controllers
         //Might leave the creation of price for admin, but to get rid of it for customer?
         // POST: api/Flight
         [HttpPost]
-        public ActionResult Post([FromBody, Bind("Company, DepartureTime, ArrivalTime, Origin, Destination, SeatAvailable, Price")] API.Models.APIFlight flight)
+        public async Task<ActionResult> Post([FromBody, Bind("Company, DepartureTime, ArrivalTime, Origin, Destination, SeatAvailable, Price")] API.Models.APIFlight flight)
         {
             Logic.Flight fli = new Logic.Flight
             {
@@ -85,19 +85,19 @@ namespace API.Controllers
                 Price = flight.Price
             };
             
-            iRepo.CreateFlight(fli);
+            await iRepo.CreateFlight(fli);
 
-            return CreatedAtRoute("GetFlight", new {FlightID = fli.FlightID}, flight);
+            return CreatedAtRoute("GetFlight", new {Company = fli.Company}, flight);
         }
 
         // PUT: api/Flight/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] API.Models.APIFlight AFlight)
+        public async Task<IActionResult> Put(int id, [FromBody] API.Models.APIFlight AFlight)
         {
             Logic.Flight fli = new Logic.Flight();
             fli.FlightID = id;
 
-            IEnumerable<Logic.Flight> Lflights = iRepo.ReadFlightList(fli);
+            IEnumerable<Logic.Flight> Lflights = await iRepo.ReadFlightList(fli);
 
             Logic.Flight newFli = new Logic.Flight
             {
@@ -111,19 +111,18 @@ namespace API.Controllers
                 Price = AFlight.Price
             };
 
-            iRepo.UpdateFlight(newFli);
+            await iRepo.UpdateFlight(newFli);
             return Ok();
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             Logic.Flight fli = new Logic.Flight();
             fli.FlightID = id;
 
-            IEnumerable<Logic.Flight> LFlights = iRepo.ReadFlightList(fli);
-            iRepo.DeleteFlight(fli);
+            await iRepo.DeleteFlight(fli);
 
             return Ok();
         }
