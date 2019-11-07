@@ -504,6 +504,7 @@ namespace Database
             else
             {
                 e_flight.SeatAvailable = e_flight.SeatAvailable - numTickets;
+
                 await dbcontext.SaveChangesAsync();
                 return "Yes";
             }

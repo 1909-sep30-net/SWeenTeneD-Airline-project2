@@ -79,8 +79,12 @@ namespace API.Controllers
                 Checkin = flightTicket.CheckIn,
                 Luggage = flightTicket.Luggage
             };
-            //await iRepo.CheckSeatAvailible(flight.flightID, number of ticket customer choose);
-            return CreatedAtRoute("GetFlightTicket", new {TicketID = flight.TicketID}, flightTicket);
+
+            await iRepo.CheckSeatAvailible(flight.FlightID, 1);
+
+            await iRepo.CreateFlightTicket(flight);
+
+            return CreatedAtRoute("GetFlightTicket", new {id = flight.TicketID}, flight);
 
         }
 
@@ -108,6 +112,7 @@ namespace API.Controllers
 
         }
 
+        //NOT WORKING AT THE MOMENT DUE TO ADDING SEAT++ IN REPO
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)

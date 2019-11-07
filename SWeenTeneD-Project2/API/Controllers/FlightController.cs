@@ -87,7 +87,7 @@ namespace API.Controllers
             
             await iRepo.CreateFlight(fli);
 
-            return CreatedAtRoute("GetFlight", new {Company = fli.Company}, flight);
+            return CreatedAtRoute("GetFlight", new {id = fli.FlightID}, fli);
         }
 
         // PUT: api/Flight/5

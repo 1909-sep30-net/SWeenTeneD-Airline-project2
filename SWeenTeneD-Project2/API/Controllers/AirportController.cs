@@ -27,6 +27,7 @@ namespace API.Controllers
 
         // GET: api/Airport/Airport's name
         [HttpGet("{name}", Name = "GetAirport")]
+
         public async Task<IEnumerable<API.Models.APIAirport>> GetByName(string name)
         {
             Logic.Airport LAir = new Logic.Airport();
@@ -57,7 +58,7 @@ namespace API.Controllers
 
             await iRepo.CreateAirport(air);
 
-            return CreatedAtRoute("GetAirport", new {Name = air.Name}, airport);
+            return CreatedAtRoute("GetAirport", new {name = air.Name}, air);
         }
 
         // PUT: api/Airport/Name of airport you want to edit

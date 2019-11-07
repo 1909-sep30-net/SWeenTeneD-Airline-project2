@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore.SqlServer;
 using Logic;
 using Database;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace API
 {
@@ -41,6 +42,19 @@ namespace API
             services.AddControllers();
 
             services.AddScoped<IRepo, Repo>();
+
+            //added this for Auth0
+            string domain = $"https://{Configuration["dev-d2ygjp6x.auth0.com"]}/";
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = domain;
+                options.Audience = Configuration["https://kevlines/api"];
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
