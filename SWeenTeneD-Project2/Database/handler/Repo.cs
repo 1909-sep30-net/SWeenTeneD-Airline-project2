@@ -146,7 +146,6 @@ namespace Database
 
         public async Task<List<Logic.Flight>> ReadFlightList(Logic.Flight flight)
         {
-            int maxId = await GetFlightId();
             if ( flight == null )
             {
                 List<Flight> flightFind = await dbcontext.Flight.ToListAsync();
