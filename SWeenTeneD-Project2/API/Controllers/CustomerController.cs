@@ -90,7 +90,7 @@ namespace API.Controllers
 
             await iRepo.CreateCustomer(cus);
 
-            return CreatedAtRoute("GetCustomer", new { FirstName = cus.FirstName }, customer);
+            return CreatedAtRoute("GetCustomer", new { firstname = cus.FirstName }, cus);
 
         }
 
