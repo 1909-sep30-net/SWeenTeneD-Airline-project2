@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Logic
@@ -162,5 +160,12 @@ namespace Logic
         /// <returns></returns>
         public Task<int> GetFlightId();
 
+        /// <summary>
+        /// Returns max index of CustomerID
+        /// </summary>
+        /// <returns></returns>
+        public Task<int> GetCustomerId();
+
+        public Task<string> GetAirPortName(string name);
     }
 }

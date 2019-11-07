@@ -27,23 +27,43 @@ namespace API.Controllers
         //it return all the customers available.
 
         //GET: api/Customer/Customer's first name
-        [HttpGet("{firstname}", Name = "GetCustomer")]
-        public async Task<IEnumerable<API.Models.APICustomer>> GetAllCustomers(string firstname)
+        [HttpGet("{id}", Name = "GetCustomer")]
+        public async Task<IEnumerable<API.Models.APICustomer>> GetAllCustomers(int id)
         {
-            Logic.Customer Lcus = new Logic.Customer();
-            Lcus.FirstName = firstname;
-            IEnumerable<Logic.Customer> customers = await iRepo.ReadCustomerList(Lcus);
-            IEnumerable<API.Models.APICustomer> apiCustomer = customers.Select(c => new API.Models.APICustomer
+            int maxId = await iRepo.GetCustomerId();
+            if (id <= 0 || id > maxId )
             {
-                //From APIModel = Logic
-                CustomerID = c.CustomerID,
-                FirstName = c.FirstName,
-                LastName = c.LastName,
-                Email = c.Email,
-                Password = c.Password
-            });
+                IEnumerable<Logic.Customer> customers = await iRepo.ReadCustomerList(null);
+                IEnumerable<API.Models.APICustomer> apiCustomer = customers.Select(c => new API.Models.APICustomer
+                {
+                    //From APIModel = Logic
+                    CustomerID = c.CustomerID,
+                    FirstName = c.FirstName,
+                    LastName = c.LastName,
+                    Email = c.Email,
+                    Password = c.Password
+                });
 
-            return apiCustomer;
+                return apiCustomer;
+            }
+            else
+            {
+                Logic.Customer Lcus = new Logic.Customer();
+                Lcus.CustomerID = id;
+                IEnumerable<Logic.Customer> customers = await iRepo.ReadCustomerList(Lcus);
+                IEnumerable<API.Models.APICustomer> apiCustomer = customers.Select(c => new API.Models.APICustomer
+                {
+                    //From APIModel = Logic
+                    CustomerID = c.CustomerID,
+                    FirstName = c.FirstName,
+                    LastName = c.LastName,
+                    Email = c.Email,
+                    Password = c.Password
+                });
+
+                return apiCustomer;
+            }
+         
         }
 
         // GET: api/Customer/5

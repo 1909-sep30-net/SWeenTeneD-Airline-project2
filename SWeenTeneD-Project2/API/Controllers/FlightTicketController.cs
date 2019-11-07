@@ -35,7 +35,7 @@ namespace API.Controllers
 
             //Be careful with int because default for int is 0 not null
             //Read maximum ID from database and pass it as parameter for If
-            if (LTicket.TicketID <= 0 | LTicket.TicketID > await iRepo.GetTicketId())
+            if (LTicket.TicketID <= 0 || LTicket.TicketID > await iRepo.GetTicketId())
             {
                 IEnumerable<Logic.FlightTicket> allFlightTickets = await iRepo.ReadTicketList(null);
                 IEnumerable<API.Models.APIFlightTicket> nullAPI = allFlightTickets.Select(af => new API.Models.APIFlightTicket

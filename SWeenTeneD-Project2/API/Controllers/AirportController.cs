@@ -29,19 +29,40 @@ namespace API.Controllers
         [HttpGet("{name}", Name = "GetAirport")]
         public async Task<IEnumerable<API.Models.APIAirport>> GetByName(string name)
         {
-            Logic.Airport LAir = new Logic.Airport();
-            LAir.Name = name;
-            IEnumerable<Logic.Airport> airports = await iRepo.ReadAirportList(LAir);
-            IEnumerable<API.Models.APIAirport> apiAirport = airports.Select(a => new API.Models.APIAirport
+            string find = await iRepo.GetAirPortName(name);
+
+            if (find == null)
             {
-                //APIModel = Logic
-                Name = a.Name,
-                Location = a.Location,
-                Weather = a.Weather
+                Logic.Airport LAir = new Logic.Airport();
+                LAir.Name = name;
+                IEnumerable<Logic.Airport> airports = await iRepo.ReadAirportList(null);
+                IEnumerable<API.Models.APIAirport> apiAirport = airports.Select(a => new API.Models.APIAirport
+                {
+                    //APIModel = Logic
+                    Name = a.Name,
+                    Location = a.Location,
+                    Weather = a.Weather
 
-            });
+                });
 
-            return apiAirport;
+                return apiAirport;
+            }
+            else
+            {
+                Logic.Airport LAir = new Logic.Airport();
+                LAir.Name = name;
+                IEnumerable<Logic.Airport> airports = await iRepo.ReadAirportList(LAir);
+                IEnumerable<API.Models.APIAirport> apiAirport = airports.Select(a => new API.Models.APIAirport
+                {
+                    //APIModel = Logic
+                    Name = a.Name,
+                    Location = a.Location,
+                    Weather = a.Weather
+
+                });
+
+                return apiAirport;
+            }
         }
 
         // POST: api/Airport
@@ -62,19 +83,19 @@ namespace API.Controllers
 
         // PUT: api/Airport/Name of airport you want to edit
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id, [FromBody] API.Models.APIAirport Aairport)
+        public async Task<IActionResult> Put(string id, [FromBody] API.Models.APIAirport airport)
         {
             Logic.Airport air = new Logic.Airport();
-            air.Name = id;
+            air.Name = airport.Name;
 
             IEnumerable<Logic.Airport> Lairports = await iRepo.ReadAirportList(air);
 
             //Need exception handling here, maybe implement in repo?
             Logic.Airport newAir = new Logic.Airport
             {
-                Name = Aairport.Name,
-                Location = Aairport.Location,
-                Weather = Aairport.Weather
+                Name = airport.Name,
+                Location = airport.Location,
+                Weather = airport.Weather
             };
 
             await iRepo.UpdateAirport(newAir);
