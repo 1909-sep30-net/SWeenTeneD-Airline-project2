@@ -30,7 +30,7 @@ namespace API.Controllers
         //GET: api/Customer/Customer's first name
         [HttpGet("{id}", Name = "GetCustomer")]
         //[ApiKeyAuth]
-        [Authorize]
+        //[Authorize]
         public async Task<IEnumerable<API.Models.APICustomer>> GetAllCustomers(int id)
         {
             int maxId = await iRepo.GetCustomerId();
@@ -79,6 +79,7 @@ namespace API.Controllers
         //POST: api/Customer
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> Create([FromBody, Bind("FirstName, LastName, Email, Password")]API.Models.APICustomer customer)
         {
 
