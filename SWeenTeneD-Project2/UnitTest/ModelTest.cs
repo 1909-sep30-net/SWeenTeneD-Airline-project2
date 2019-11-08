@@ -94,6 +94,25 @@ namespace UnitTest
             Assert.Equal(ticket1.Luggage, ticket2.Luggage);
             Assert.Equal(ticket1.Price, ticket2.Price);
         }
+
+        [Fact]
+        public void ManagerTest()
+        {
+            Logic.Manager manager = new Logic.Manager
+            {
+                ManagerId = 1,
+                FirstName = "Sam",
+                LastName = "Lin",
+                Email = "123@321",
+                Password = "4321"
+            };
+
+            Assert.Equal(1, manager.ManagerId);
+            Assert.Equal("Sam", manager.FirstName);
+            Assert.Equal("Lin", manager.LastName);
+            Assert.Equal("123@321", manager.Email);
+            Assert.Equal("4321", manager.Password);
+        }
     }
 
     public class APIModelTest
@@ -180,6 +199,25 @@ namespace UnitTest
             Assert.False(ticket.CheckIn);
             Assert.Equal(1, ticket.Luggage);
         }
+
+        [Fact]
+        public void ManagerTest()
+        {
+            APIManager manager = new APIManager
+            {
+                ManagerId = 1,
+                FirstName = "Sam",
+                LastName = "Lin",
+                Email = "123@321",
+                Password = "4321"
+            };
+
+            Assert.Equal(1, manager.ManagerId);
+            Assert.Equal("Sam", manager.FirstName);
+            Assert.Equal("Lin", manager.LastName);
+            Assert.Equal("123@321", manager.Email);
+            Assert.Equal("4321", manager.Password);
+        }
     }
 
     public class EntityModelTest
@@ -265,6 +303,25 @@ namespace UnitTest
             Assert.Equal(299.99, ticket.Price);
             Assert.False(ticket.Checkin);
             Assert.Equal(1, ticket.Luggage);
+        }
+
+        [Fact]
+        public void ManagerTest()
+        {
+            Manager manager = new Manager
+            {
+                ManagerId = 1,
+                FirstName = "Sam",
+                LastName = "Lin",
+                Email = "123@321",
+                Password = "4321"
+            };
+
+            Assert.Equal(1, manager.ManagerId);
+            Assert.Equal("Sam", manager.FirstName);
+            Assert.Equal("Lin", manager.LastName);
+            Assert.Equal("123@321", manager.Email);
+            Assert.Equal("4321", manager.Password);
         }
     }
 }

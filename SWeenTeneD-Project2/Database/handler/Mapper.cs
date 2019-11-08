@@ -109,5 +109,29 @@ namespace Database
             };
         }
 
+        public static Manager MapManagerToE(Logic.Manager manager)
+        {
+            return new Manager
+            {
+                ManagerId = manager.ManagerId,
+                FirstName = manager.FirstName,
+                LastName = manager.LastName,
+                Email = manager.Email,
+                Password = manager.Password
+            };
+        }
+
+        public static Logic.Manager MapEToManager(Manager manager)
+        {
+            return new Logic.Manager
+            {
+                ManagerId = manager.ManagerId,
+                FirstName = manager.FirstName,
+                LastName = manager.LastName,
+                Email = manager.Email,
+                Password = manager.Password
+            };
+        }
+
     }
 }

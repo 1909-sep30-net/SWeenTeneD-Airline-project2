@@ -222,8 +222,6 @@ namespace UnitTest
             Repo repo = new Repo(testContext);
             string create = await repo.CreateFlight(flight);
 
-            flight.FlightID = 1;
-
             List<Logic.Flight> check = await repo.ReadFlightList(flight);
 
             Assert.Equal(1, check[0].FlightID);
