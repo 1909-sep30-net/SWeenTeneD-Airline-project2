@@ -64,7 +64,10 @@ namespace API
             services.AddScoped<IRepo, Repo>();
 
             //added this for Auth0
-            string domain = $"https://{Configuration["dev-d2ygjp6x.auth0.com"]}/";
+            string domain = Configuration["auth0:Domain"];
+            string audience = Configuration["auth0:ApiIdentifier"];
+
+            //string domain = "auth0:Domain";
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -73,7 +76,7 @@ namespace API
             }).AddJwtBearer(options =>
             {
                 options.Authority = domain;
-                options.Audience = Configuration["https://kevlines/api"];
+                options.Audience = audience;
             });
 
         }
@@ -89,6 +92,9 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            //Added authentication
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

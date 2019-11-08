@@ -90,6 +90,7 @@ namespace API.Controllers
         //POST: api/Customer
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> Create([FromBody, Bind("FirstName, LastName, Email, Password")]API.Models.APICustomer customer)
         {
 
