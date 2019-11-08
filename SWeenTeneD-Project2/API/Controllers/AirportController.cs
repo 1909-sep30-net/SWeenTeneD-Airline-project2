@@ -18,12 +18,22 @@ namespace API.Controllers
             iRepo = repo; 
         }
 
-        // GET: api/Airport
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
+        // GET: api/airport
+        [HttpGet]
+        public async Task<IEnumerable<API.Models.APIAirport>> Get()
+        {
+            IEnumerable<Logic.Airport> airports = await iRepo.ReadAirportList(null);
+            IEnumerable<API.Models.APIAirport> apiAirport = airports.Select(a => new API.Models.APIAirport
+            {
+                //APIModel = Logic
+                Name = a.Name,
+                Location = a.Location,
+                Weather = a.Weather
+
+            });
+
+            return apiAirport;
+        }
 
         // GET: api/Airport/Airport's name
         [HttpGet("{name}", Name = "GetAirport")]
