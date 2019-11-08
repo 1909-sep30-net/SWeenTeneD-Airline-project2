@@ -154,7 +154,7 @@ namespace Database
             }
             if (flight.FlightID <= 0)
             {
-                IQueryable<Flight> e_flight = dbcontext.Flight.Select(f => f);
+                IQueryable<Flight> e_flight = dbcontext.Flight;
 
                 if(flight.Company != null)
                 {
@@ -479,7 +479,7 @@ namespace Database
                 //logger.Warn("FlightTicket not found.")
                 return "no such ticket";
             }
-            Flight e_flight = dbcontext.Flight.Find(ticket.FlightID);
+            Flight e_flight = dbcontext.Flight.Find(e_ticket.FlightID);
             e_flight.SeatAvailable++;
             dbcontext.Remove(dbcontext.FlightTicket.Find(ticket.TicketID));
 

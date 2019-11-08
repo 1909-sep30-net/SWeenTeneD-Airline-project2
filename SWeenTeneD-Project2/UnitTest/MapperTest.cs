@@ -187,5 +187,47 @@ namespace UnitTest
             Assert.Equal(ticket1.Luggage, ticket2.Luggage);
 
         }
+
+        [Fact]
+        public void MapManagerToETest()
+        {
+            l.Manager manager1 = new l.Manager
+            {
+                ManagerId = 1,
+                FirstName = "Sam",
+                LastName = "Lin",
+                Email = "123@321",
+                Password = "4321"
+            };
+
+            d.Manager manager2 = d.Mapper.MapManagerToE(manager1);
+
+            Assert.Equal(1, manager2.ManagerId);
+            Assert.Equal("Sam", manager2.FirstName);
+            Assert.Equal("Lin", manager2.LastName);
+            Assert.Equal("123@321", manager2.Email);
+            Assert.Equal("4321", manager2.Password);
+        }
+
+        [Fact]
+        public void MapEToManagerTest()
+        {
+            d.Manager manager1 = new d.Manager
+            {
+                ManagerId = 1,
+                FirstName = "Sam",
+                LastName = "Lin",
+                Email = "123@321",
+                Password = "4321"
+            };
+
+            l.Manager manager2 = d.Mapper.MapEToManager(manager1);
+
+            Assert.Equal(1, manager2.ManagerId);
+            Assert.Equal("Sam", manager2.FirstName);
+            Assert.Equal("Lin", manager2.LastName);
+            Assert.Equal("123@321", manager2.Email);
+            Assert.Equal("4321", manager2.Password);
+        }
     }
 }
