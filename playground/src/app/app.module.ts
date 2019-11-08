@@ -14,6 +14,7 @@ import { CustomerDetailComponent } from './customer-detail/customer-detail.compo
 import { MessageComponent } from './message/message.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CustomerSearchComponent } from './customer-search/customer-search.component';
+import { Cust2Component } from './cust2/cust2.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CustomerSearchComponent } from './customer-search/customer-search.compo
     CustomerDetailComponent,
     MessageComponent,
     DashboardComponent,
-    CustomerSearchComponent
+    CustomerSearchComponent,
+    Cust2Component
   ],
   imports: [
     BrowserModule,
