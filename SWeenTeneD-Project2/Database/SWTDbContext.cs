@@ -16,6 +16,8 @@ namespace Database
         public virtual DbSet<Flight> Flight { get; set; }
         public virtual DbSet<FlightTicket> FlightTicket { get; set; }
 
+        public virtual DbSet<Manager> Manager{ get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
 
             modelBuilder.Entity<Customer>(entity =>
@@ -129,6 +131,36 @@ namespace Database
 
                 entity.Property(e => e.Luggage);
                     
+
+            });
+
+            modelBuilder.Entity<Manager>(entity =>
+            {
+                entity.Property(c => c.ManagerId)
+                    .UseIdentityColumn(1, 1)
+                    .IsRequired();
+
+                entity.HasIndex(c => c.ManagerId)
+                    .IsUnique();
+
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.LastName)
+                      .IsRequired()
+                      .HasMaxLength(30);
+
+                entity.Property(e => e.Email)
+                      .HasMaxLength(50);
+                //%@% verified needed
+
+                entity.Property(e => e.Password)
+                    .HasMaxLength(30);
+
+                entity.HasIndex(e => e.Password)
+                    .IsUnique();
+
 
             });
         }
