@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Logic;
 using Database;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -28,6 +29,8 @@ namespace API.Controllers
 
         //GET: api/Customer/Customer's first name
         [HttpGet("{id}", Name = "GetCustomer")]
+        //[ApiKeyAuth]
+        [Authorize]
         public async Task<IEnumerable<API.Models.APICustomer>> GetAllCustomers(int id)
         {
             int maxId = await iRepo.GetCustomerId();
@@ -90,7 +93,7 @@ namespace API.Controllers
 
             await iRepo.CreateCustomer(cus);
 
-            return CreatedAtRoute("GetCustomer", new { firstname = cus.FirstName }, cus);
+            return CreatedAtRoute("GetCustomer", new { id = cus.CustomerID }, cus);
 
         }
 

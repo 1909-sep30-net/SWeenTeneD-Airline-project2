@@ -18,13 +18,6 @@ namespace API.Controllers
             iRepo = repo;
         }
 
-        // GET: api/Flight
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
         //Should return a specific flight, if ID does not exist then print all
         // GET: api/Flight/5
         [HttpGet("{id}", Name = "GetFlight")]

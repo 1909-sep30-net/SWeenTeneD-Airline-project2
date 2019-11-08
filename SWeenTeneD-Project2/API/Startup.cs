@@ -41,6 +41,8 @@ namespace API
                 builder =>
                 {
                     builder.WithOrigins("http://dev-d2ygjp6x.auth0.com")
+                                            //Might need to add the app service website from microsoft azure site here in WithOrigins
+
                                             //Added this to allow any method or header in angular to prevent errors
                                             .AllowAnyHeader()
                                             .AllowAnyMethod()
