@@ -1,0 +1,11 @@
+<p>abc</p>
+
+<div>
+    <button (click)="show()">Customer</button> 
+</div>
+
+<ul class="something">
+    <li *ngFor="let cust of items">
+        <span>{{cust.id}}, {{cust.firstname}}, {{cust.lastname}}</span>
+    </li>
+</ul>

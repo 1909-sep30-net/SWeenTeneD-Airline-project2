@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace Database
 {
     public static class Mapper
@@ -109,6 +106,30 @@ namespace Database
                 Price = BFlightTicket.Price,
                 Checkin = BFlightTicket.Checkin,
                 Luggage = BFlightTicket.Luggage
+            };
+        }
+
+        public static Manager MapManagerToE(Logic.Manager manager)
+        {
+            return new Manager
+            {
+                ManagerId = manager.ManagerId,
+                FirstName = manager.FirstName,
+                LastName = manager.LastName,
+                Email = manager.Email,
+                Password = manager.Password
+            };
+        }
+
+        public static Logic.Manager MapEToManager(Manager manager)
+        {
+            return new Logic.Manager
+            {
+                ManagerId = manager.ManagerId,
+                FirstName = manager.FirstName,
+                LastName = manager.LastName,
+                Email = manager.Email,
+                Password = manager.Password
             };
         }
 

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Logic;
 using Database;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -22,13 +23,15 @@ namespace API.Controllers
             iRepo = repo;
         }
 
-        //GET: api/Customer/Customer's first name
-        [HttpGet("{firstname}", Name = "GetCustomer")]
-        public IEnumerable<API.Models.APICustomer> GetAllCustomers(string firstname)
+        //Write a if statement in this method, so that if the customer returns null
+        //then it you pass that null customer to the ReadCustomerList and it should
+        //it return all the customers available.
+
+        [HttpGet(Name = "FullListCustomer")]
+        //[Authorize]
+        public async Task<IEnumerable<API.Models.APICustomer>> GetAllCustomers()
         {
-            Logic.Customer Lcus = new Logic.Customer();
-            Lcus.FirstName = firstname;
-            IEnumerable<Logic.Customer> customers = iRepo.ReadCustomerList(Lcus);
+            IEnumerable<Logic.Customer> customers = await iRepo.ReadCustomerList(null);
             IEnumerable<API.Models.APICustomer> apiCustomer = customers.Select(c => new API.Models.APICustomer
             {
                 //From APIModel = Logic
@@ -42,17 +45,53 @@ namespace API.Controllers
             return apiCustomer;
         }
 
-        // GET: api/Customer/5
-        //[HttpGet("{id}", Name = "GetCustomer")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        //GET: api/Customer/Customer's first name
+        [HttpGet("{id}", Name = "GetCustomer")]
+        //[ApiKeyAuth]
+        //[Authorize]
+        public async Task<IEnumerable<API.Models.APICustomer>> GetAllCustomers(int id)
+        {
+            int maxId = await iRepo.GetCustomerId();
+            if (id <= 0 || id > maxId )
+            {
+                IEnumerable<Logic.Customer> customers = await iRepo.ReadCustomerList(null);
+                IEnumerable<API.Models.APICustomer> apiCustomer = customers.Select(c => new API.Models.APICustomer
+                {
+                    //From APIModel = Logic
+                    CustomerID = c.CustomerID,
+                    FirstName = c.FirstName,
+                    LastName = c.LastName,
+                    Email = c.Email,
+                    Password = c.Password
+                });
+
+                return apiCustomer;
+            }
+            else
+            {
+                Logic.Customer Lcus = new Logic.Customer();
+                Lcus.CustomerID = id;
+                IEnumerable<Logic.Customer> customers = await iRepo.ReadCustomerList(Lcus);
+                IEnumerable<API.Models.APICustomer> apiCustomer = customers.Select(c => new API.Models.APICustomer
+                {
+                    //From APIModel = Logic
+                    CustomerID = c.CustomerID,
+                    FirstName = c.FirstName,
+                    LastName = c.LastName,
+                    Email = c.Email,
+                    Password = c.Password
+                });
+
+                return apiCustomer;
+            }
+         
+        }
 
         //POST: api/Customer
 
         [HttpPost]
-        public ActionResult Create([FromBody, Bind("FirstName, LastName, Email, Password")]API.Models.APICustomer customer)
+        [Authorize]
+        public async Task<ActionResult> Create([FromBody, Bind("FirstName, LastName, Email, Password")]API.Models.APICustomer customer)
         {
 
             Logic.Customer cus = new Logic.Customer
@@ -64,24 +103,23 @@ namespace API.Controllers
                 Password = customer.Password
             };
 
-            iRepo.CreateCustomer(cus);
+            await iRepo.CreateCustomer(cus);
 
-            return CreatedAtRoute("GetCustomer", new { FirstName = cus.FirstName }, customer);
+            return CreatedAtRoute("GetCustomer", new { id = cus.CustomerID }, cus);
 
         }
 
         // PUT: api/Customer/First name of customer you want to edit
         [HttpPut("{id}")]
-        public IActionResult Put(string id, [FromBody] API.Models.APICustomer Acustomer)
+        public async Task<IActionResult> Put(string id, [FromBody] API.Models.APICustomer Acustomer)
         {
 
             Logic.Customer cus = new Logic.Customer();
             cus.FirstName = id;
             
-            IEnumerable<Logic.Customer> Lcustomers = iRepo.ReadCustomerList(cus);
+            IEnumerable<Logic.Customer> Lcustomers = await iRepo.ReadCustomerList(cus);
 
                 //Remember to add try catch or some exception handling
-                //Right Now, can update but cannot update first name for some reason
                 Logic.Customer newCus = new Logic.Customer
                 {
                     CustomerID = Acustomer.CustomerID,
@@ -91,20 +129,19 @@ namespace API.Controllers
                     Password = Acustomer.Password
                 };
 
-                iRepo.UpdateCustomer(newCus);
+                await iRepo.UpdateCustomer(newCus);
                 return Ok();
          
         }
 
         // DELETE: api/customer/CustomerID
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             Logic.Customer cus = new Logic.Customer();
             cus.CustomerID = id;
 
-            IEnumerable<Logic.Customer> Lcustomers = iRepo.ReadCustomerList(cus);
-            iRepo.DeleteCustomer(cus);
+            await iRepo.DeleteCustomer(cus);
 
             return Ok();
 

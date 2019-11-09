@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Logic
 {
@@ -12,7 +11,7 @@ namespace Logic
         /// </summary>
         /// <param name="customer"></param>
         /// <returns>string</returns>
-        public string CreateCustomer(Customer customer);
+        public Task<string> CreateCustomer(Customer customer);
 
         /// <summary>
         /// Function to read list of customer from database
@@ -20,7 +19,7 @@ namespace Logic
         /// </summary>
         /// <param name="customer"></param>
         /// <returns>List of Customer</returns>
-        public List<Customer> ReadCustomerList(Customer customer);
+        public Task<List<Customer>> ReadCustomerList(Customer customer);
 
         /// <summary>
         /// Function to update single customer in the database
@@ -28,7 +27,7 @@ namespace Logic
         /// </summary>
         /// <param name="customer"></param>
         /// <returns>string</returns>
-        public string UpdateCustomer(Customer customer);
+        public Task<string> UpdateCustomer(Customer customer);
 
         /// <summary>
         /// Function to delete a single customer in the database
@@ -36,7 +35,7 @@ namespace Logic
         /// </summary>
         /// <param name="customer"></param>
         /// <returns>string</returns>
-        public string DeleteCustomer(Customer customer);
+        public Task<string> DeleteCustomer(Customer customer);
 
 
         /// <summary>
@@ -45,7 +44,7 @@ namespace Logic
         /// </summary>
         /// <param name="flight"></param>
         /// <returns>string</returns>
-        public string CreateFlight(Flight flight);
+        public Task<string> CreateFlight(Flight flight);
 
         /// <summary>
         /// Function to read a list of Flights in the datbase
@@ -53,7 +52,7 @@ namespace Logic
         /// </summary>
         /// <param name="flight"></param>
         /// <returns>list of Flight</returns>
-        public List<Flight> ReadFlightList(Flight flight);
+        public Task<List<Flight>> ReadFlightList(Flight flight);
 
         /// <summary>
         /// Function to update single flight in the database
@@ -61,7 +60,7 @@ namespace Logic
         /// </summary>
         /// <param name="flight"></param>
         /// <returns>string</returns>
-        public string UpdateFlight(Flight flight);
+        public Task<string> UpdateFlight(Flight flight);
 
         /// <summary>
         /// Function to delete a single flight in the database
@@ -69,7 +68,7 @@ namespace Logic
         /// </summary>
         /// <param name="flight"></param>
         /// <returns>string</returns>
-        public string DeleteFlight(Flight flight);
+        public Task<string> DeleteFlight(Flight flight);
 
 
         /// <summary>
@@ -78,7 +77,7 @@ namespace Logic
         /// </summary>
         /// <param name="airport"></param>
         /// <returns>string</returns>
-        public string CreateAirport(Airport airport);
+        public Task<string> CreateAirport(Airport airport);
 
         /// <summary>
         /// Function to read a list of airport in the database,
@@ -86,7 +85,7 @@ namespace Logic
         /// </summary>
         /// <param name="airport"></param>
         /// <returns>list of Airport</returns>
-        public List<Airport> ReadAirportList(Airport airport);
+        public Task<List<Airport>> ReadAirportList(Airport airport);
 
         /// <summary>
         /// Function to update single airport in the database,
@@ -94,7 +93,7 @@ namespace Logic
         /// </summary>
         /// <param name="airport"></param>
         /// <returns>string</returns>
-        public string UpdateAirport(Airport airport);
+        public Task<string> UpdateAirport(Airport airport);
 
         /// <summary>
         /// Function to delete single airport in the database,
@@ -102,7 +101,7 @@ namespace Logic
         /// </summary>
         /// <param name="airport"></param>
         /// <returns>string</returns>
-        public string DeleteAirport(Airport airport);
+        public Task<string> DeleteAirport(Airport airport);
 
 
         /// <summary>
@@ -111,7 +110,7 @@ namespace Logic
         /// </summary>
         /// <param name="ticket"></param>
         /// <returns>string</returns>
-        public string CreateFlightTicket(FlightTicket ticket);
+        public Task<string> CreateFlightTicket(FlightTicket ticket);
 
         /// <summary>
         /// Function to read list of ticket in the database,
@@ -119,7 +118,7 @@ namespace Logic
         /// </summary>
         /// <param name="ticket"></param>
         /// <returns>list of FlightTicket</returns>
-        public List<FlightTicket> ReadTicketList(FlightTicket ticket);
+        public Task<List<FlightTicket>> ReadTicketList(FlightTicket ticket);
 
         /// <summary>
         /// Function to update single ticket in the database,
@@ -127,7 +126,7 @@ namespace Logic
         /// </summary>
         /// <param name="Airport"></param>
         /// <returns>string</returns>
-        public string UpdateFlightTicket(Airport Airport);
+        public Task<string> UpdateFlightTicket(FlightTicket ticket);
 
         /// <summary>
         /// Function to delete single ticket in the database,
@@ -136,7 +135,7 @@ namespace Logic
         /// </summary>
         /// <param name="ticket"></param>
         /// <returns>string</returns>
-        public string DeleteFlightTicket(FlightTicket ticket);
+        public Task<string> DeleteFlightTicket(FlightTicket ticket);
 
 
         /// <summary>
@@ -147,7 +146,26 @@ namespace Logic
         /// <param name="flight"></param>
         /// <param name="numTickets"></param>
         /// <returns>string</returns>
-        public string CheckSeatAvailible(int flight, int numTickets);
+        public Task<string> CheckSeatAvailible(int flight, int numTickets);
 
+        /// <summary>
+        /// Returns max index of TicketID
+        /// </summary>
+        /// <returns></returns>
+        public Task<int> GetTicketId();
+
+        /// <summary>
+        /// Returns max index of FlightID
+        /// </summary>
+        /// <returns></returns>
+        public Task<int> GetFlightId();
+
+        /// <summary>
+        /// Returns max index of CustomerID
+        /// </summary>
+        /// <returns></returns>
+        public Task<int> GetCustomerId();
+
+        public Task<string> GetAirPortName(string name);
     }
 }
