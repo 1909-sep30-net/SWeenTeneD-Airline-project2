@@ -38,7 +38,7 @@ steps:
 - task: SonarCloudPrepare@1
   displayName: Prepare SonarCloud analysis
   inputs:
-    SonarCloud: 'sonarcloud-escalonn'
+    SonarCloud: 'project2'
     organization: '1909-sep30-net'
     scannerMode: 'CLI'
     configMode: 'manual'
