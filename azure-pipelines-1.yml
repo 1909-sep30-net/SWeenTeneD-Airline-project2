@@ -10,7 +10,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  appDir: intro-app
+  appDir: kevlines
 
 steps:
 - checkout: self
