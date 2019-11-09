@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using System.Data.Common;
 using System.Data.SqlClient;
-using Npgsql.EntityFrameworkCore.PostgreSQL;
-using Npgsql.EntityFrameworkCore;
 
 namespace Database
 {
@@ -20,6 +15,8 @@ namespace Database
         public virtual DbSet<Airport> Airport { get; set; }
         public virtual DbSet<Flight> Flight { get; set; }
         public virtual DbSet<FlightTicket> FlightTicket { get; set; }
+
+        public virtual DbSet<Manager> Manager{ get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
 
@@ -134,6 +131,36 @@ namespace Database
 
                 entity.Property(e => e.Luggage);
                     
+
+            });
+
+            modelBuilder.Entity<Manager>(entity =>
+            {
+                entity.Property(c => c.ManagerId)
+                    .UseIdentityColumn(1, 1)
+                    .IsRequired();
+
+                entity.HasIndex(c => c.ManagerId)
+                    .IsUnique();
+
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.LastName)
+                      .IsRequired()
+                      .HasMaxLength(30);
+
+                entity.Property(e => e.Email)
+                      .HasMaxLength(50);
+                //%@% verified needed
+
+                entity.Property(e => e.Password)
+                    .HasMaxLength(30);
+
+                entity.HasIndex(e => e.Password)
+                    .IsUnique();
+
 
             });
         }

@@ -4,7 +4,14 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- master
+  branches:
+    include:
+      - master
+  paths: 
+    include:
+      - SWeenTeneD-Project2
+
+continueOnError: true
 
 pool:
   vmImage: 'windows-latest'
@@ -13,6 +20,10 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+
+- checkout: self
+  clean: true
+
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'project2'
@@ -58,7 +69,6 @@ steps:
     command: 'test'
     projects: '**/*Test/*.csproj'
     arguments: '-c $(buildConfiguration) --collect "Code Coverage"'
-    continueOnError: true
 
 - task: PublishCodeCoverageResults@1
   displayName: Publish code coverage
@@ -71,4 +81,21 @@ steps:
 
 - task: SonarCloudPublish@1
   displayName: Publish SonarCloud quality gate result
+
+- task: DotNetCoreCLI@2
+  displayName: dotnet publish + zip
+  inputs:
+    command: 'publish'
+    arguments: --configuration $(buildConfiguration)
+    publishWebProjects: true
+    zipAfterPublish: true
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Revature-Training(9a56e737-3e9f-4bb8-bc24-e316a0047308)'
+    appType: 'webApp'
+    WebAppName: 'SWeenTeneD'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+
   
