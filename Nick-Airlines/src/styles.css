@@ -53,6 +53,7 @@ body {
     overflow-x: hidden;
     transition: 0.45s;
     padding-top: 54px;
+
   }
   
   .sidenav a {
@@ -132,7 +133,9 @@ body {
     cursor: pointer;
   }
 
+
 .mat-new-releases {
+
     font-size: 33px;
     padding-top: 19px;
     padding-right: 1.9rem;
@@ -149,12 +152,15 @@ cursor: pointer;
 }
 
 mat-menu {
+
     overflow-x: hidden;
     overflow-y: hidden; 
  padding: 400px; 
 }
 
+
 .move-menu { 
+
     overflow-x: hidden;
     overflow-y: hidden;
     background-color: red;

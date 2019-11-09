@@ -62,14 +62,12 @@ namespace UnitTest
         {
             Logic.Airport airport1 = new Logic.Airport
             {
-                AirportID = 1,
                 Name = "Sweentened",
                 Location = "Dallas",
                 Weather = "Sunny"
             };
             Logic.Airport airport2 = new Logic.Airport(1, "Sweentened", "Dallas", "Sunny");
 
-            Assert.Equal(airport1.AirportID, airport2.AirportID);
             Assert.Equal(airport1.Name, airport2.Name);
             Assert.Equal(airport1.Location, airport2.Location);
             Assert.Equal(airport1.Weather, airport2.Weather);
@@ -152,13 +150,11 @@ namespace UnitTest
         {
             APIAirport airport = new APIAirport
             {
-                AirportID = 1,
                 Name = "Fly",
                 Location = "Dallas",
                 Weather = "Sunny"
             };
 
-            Assert.Equal(1, airport.AirportID);
             Assert.Equal("Fly", airport.Name);
             Assert.Equal("Dallas", airport.Location);
             Assert.Equal("Sunny", airport.Weather);
@@ -219,8 +215,8 @@ namespace UnitTest
                 Company = "AA",
                 DepartureTime = DepartingTime1,
                 ArrivalTime = ArrivalTime1,
-                Origin = "DEW",
-                Destination = "LAX",
+                Origin = "DFW",
+                Destination = "DAL",
                 SeatAvailable = 99,
                 Price = 456.50
             };
@@ -229,8 +225,8 @@ namespace UnitTest
             Assert.Equal("AA", flight.Company);
             Assert.Equal(DepartingTime1, flight.DepartureTime);
             Assert.Equal(ArrivalTime1, flight.ArrivalTime);
-            Assert.Equal("DEW", flight.Origin);
-            Assert.Equal("LAX", flight.Destination);
+            Assert.Equal("DFW", flight.Origin);
+            Assert.Equal("DAL", flight.Destination);
             Assert.Equal(99, flight.SeatAvailable);
             Assert.Equal(456.50, flight.Price);
         }
@@ -240,13 +236,11 @@ namespace UnitTest
         {
             Airport airport = new Airport
             {
-                AirportID = 1,
                 Name = "Fly",
                 Location = "Dallas",
                 Weather = "Sunny"
             };
 
-            Assert.Equal(1, airport.AirportID);
             Assert.Equal("Fly", airport.Name);
             Assert.Equal("Dallas", airport.Location);
             Assert.Equal("Sunny", airport.Weather);

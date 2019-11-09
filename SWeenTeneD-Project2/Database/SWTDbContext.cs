@@ -54,19 +54,10 @@ namespace Database
 
             modelBuilder.Entity<Airport>(entity =>
             {
-                entity.Property(e => e.AirportID)
-                    .UseIdentityColumn(1,1)
-                    .IsRequired();
-
-                entity.HasIndex(e => e.AirportID)
-                    .IsUnique();
+                entity.HasKey(e => e.Name);
 
                 entity.Property(e => e.Name)
-                    .IsRequired()
                     .HasMaxLength(50);
-
-                entity.HasIndex(e => e.Name)
-                    .IsUnique();
 
                 entity.Property(e => e.Location)
                     .IsRequired()
@@ -99,15 +90,13 @@ namespace Database
 
                 entity.HasOne(e => e.Airport)
                     .WithMany(d => d.Flight)
-                    .HasPrincipalKey(p => p.Location)
                     .HasForeignKey(p => p.Origin)
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .IsRequired();
 
                 entity.HasOne(e => e.Airport)
                     .WithMany(d => d.Flight)
-                    .HasPrincipalKey(p => p.Location)
                     .HasForeignKey(p => p.Destination)
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .IsRequired();
 
                 entity.Property(e => e.SeatAvailable)
                     .IsRequired();

@@ -13,8 +13,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
   }
+
   
   /*
+
   openNav() 
     {
        // Set nodes to variable
@@ -24,7 +26,9 @@ export class HomeComponent implements OnInit {
 
        // Do operations with nodes
        sidenav.style.width = "200px";
+
        sidenav.style.marginTop = "0px";
+
        hidden.style.display  = "none";
        main.style.marginLeft = "200px";
     }
@@ -36,5 +40,7 @@ export class HomeComponent implements OnInit {
        document.getElementById("main").style.marginLeft = "0";
        document.getElementById("hide").style.display = "block";
     }
+
 */
+
 }

@@ -8,8 +8,6 @@ namespace API.Models
 {
     public class APIAirport
     {
-        public int AirportID { get; set; }
-
         [Required]
         public string Name { get; set; }
 
