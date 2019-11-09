@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
        // Set nodes to variable
        let sidenav = document.getElementById("mySidenav")
        let hidden  = document.getElementById("hide")
-       let main    =  document.getElementById("main")
+       let main    = document.getElementById("main")
 
        // Do operations with nodes
        sidenav.style.width = "200px";
