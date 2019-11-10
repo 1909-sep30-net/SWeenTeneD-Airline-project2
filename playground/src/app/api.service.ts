@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getItems(): Promise<Customer[]> {
+  getItems(): Promise<Customer> {
     const url = `${environment.BaseUrl}/api/customer/0`;
-    return this.httpClient.get<Customer[]>(url).toPromise();
+    return this.httpClient.get<Customer>(url).toPromise();
   }
 }

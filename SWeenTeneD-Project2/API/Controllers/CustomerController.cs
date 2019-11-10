@@ -44,24 +44,6 @@ namespace API.Controllers
         //then it you pass that null customer to the ReadCustomerList and it should
         //it return all the customers available.
 
-        [HttpGet(Name = "FullListCustomer")]
-        //[Authorize]
-        public async Task<IEnumerable<API.Models.APICustomer>> GetAllCustomers()
-        {
-            IEnumerable<Logic.Customer> customers = await iRepo.ReadCustomerList(null);
-            IEnumerable<API.Models.APICustomer> apiCustomer = customers.Select(c => new API.Models.APICustomer
-            {
-                //From APIModel = Logic
-                CustomerID = c.CustomerID,
-                FirstName = c.FirstName,
-                LastName = c.LastName,
-                Email = c.Email,
-                Password = c.Password
-            });
-
-            return apiCustomer;
-        }
-
         //GET: api/Customer/Customer's first name
         [HttpGet("{id}", Name = "GetCustomer")]
         //[ApiKeyAuth]
