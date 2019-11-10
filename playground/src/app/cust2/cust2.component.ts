@@ -8,10 +8,10 @@ import { ApiService } from '../api.service';
   styleUrls: ['./cust2.component.css']
 })
 export class Cust2Component implements OnInit {
-  items: Customer[] = null;
+  items: Customer = null;
 
-  show(): void {
-    this.custApi.getItems()
+  show() {
+    return this.custApi.getItems()
     .then(item => this.items = item);
   }
   

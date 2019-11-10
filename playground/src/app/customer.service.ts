@@ -13,7 +13,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class CustomerService {
 
-  private custUrl = 'api/customers';
+  private custUrl = '/api/customer';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json'})

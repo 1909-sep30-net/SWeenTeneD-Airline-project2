@@ -45,6 +45,10 @@ namespace API.Controllers
             return apiCustomer;
         }
 
+        //Write a if statement in this method, so that if the customer returns null
+        //then it you pass that null customer to the ReadCustomerList and it should
+        //it return all the customers available.
+
         //GET: api/Customer/Customer's first name
         [HttpGet("{id}", Name = "GetCustomer")]
         //[ApiKeyAuth]

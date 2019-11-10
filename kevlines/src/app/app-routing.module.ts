@@ -1,0 +1,28 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import {RegisterComponent} from '../app/shared/components/register/register.component'
+import { ProfileComponent } from '../app/shared/components/profile/profile.component'
+import { AuthGuard } from './shared/guards/auth.guard';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from './shared/services/interceptor.service';
+import { ExternalApiComponent } from  '../app/shared/components/external-api/external-api.component';
+
+const routes: Routes = [
+  { path: '', component: RegisterComponent },
+
+  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'external-api', component: ExternalApiComponent, canActivate: [AuthGuard]}
+
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptorService,
+    multi: true
+  }]
+})
+export class AppRoutingModule { }
