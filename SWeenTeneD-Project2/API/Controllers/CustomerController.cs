@@ -22,6 +22,23 @@ namespace API.Controllers
             iRepo = repo;
         }
 
+        [HttpGet(Name = "Customer")]
+        public async Task<IEnumerable<API.Models.APICustomer>> Get()
+        {
+            IEnumerable<Logic.Customer> customers = await iRepo.ReadCustomerList(null);
+            IEnumerable<API.Models.APICustomer> apiCustomer = customers.Select(c => new API.Models.APICustomer
+            {
+                //From APIModel = Logic
+                CustomerID = c.CustomerID,
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                Email = c.Email,
+                Password = c.Password
+            });
+
+            return apiCustomer;
+        }
+
         //Write a if statement in this method, so that if the customer returns null
         //then it you pass that null customer to the ReadCustomerList and it should
         //it return all the customers available.
