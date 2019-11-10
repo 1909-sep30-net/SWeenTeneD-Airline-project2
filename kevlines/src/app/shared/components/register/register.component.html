@@ -6,7 +6,7 @@
    <div id="login-box">
       <div class="left-box">
         <h1> Register</h1>  
-          <input  required minlength="3" maxlength="10 ngModel  #FirstName="ngModel"  type="text"     name="FirstName" placeholder="Firstname"/>
+          <input  required minlength="3" maxlength="10" ngModel  #FirstName="ngModel"  type="text"     name="FirstName" placeholder="Firstname"/>
           <div *ngIf="FirstName.touched && !FirstName.valid">First name is required</div>
          
           <input  required ngModel   #LastName="ngModel" type="text" name="LastName"  placeholder="Lastname"/>
