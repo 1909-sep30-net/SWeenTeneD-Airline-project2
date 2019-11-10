@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+//import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemDataService } from './in-mem-data.service';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -32,9 +32,9 @@ import { Cust2Component } from './cust2/cust2.component';
     AppRoutingModule,
     HttpClientModule,
 
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemDataService, { dataEncapsulation: false}
-    )
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //   InMemDataService, { dataEncapsulation: false}
+    // )
   ],
   providers: [],
   bootstrap: [AppComponent]
