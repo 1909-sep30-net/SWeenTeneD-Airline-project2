@@ -76,6 +76,8 @@ namespace API.Controllers
             return apiFlightTicket;
         }
 
+
+
         // POST: api/FlightTicket
         [HttpPost]
         public async Task<ActionResult> Post([FromBody,Bind("FlightID, CustomerID, Price, CheckIn, Luggage")] API.Models.APIFlightTicket flightTicket)

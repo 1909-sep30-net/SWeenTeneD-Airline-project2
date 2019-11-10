@@ -29,7 +29,7 @@ namespace API.Controllers
 
         [HttpGet(Name = "FullListCustomer")]
         //[Authorize]
-        public async Task<IEnumerable<API.Models.APICustomer>> GetAllCustomers()
+        public async Task<IEnumerable<API.Models.APICustomer>> Get()
         {
             IEnumerable<Logic.Customer> customers = await iRepo.ReadCustomerList(null);
             IEnumerable<API.Models.APICustomer> apiCustomer = customers.Select(c => new API.Models.APICustomer
