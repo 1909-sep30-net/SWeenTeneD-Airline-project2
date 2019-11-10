@@ -18,12 +18,23 @@ namespace API.Controllers
             iRepo = repo;
         }
 
-        // GET: api/Flight
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
+        [HttpGet]
+        public async Task<IEnumerable<API.Models.APIFlight>> Get()
+        {
+            IEnumerable<Logic.Flight> allFlights = await iRepo.ReadFlightList(null);
+            IEnumerable<API.Models.APIFlight> nullAPI = allFlights.Select(af => new API.Models.APIFlight
+            {
+                FlightID = af.FlightID,
+                Company = af.Company,
+                DepartureTime = af.DepartureTime,
+                ArrivalTime = af.ArrivalTime,
+                Origin = af.Origin,
+                Destination = af.Destination,
+                SeatAvailable = af.SeatAvailable,
+                Price = af.Price
+            });
+            return nullAPI;
+        }
 
         //Should return a specific flight, if ID does not exist then print all
         // GET: api/Flight/5

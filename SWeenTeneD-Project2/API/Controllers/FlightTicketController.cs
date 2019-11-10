@@ -20,11 +20,21 @@ namespace API.Controllers
         }
 
         // GET: api/FlightTicket
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
+        [HttpGet]
+        public async Task<IEnumerable<API.Models.APIFlightTicket>> Get()
+        {
+            IEnumerable<Logic.FlightTicket> allFlightTickets = await iRepo.ReadTicketList(null);
+            IEnumerable<API.Models.APIFlightTicket> nullAPI = allFlightTickets.Select(af => new API.Models.APIFlightTicket
+            {
+                TicketID = af.TicketID,
+                FlightID = af.FlightID,
+                CustomerID = af.CustomerID,
+                Price = af.Price,
+                CheckIn = af.Checkin,
+                Luggage = af.Luggage
+            });
+            return nullAPI;
+        }
 
         // GET: api/FlightTicket/5
         [HttpGet("{id}", Name = "GetFlightTicket")]

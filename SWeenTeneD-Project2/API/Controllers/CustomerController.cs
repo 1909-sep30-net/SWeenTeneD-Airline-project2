@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Logic;
 using Database;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -43,8 +44,28 @@ namespace API.Controllers
         //then it you pass that null customer to the ReadCustomerList and it should
         //it return all the customers available.
 
+        [HttpGet(Name = "FullListCustomer")]
+        //[Authorize]
+        public async Task<IEnumerable<API.Models.APICustomer>> GetAllCustomers()
+        {
+            IEnumerable<Logic.Customer> customers = await iRepo.ReadCustomerList(null);
+            IEnumerable<API.Models.APICustomer> apiCustomer = customers.Select(c => new API.Models.APICustomer
+            {
+                //From APIModel = Logic
+                CustomerID = c.CustomerID,
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                Email = c.Email,
+                Password = c.Password
+            });
+
+            return apiCustomer;
+        }
+
         //GET: api/Customer/Customer's first name
         [HttpGet("{id}", Name = "GetCustomer")]
+        //[ApiKeyAuth]
+        //[Authorize]
         public async Task<IEnumerable<API.Models.APICustomer>> GetAllCustomers(int id)
         {
             int maxId = await iRepo.GetCustomerId();
@@ -83,16 +104,10 @@ namespace API.Controllers
          
         }
 
-        // GET: api/Customer/5
-        //[HttpGet("{id}", Name = "GetCustomer")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
         //POST: api/Customer
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> Create([FromBody, Bind("FirstName, LastName, Email, Password")]API.Models.APICustomer customer)
         {
 
@@ -107,7 +122,7 @@ namespace API.Controllers
 
             await iRepo.CreateCustomer(cus);
 
-            return CreatedAtRoute("GetCustomer", new { firstname = cus.FirstName }, cus);
+            return CreatedAtRoute("GetCustomer", new { id = cus.CustomerID }, cus);
 
         }
 
