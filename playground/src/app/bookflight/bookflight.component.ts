@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import BookFlight from '../bookflight';
-import { BookflightService } from '../bookflight.service';
+import Flight from '../Flight';
+import { BookflightService } from '../Flight.service';
 
 @Component({
   selector: 'app-bookflight',
@@ -9,14 +9,19 @@ import { BookflightService } from '../bookflight.service';
 })
 export class BookflightComponent implements OnInit {
 
-  items: BookFlight[];
+  public flight = [];
 
   constructor(private bfapi: BookflightService) { }
 
-  public bookfight = [];
-  show() {
-    return this.bfapi.getItems().subscribe(data =>
-      this.bookfight = data)
+  // showflight() {
+  //   return this.bfapi.getItems()
+  //   .then(item => this.items = item);
+  // }
+
+  showflight() {
+    return this.bfapi.getItems().subscribe(data => {
+      this.flight = data
+    })
   }
 
   ngOnInit() {

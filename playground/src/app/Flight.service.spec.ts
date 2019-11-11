@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { BookflightService } from './bookflight.service';
+import { BookflightService } from './Flight.service';
 
 describe('BookflightService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
