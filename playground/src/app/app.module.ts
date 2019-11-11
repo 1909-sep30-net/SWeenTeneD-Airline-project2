@@ -15,6 +15,7 @@ import { MessageComponent } from './message/message.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CustomerSearchComponent } from './customer-search/customer-search.component';
 import { Cust2Component } from './cust2/cust2.component';
+import { BookflightComponent } from './bookflight/bookflight.component';
 
 @NgModule({
   declarations: [
@@ -24,14 +25,15 @@ import { Cust2Component } from './cust2/cust2.component';
     MessageComponent,
     DashboardComponent,
     CustomerSearchComponent,
-    Cust2Component
+    Cust2Component,
+    BookflightComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-
+    
     // HttpClientInMemoryWebApiModule.forRoot(
     //   InMemDataService, { dataEncapsulation: false}
     // )
