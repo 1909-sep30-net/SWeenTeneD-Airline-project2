@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment.prod';
-import BookFlight from  './bookflight';
+import Flight from  './Flight';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,10 +11,10 @@ export class BookflightService {
 
   constructor(private httpClient: HttpClient) { }
 
-  url = `${environment.BaseUrl}/api/airport`;
+  url = `${environment.BaseUrl}/api/flight`;
 
-  getItems(): Observable<BookFlight[]> {
+  getItems(): Observable<Flight[]> {
     
-    return this.httpClient.get<BookFlight[]>(this.url);
+    return this.httpClient.get<Flight[]>(this.url);
   }
 }

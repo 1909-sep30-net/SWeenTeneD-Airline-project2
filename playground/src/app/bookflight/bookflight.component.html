@@ -1,9 +1,17 @@
+<h3>Book Flight</h3>
+
 <div>
-    <button (click)="show()">Airport</button> 
+    <button (click)="showflight()">Airport</button> 
 </div>
     
-<ul class="something">
-    <li *ngFor="let bf of items">
-        <span>{{bf.origin}}</span>
-    </li>
-</ul>
+<select>
+    <option *ngFor="let bf of flight" value="bf">{{bf.origin}}</option>
+</select><br><br>
+
+<select>
+    <option *ngFor="let bf of flight" value="bf">{{bf.destination}}</option>
+</select><br><br>
+
+<select>
+    <option *ngFor="let bf of flight" value="bf">{{bf.departureTime}} ~ {{bf.arrivalTime}}</option>
+</select><br><br>
