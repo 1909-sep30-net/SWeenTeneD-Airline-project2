@@ -11,7 +11,7 @@ export class BookflightService {
 
   constructor(private httpClient: HttpClient) { }
 
-  url = `${environment.BaseUrl}/api/airport`;
+  url = `${environment.BaseUrl}/api/flight`;
 
   getItems(): Observable<BookFlight[]> {
     
