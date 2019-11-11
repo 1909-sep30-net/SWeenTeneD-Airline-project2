@@ -11,6 +11,7 @@
     "server": "node server.js",
     "dev": "npm-run-all --parallel start server"
   },
+
   "private": true,
   "dependencies": {
     "@angular/animations": "~8.2.13",
