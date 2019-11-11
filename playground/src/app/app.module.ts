@@ -33,7 +33,7 @@ import { BookflightComponent } from './bookflight/bookflight.component';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    
+
     // HttpClientInMemoryWebApiModule.forRoot(
     //   InMemDataService, { dataEncapsulation: false}
     // )
