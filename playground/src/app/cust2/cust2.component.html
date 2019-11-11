@@ -5,7 +5,11 @@
 </div>
 
 <ul class="something">
-    <li *ngFor="let cust of items">
-        <span>{{cust.id}}, {{cust.firstname}}, {{cust.lastname}}</span>
+    <li *ngFor="let cust of customerr">
+        <span>{{cust.customerID}}: {{cust.firstName}} {{cust.lastName}}</span>
     </li>
 </ul>
+
+<select>
+        <option *ngFor="let cust of customerr" value="cust">{{cust.customerID}}: {{cust.firstName}}</option>
+</select>

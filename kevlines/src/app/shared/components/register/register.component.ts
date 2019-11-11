@@ -4,7 +4,6 @@ import Customer from '../../models/customer';
 import {NavbarComponent} from '../navbar/navbar.component'
 import {HttpClient} from '@angular/common/http'
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -19,11 +18,5 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
   }
-
-
-
-
-
-
 
 }

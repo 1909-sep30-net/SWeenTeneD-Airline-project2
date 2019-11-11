@@ -27,6 +27,7 @@ import { CheckinComponent} from './shared/components/checkin/checkin.component'
     CustomerComponent,
     BookflightComponent,
     CheckinComponent
+
   ],
   imports: [
     BrowserModule,

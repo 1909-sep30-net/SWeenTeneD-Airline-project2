@@ -3,9 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemDataService } from './in-mem-data.service';
-
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -15,6 +12,7 @@ import { MessageComponent } from './message/message.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CustomerSearchComponent } from './customer-search/customer-search.component';
 import { Cust2Component } from './cust2/cust2.component';
+import { BookflightComponent } from './bookflight/bookflight.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +22,8 @@ import { Cust2Component } from './cust2/cust2.component';
     MessageComponent,
     DashboardComponent,
     CustomerSearchComponent,
-    Cust2Component
+    Cust2Component,
+    BookflightComponent
   ],
   imports: [
     BrowserModule,
@@ -32,9 +31,9 @@ import { Cust2Component } from './cust2/cust2.component';
     AppRoutingModule,
     HttpClientModule,
 
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemDataService, { dataEncapsulation: false}
-    )
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //   InMemDataService, { dataEncapsulation: false}
+    // )
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,7 +10,8 @@
     </div>
   </mat-toolbar>
   <div id="mySidenav" class="sidenav">
-    <a class="closebtn" (click)="closeNav()">&times;</a>
+
+    <a class="closebtn" (click)="closeNav()">&times;</a>   
     <a [routerLink]="['/bookflight']" routerLinkActive="router-link-active"      routerLink="bookflight">Book Flight </a><hr>
     <a [routerLink]="['/checkin']">Check in </a><hr>
     &nbsp;<a routerLink="external-api" *ngIf="auth.loggedIn">External API</a>
