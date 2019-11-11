@@ -101,6 +101,7 @@ namespace API.Controllers
         }
 
         // PUT: api/FlightTicket/5
+        //Manager PUT
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] API.Models.APIFlightTicket AflightTicket)
         {
@@ -122,6 +123,29 @@ namespace API.Controllers
             await iRepo.UpdateFlightTicket(newFli);
             return Ok();
 
+        }
+
+        //Customer PUT
+        [HttpPut("checkin")]
+        public async Task<IActionResult> PutForCustomer([FromBody] API.Models.APICheckin checkin)
+        {
+            //Logic.FlightTicket fli = new Logic.FlightTicket();
+            //fli.TicketID = id;
+
+            bool checkInResult = await iRepo.CheckIn(checkin.CheckID, checkin.CFirstName, checkin.CLastName);
+
+            if ( checkInResult == false)
+            {
+                //Returns you to same page
+                Console.WriteLine("Your check-in is false!");
+                return CreatedAtRoute("GetFlightTicket", new { id = checkin.CheckID}, checkin);
+
+            }
+            else
+            {
+                //Returns you to same page but also returns your status of CheckIn to true
+                return Ok();
+            }
         }
 
         //NOT WORKING AT THE MOMENT DUE TO ADDING SEAT++ IN REPO

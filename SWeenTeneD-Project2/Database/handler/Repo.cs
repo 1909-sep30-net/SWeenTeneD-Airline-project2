@@ -549,9 +549,11 @@ namespace Database
             {
                 foreach( Customer cus in customers)
                 {
-                    FlightTicket ticket = dbcontext.FlightTicket.Where(t => t.FlightTicketID == ticketId
-                        && t.CustomerID == cus.CustomerID).AsNoTracking().First();
-                    if ( ticket == null)
+                    FlightTicket ticket = await dbcontext.FlightTicket.FindAsync(ticketId);
+
+                    int test = 0;
+
+                    if ( ticket.FlightID <= 0)
                     {
                         return false;
                     }
