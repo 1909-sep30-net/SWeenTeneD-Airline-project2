@@ -1,28 +1,96 @@
-<html>
-<head>
-<title> {{title}} </title>   
-</head>
-<body>
+   
+   <header>
+     <div class="content" style="text-align: center;"> 
+         <h1>Shop at Kevlines</h1>
+         <h4> For all your travel needs</h4>
+     </div>
+   </header>
+
+   <div class="content-fill2" style="text-align: center;">
+     <p> Fill in By Tri I dont know what to say! Tri has a good way with words</p>
+   </div>
+  
+<div class="row">
+    <div class="column">
+      <img src="../../../../assets/images/firstboxrow.jpg" alt="Customer Service" style="width:100%">
+      <p class="sub-header" style="text-align: center;"><strong>Customer Service </strong></p>
+      <p>This Customer service plan addresses a number of the service goals we have defined for 
+        ourselves. Every customer is important to American Airlines and American Eagle, and we 
+        are dedicated to making every flight you take with us something special. Your safety,
+         comfort, and convenience are our most important concerns. 
+      </p>
+
+    </div>
+    <div class="column">
+      <img src="../../../../assets/images/carRentalBox.jpg" alt="Great prices" style="width:100%">
+      <p class="sub-header" style="text-align: center;"><strong>Lowest Prices</strong></p>
+      <p >Searching for a flight can be a bit overwhelming. There are so many factors: 
+        dates, times, price, fare classes, airline, and more. Even when you know exactly 
+        when and where you want to fly, where should you look for the absolute best price? You should come to 
+        Kevlines for all your flying needs
+      </p>
+
+    </div>
+    <div class="column">
+      <img src="../../../../assets/images/boxRowHotel.jpg" alt="Hotel" style="width:100%">
+      <p  class="sub-header" style="text-align: center;"><strong>Free WiFi </strong></p>
+      <p>Whether it’s for business or simply because of a very debatably unhealthy obsession, 
+        many of us struggle going more than a few minutes without internet access. This 
+        can be particularly troublesome when traveling. To make sure we stay as connected 
+        as possible,come to Kevlines where it is free.
+      </p>
+    </div>
+  </div>
+
+  <div class="api">
+    
+     <h1>Recently sold tickets</h1>
+      <p> working on now! This will be the third party api i just get recently sold ticket from</p>
+      <p> I will upload image in jumbotron</p>
+  </div>
+
+   
+
+
+<!-- 
+    <div *ngIf="!auth.loggedIn"> 
+        <header>
+                <button (click)="auth.login()" *ngIf="!auth.loggedIn">Log In</button>
+                <button (click)="auth.logout()" *ngIf="auth.loggedIn">Log Out</button>
+                <a routerLink="profile" *ngIf="auth.loggedIn">Profile</a>
+            </header>
+        </div>
+
+-->
+      
+          
+
+<!--
+  <form #regForm="ngForm">
    <div id="login-box">
       <div class="left-box">
         <h1> Register</h1>  
-          <input  required minlength="3" maxlength="10 ngModel  #FirstName="ngModel"  type="text"     name="FirstName" placeholder="Firstname"/>
-          <div *ngIf="FirstName.touched && !FirstName.valid">First name is required</div>
-         
+          <input  required minlength="3" pattern="[a-z]" ngModel #FirstName="ngModel"  type="text"     name="FirstName" placeholder="Firstname"/>
+          <div *ngIf="FirstName.touched && !FirstName.valid">
+              <div *ngIf="FirstName.errors.required">First name is required</div>
+              <div *ngIf="FirstName.errors.minlength">First name should be minium {{FirstName.errors.minlength.requiredLength}} </div>
+          </div>
           <input  required ngModel   #LastName="ngModel" type="text" name="LastName"  placeholder="Lastname"/>
-          <div *ngIf="LastName.touched && !LastName.valid">First name is required</div>
-
-          <input  required ngModel     type="email"    name="Email"     placeholder="Email"/>
-          <div *ngIf="FirstName.touched && !FirstName.valid">First name is required</div>
-
-          <input  required ngModel    type="password" name="Password"  placeholder="Password"/>
-          <div *ngIf="FirstName.touched && !FirstName.valid">First name is required</div>
-
-          <input type="submit" name="register-button" value="Register"/>   
+          <div *ngIf="LastName.touched && !LastName.valid">
+              <div *ngIf="LastName.errors.required">First name is required</div>
+              <div *ngIf="LastName.errors.minlength">First name should be minium {{FirstName.errors.minlength.requiredLength}} </div>
+          </div>
+          <input  required ngModel  #email="ngModel"   type="email"    name="Email"     placeholder="Email"/>
+          <div *ngIf="email.touched && !email.valid">Email is required</div>
+          <input  required ngModel minlength="7" #password="ngModel"  type="password" name="Password"  placeholder="Password"/>
+          <div *ngIf="password.touched && !password.valid">
+              <div *ngIf="password.errors.required">Password is required</div>
+              <div *ngIf="password.errors.minlength">Password name should be minium {{Password.errors.minlength.requiredLength}} </div>
+          </div>
+          <input type="submit" (click)="submit()" name="register-button" value="Register"/>   
       </div>
         <div class="right-box">
-          <span class="signinwith">Register with<br/>Social Network</span>
-        
+          <span class="signinwith">Register with<br/>Social Network</span>    
         <button class="social facebook">Register with Facebook</button>    
         <button class="social github">Register with Github</button> 
         <button class="social google">Register with Google</button> 
@@ -30,7 +98,8 @@
         </div>
         <div class="or">OR</div>
     </div>
-    
+  </form> 
 </body>    
 </html>
+-->
 

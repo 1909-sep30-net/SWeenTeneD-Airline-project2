@@ -1,4 +1,6 @@
-<mat-toolbar class="toolbar-color navbar">
+
+<div *ngIf="auth.loggedIn">
+    <mat-toolbar class="toolbar-color navbar">
     <mat-icon class="icon-size icon-color" (click)="openNav()" id="hide"> reorder </mat-icon>
     <a style="   visibility: hidden; "> hello</a>
     <div>
@@ -9,12 +11,19 @@
   </mat-toolbar>
   <div id="mySidenav" class="sidenav">
     <a class="closebtn" (click)="closeNav()">&times;</a>
-    <a href="#">Flight Status</a><hr>
-    <a href="#">Book Flight </a><hr>
-    <a href="#">Check in </a><hr>
+    <a [routerLink]="['/bookflight']" routerLinkActive="router-link-active"      routerLink="bookflight">Book Flight </a><hr>
+    <a [routerLink]="['/checkin']">Check in </a><hr>
     &nbsp;<a routerLink="external-api" *ngIf="auth.loggedIn">External API</a>
-
   </div>
-  
+  </div>
 
-
+ 
+<div *ngIf="!auth.loggedIn">
+  <mat-toolbar class="toolbar-color navbar">
+      <mat-icon class="icon-size icon-color"  id="hide" > airplanemode_active</mat-icon>
+      <a id="name-site" style="text-align: center;" > Kevlines</a>
+      <div>
+         <mat-icon  (click)="auth.login()" class="mat-logout"> person</mat-icon>
+      </div>
+    </mat-toolbar>
+</div> 
