@@ -10,7 +10,11 @@ import {MaterialModule} from './module/material/material.module';
 import { LoginComponent } from '../app/shared/components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ExternalApiComponent } from './shared/components/external-api/external-api.component';
-import {FormControl, FormsModule} from '@angular/forms/'
+import {FormControl, FormsModule} from '@angular/forms/';
+import { CustomerComponent } from './shared/components/customer/customer.component';
+import { BookflightComponent } from './shared/components/bookflight/bookflight.component';
+import { CheckinComponent} from './shared/components/checkin/checkin.component'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +23,11 @@ import {FormControl, FormsModule} from '@angular/forms/'
     RegisterComponent,
     NavbarComponent,
     LoginComponent,
-    ExternalApiComponent
+    ExternalApiComponent,
+    CustomerComponent,
+    BookflightComponent,
+    CheckinComponent
+
   ],
   imports: [
     BrowserModule,
