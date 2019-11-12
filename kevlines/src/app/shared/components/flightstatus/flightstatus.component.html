@@ -4,36 +4,26 @@
 
 <div id='main'> 
 
-        <table id="customers">
-                <tr>
-                        <th>Company</th>
-                        <th>Origin</th>
-                        <th>Departure Time</th>
-                        <th>Arrival Time</th>
-                        <th>Origin</th>
-                        <th>Destination</th>
-                </tr>
-                <tr>
-                    
-                  <td>{{flight.company}}</td>
-                  <td>{{flight.origin}}</td>
-                  <td>{{flight.departureTime}}</td>
-                  <td>{{flight.arrivalTime}}</td>
-                  <td> {{flight.destination}} </td>
-                </tr>
-              </table>
-
-
-
-
-
-
-
-
     <div *ngFor="let flight of fs">
 
-        <span> {{flight.company}} {{flight.origin}}  {{flight.departureTime}} {{flight.arrivalTime}} {{flight.destination}}  </span>
-
+            <table id="customer">
+                    <tr>
+                            <th>Company</th>
+                            <th>Origin</th>
+                            <th>Departure Time</th>
+                            <th>Arrival Time</th>
+                            <th>Origin</th>
+                            <th>Destination</th>
+                    </tr>
+                    <tr>
+                        
+                      <td>{{flight.company}}</td>
+                      <td>{{flight.origin}}</td>
+                      <td>{{flight.departureTime}}</td>
+                      <td>{{flight.arrivalTime}}</td>
+                      <td> {{flight.destination}} </td>
+                    </tr>
+                  </table>
     </div>
 
 
