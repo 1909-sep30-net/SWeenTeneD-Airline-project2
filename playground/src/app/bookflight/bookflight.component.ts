@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Flight from '../Flight';
+import ticket from '../ticket';
 import { BookflightService } from '../Flight.service';
 
 @Component({
@@ -24,7 +25,14 @@ export class BookflightComponent implements OnInit {
     })
   }
 
+  buyticket(flightID) {
+    console.log(flightID);
+  }
+
   ngOnInit() {
+    return this.bfapi.getItems().subscribe(data => {
+      this.flight = data
+    })
   }
 
 }

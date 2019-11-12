@@ -14,7 +14,7 @@ export class CustomerService {
 
 
   insertCustomer(customer: Customer): Promise<Customer> {
-    let url = `${environment.kevApiBaseUrl}/api/Customer`;
+    let url = `${environment.BaseUrl}/api/Customer`;
     return this.httpClient.post<Customer>(url, customer).toPromise()
   }
 

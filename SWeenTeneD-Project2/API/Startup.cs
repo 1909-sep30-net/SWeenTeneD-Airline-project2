@@ -40,7 +40,8 @@ namespace API
                 options.AddPolicy(MyAllowSpecificOrigins,
                 builder =>
                 {
-                    builder.WithOrigins("http://localhost:4200")
+                    builder.WithOrigins("http://localhost:4200",
+                                        "https://sweentened-angular.azurewebsites.net")
                                             //Might need to add the app service website from microsoft azure site here in WithOrigins
 
                                             //Added this to allow any method or header in angular to prevent errors

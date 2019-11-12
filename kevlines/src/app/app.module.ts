@@ -16,6 +16,8 @@ import { BookflightComponent } from './shared/components/bookflight/bookflight.c
 import { CheckinComponent} from './shared/components/checkin/checkin.component';
 import {PricehistoryService} from '../../src/app/shared/services/pricehistory.service';
 import { FlightstatusComponent } from './shared/components/flightstatus/flightstatus.component';
+import { Cust2Component } from './cust2/cust2.component';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { FlightstatusComponent } from './shared/components/flightstatus/flightst
     BookflightComponent,
     CheckinComponent,
     FlightstatusComponent
+    Cust2Component
   ],
   imports: [
     BrowserModule,
