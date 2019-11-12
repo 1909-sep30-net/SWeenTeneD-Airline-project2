@@ -31,7 +31,7 @@ import { Cust2Component } from './cust2/cust2.component';
     CustomerComponent,
     BookflightComponent,
     CheckinComponent,
-    FlightstatusComponent
+    FlightstatusComponent,
     Cust2Component
   ],
   imports: [
