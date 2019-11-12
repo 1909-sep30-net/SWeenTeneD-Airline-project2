@@ -10,8 +10,19 @@ import {MaterialModule} from './module/material/material.module';
 import { LoginComponent } from '../app/shared/components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ExternalApiComponent } from './shared/components/external-api/external-api.component';
+<<<<<<< HEAD
 import {FormControl, FormsModule} from '@angular/forms/'
 import { Cust2Component } from './cust2/cust2.component';
+=======
+import {FormControl, FormsModule} from '@angular/forms/';
+import { CustomerComponent } from './shared/components/customer/customer.component';
+import { BookflightComponent } from './shared/components/bookflight/bookflight.component';
+import { CheckinComponent} from './shared/components/checkin/checkin.component';
+import {PricehistoryService} from '../../src/app/shared/services/pricehistory.service';
+import { FlightstatusComponent } from './shared/components/flightstatus/flightstatus.component';
+import { Cust2Component } from './cust2/cust2.component';
+
+>>>>>>> master
 
 @NgModule({
   declarations: [
@@ -22,6 +33,13 @@ import { Cust2Component } from './cust2/cust2.component';
     NavbarComponent,
     LoginComponent,
     ExternalApiComponent,
+<<<<<<< HEAD
+=======
+    CustomerComponent,
+    BookflightComponent,
+    CheckinComponent,
+    FlightstatusComponent,
+>>>>>>> master
     Cust2Component
   ],
   imports: [
@@ -33,7 +51,7 @@ import { Cust2Component } from './cust2/cust2.component';
     FormsModule
 
   ],
-  providers: [],
+  providers: [PricehistoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

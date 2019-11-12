@@ -23,7 +23,11 @@ export class Cust2Component implements OnInit {
   // }
 
 
+<<<<<<< HEAD
   constructor(private custApi: CustomerApiService) { }
+=======
+  constructor(private custApi: ApiService) { }
+>>>>>>> master
 
   ngOnInit() {
     //this.custApi.getItems().subscribe(data => this.customerr = data)

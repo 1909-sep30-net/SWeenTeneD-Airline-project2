@@ -3,15 +3,19 @@
 <div>
     <button (click)="showflight()">Airport</button> 
 </div>
-    
-<select>
-    <option *ngFor="let bf of flight" value="bf">{{bf.origin}}</option>
-</select><br><br>
 
-<select>
-    <option *ngFor="let bf of flight" value="bf">{{bf.destination}}</option>
-</select><br><br>
-
-<select>
-    <option *ngFor="let bf of flight" value="bf">{{bf.departureTime}} ~ {{bf.arrivalTime}}</option>
-</select><br><br>
+<form (ngSubmit)="buyticket(luggage)">
+    <select>
+        <option *ngFor="let bf of flight" value="flightID">
+            {{bf.flightID}}: {{bf.origin}} ~ {{bf.destination}}, {{bf.departureTime}} ~ {{bf.arrivalTime}}, ${{bf.price}}
+        </option>
+    </select><br><br>
+    Number of Luggage
+    <br><br>
+    <select name="luggage" id="luggage">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+    </select>
+    <button type="submit">Buy Ticket</button>
+</form>
