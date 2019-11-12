@@ -167,5 +167,8 @@ namespace Logic
         public Task<int> GetCustomerId();
 
         public Task<string> GetAirPortName(string name);
+
+        public Task<bool> CheckIn(int ticketId, string firstName, string lastName);
+
     }
 }

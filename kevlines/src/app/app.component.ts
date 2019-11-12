@@ -20,7 +20,7 @@ import { AuthService } from '../app/shared/services/auth.service';
 
 export class AppComponent implements OnInit {
 
-  constructor(public auth: AuthService) {}
+  constructor(private auth: AuthService) {}
 
   ngOnInit() {
     this.auth.localAuthSetup();
