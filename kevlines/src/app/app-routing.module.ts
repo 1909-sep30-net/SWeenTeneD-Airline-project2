@@ -15,8 +15,8 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path:'bookflight',component: BookflightComponent},
-  { path:'flightstatus',component: FlightstatusComponent},
-  { path:'checkin',component: CheckinComponent},
+  { path:'flightstatus',component: FlightstatusComponent, canActivate: [AuthGuard]},
+  { path:'checkin',component: CheckinComponent}, 
   { path: 'external-api', component: ExternalApiComponent, canActivate: [AuthGuard]}
 
 ];

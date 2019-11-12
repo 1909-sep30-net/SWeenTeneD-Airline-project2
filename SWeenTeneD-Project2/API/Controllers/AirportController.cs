@@ -93,8 +93,8 @@ namespace API.Controllers
         }
 
         // PUT: api/Airport/Name of airport you want to edit
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id, [FromBody] API.Models.APIAirport airport)
+        [HttpPut("")]
+        public async Task<IActionResult> Put([FromBody] API.Models.APIAirport airport)
         {
             Logic.Airport air = new Logic.Airport();
             air.Name = airport.Name;

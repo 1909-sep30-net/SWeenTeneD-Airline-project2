@@ -109,12 +109,11 @@ namespace API.Controllers
         }
 
         // PUT: api/Customer/First name of customer you want to edit
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id, [FromBody] API.Models.APICustomer Acustomer)
+        [HttpPut("")]
+        public async Task<IActionResult> Put([FromBody] API.Models.APICustomer Acustomer)
         {
 
             Logic.Customer cus = new Logic.Customer();
-            cus.FirstName = id;
             
             IEnumerable<Logic.Customer> Lcustomers = await iRepo.ReadCustomerList(cus);
 

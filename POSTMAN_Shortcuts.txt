@@ -1,0 +1,88 @@
+CUSTOMER
+
+POST
+{
+	"FirstName": "Joe",
+	"LastName": "Mama",
+	"Email": "spooner@gmail.com",
+	"Password":"jojo"
+}
+
+GET
+By first name
+
+PUT
+By first Name
+
+{
+	"CustomerID": 1,
+	"FirstName": "Joe",
+	"LastName": "Mama",
+	"Email": "spooner@gmail.com",
+	"Password":"jojo"
+}
+
+DELETE
+*********************************
+AIRPORT
+
+POST
+{
+	"Name": "Fredport",
+	"Location": "Arlington",
+	"Weather": "Sunny"
+}
+
+PUT
+By airport name
+{
+	"AirportID": 1,
+	"Name": "Fredport",
+	"Location": "Arlington",
+	"Weather": "Sunny"
+}
+
+GET
+
+DELETE
+By airport name
+*********************************
+FLIGHT
+
+POST
+
+	"Company":"Fredco",
+	"DepartureTime": "2019-11-05T08:47:10",
+	"ArrivalTime": "2019-11-06T02:15:15",
+	"Origin": "Fredport",
+	"Destination": "Nickport",
+	"SeatAvailable": 100,
+	"Price": 80.0
+
+PUT
+By ID
+
+GET
+By ID
+
+DELETE
+By ID
+***********************************
+FlightTicket
+POST
+	"FlightID": 4,
+	"CustomerID": 4,
+	"Price": 80.0,
+	"CheckIn": true,
+	"Luggage": 3
+
+PUT
+BY ID
+
+
+GET
+BY ID
+
+
+DELETE
+BY ID

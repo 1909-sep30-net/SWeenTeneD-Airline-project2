@@ -99,11 +99,10 @@ namespace API.Controllers
         }
 
         // PUT: api/FlightTicket/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] API.Models.APIFlightTicket AflightTicket)
+        [HttpPut("")]
+        public async Task<IActionResult> Put([FromBody] API.Models.APIFlightTicket AflightTicket)
         {
             Logic.FlightTicket fli = new Logic.FlightTicket();
-            fli.TicketID = id;
 
             IEnumerable<Logic.FlightTicket> LflightTickets = await iRepo.ReadTicketList(fli);
 
