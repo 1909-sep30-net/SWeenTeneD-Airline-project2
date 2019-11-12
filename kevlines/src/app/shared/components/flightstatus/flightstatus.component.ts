@@ -10,7 +10,7 @@ import {FlightstatusService} from '../../services/flightstatus.service';
 })
 export class FlightstatusComponent implements OnInit {
 
-  constructor(private _flightStatus: FlightstatusService) { }
+  constructor(public _flightStatus: FlightstatusService) { }
   public fs = []
 
 show(){
