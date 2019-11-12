@@ -1,7 +1,7 @@
 export default interface Customer {
-    id: number;
-    firstname: string;
-    lastname: string;
+    customerID: number;
+    firstName: string;
+    lastName: string;
     email: string;
     password: string;
 }

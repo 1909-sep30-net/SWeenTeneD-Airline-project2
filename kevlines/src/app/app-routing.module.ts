@@ -10,7 +10,6 @@ import { InterceptorService } from './shared/services/interceptor.service';
 import { ExternalApiComponent } from  '../app/shared/components/external-api/external-api.component';
 import { FlightstatusComponent } from './shared/components/flightstatus/flightstatus.component';
 
-
 const routes: Routes = [
   { path: '', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },

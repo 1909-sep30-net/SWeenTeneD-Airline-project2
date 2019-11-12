@@ -535,5 +535,34 @@ namespace Database
                 return find.Name;
             }
         }
+
+        public async Task<bool> CheckIn(int ticketId, string firstName, string lastName)
+        {
+            List<Customer> customers = await dbcontext.Customer.Where(c => c.FirstName == firstName
+             && c.LastName == lastName).AsNoTracking().ToListAsync();
+
+            if ( customers.Count < 1)
+            {
+                return false;
+            }
+            else 
+            {
+                foreach( Customer cus in customers)
+                {
+                    FlightTicket ticket = dbcontext.FlightTicket.Where(t => t.FlightTicketID == ticketId
+                        && t.CustomerID == cus.CustomerID).AsNoTracking().First();
+                    if ( ticket == null)
+                    {
+                        return false;
+                    }
+                }
+
+                FlightTicket ticket1 = await dbcontext.FlightTicket.FindAsync(ticketId);
+                ticket1.Checkin = true;
+
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+        }
     }
 }

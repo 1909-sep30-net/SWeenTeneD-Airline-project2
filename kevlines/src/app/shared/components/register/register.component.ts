@@ -5,6 +5,7 @@ import {NavbarComponent} from '../navbar/navbar.component';
 import {HttpClientModule} from '@angular/common/http';
 import {PricehistoryService} from '../../services/pricehistory.service';
 import IHistoryModel from '../../models/IHistoryModel';
+import {HttpClient} from '@angular/common/http'
 
 @Component({
   selector: 'app-register',
@@ -43,11 +44,5 @@ export class RegisterComponent implements OnInit {
     )
 */
   }
-
-
-
-
-
-
 
 }

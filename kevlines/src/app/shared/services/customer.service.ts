@@ -4,7 +4,6 @@ import Customer from '../models/customer';
 import {environment} from '../../../environments/environment';
 import { Observable } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -25,6 +24,5 @@ export class CustomerService {
     return this.httpClient.post<Customer>(url, customer)
   }
 */
-
 
 }

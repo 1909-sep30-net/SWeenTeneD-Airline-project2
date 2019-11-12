@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import {NavbarComponent} from '../navbar/navbar.component';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -13,8 +14,4 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
   }
 
-
-
-
-  
 }
