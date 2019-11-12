@@ -3,11 +3,27 @@
       
     <input #searchBox id="search-box" (input)="search(searchBox.value)" />
       
+    <div *ngFor="let cust of customers$ | async" >
+        <span *ngIf= "searchBox.value == cust.firstName; else e">
+            {{cust.firstName}} {{cust.lastName}}
+        </span>   
+        
+
+    </div>
+ 
+
+<!-- 
     <ul class="search-result">
         <li *ngFor="let cust of customers$ | async" >
             <a routerLink="/detail/{{cust.id}}">
-              {{cust.name}}
+                <span *ngIf= "searchBox.value == cust.firstName; else e">
+                        {{cust.firstName}} {{cust.lastName}}
+                </span>
+                <ng-template #e style="visibility: hidden;">
+                    Null
+                </ng-template>
             </a>
         </li>
     </ul>
+    -->
 </div>
