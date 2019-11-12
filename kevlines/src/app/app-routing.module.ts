@@ -8,6 +8,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './shared/services/interceptor.service';
 import { ExternalApiComponent } from  '../app/shared/components/external-api/external-api.component';
+import { FlightstatusComponent } from './shared/components/flightstatus/flightstatus.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path:'bookflight',component: BookflightComponent},
+  { path:'flightstatus',component: FlightstatusComponent},
   { path:'checkin',component: CheckinComponent},
   { path: 'external-api', component: ExternalApiComponent, canActivate: [AuthGuard]}
 

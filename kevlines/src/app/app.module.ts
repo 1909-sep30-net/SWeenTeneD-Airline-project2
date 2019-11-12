@@ -13,7 +13,9 @@ import { ExternalApiComponent } from './shared/components/external-api/external-
 import {FormControl, FormsModule} from '@angular/forms/';
 import { CustomerComponent } from './shared/components/customer/customer.component';
 import { BookflightComponent } from './shared/components/bookflight/bookflight.component';
-import { CheckinComponent} from './shared/components/checkin/checkin.component'
+import { CheckinComponent} from './shared/components/checkin/checkin.component';
+import {PricehistoryService} from '../../src/app/shared/services/pricehistory.service';
+import { FlightstatusComponent } from './shared/components/flightstatus/flightstatus.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { CheckinComponent} from './shared/components/checkin/checkin.component'
     ExternalApiComponent,
     CustomerComponent,
     BookflightComponent,
-    CheckinComponent
+    CheckinComponent,
+    FlightstatusComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,7 @@ import { CheckinComponent} from './shared/components/checkin/checkin.component'
     FormsModule
 
   ],
-  providers: [],
+  providers: [PricehistoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,9 +1,9 @@
 export default interface FlightStatus {
      FlightID: number;
 
-     Company:string 
-     DepartureTime:Date
-     ArrivalTime:Date 
+     company:string 
+     departureTime:Date
+     arrivalTime:Date 
      origin:string
      destination: string
      seatAvailable: number
