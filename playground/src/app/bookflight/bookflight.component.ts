@@ -9,14 +9,16 @@ import { BookflightService } from '../bookflight.service';
 })
 export class BookflightComponent implements OnInit {
 
-  items: BookFlight[];
+  public bookfight = [];
+  show() {
+    return this.bfapi.getItems().subscribe(data => {
+      this.bookfight = data
+    })
+  }
 
   constructor(private bfapi: BookflightService) { }
 
-  showflight() {
-    return this.bfapi.getItems()
-    .then(item => this.items = item);
-  }
+ 
 
   ngOnInit() {
   }
