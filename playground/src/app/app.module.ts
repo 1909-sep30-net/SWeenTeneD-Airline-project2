@@ -15,7 +15,7 @@ import { MessageComponent } from './message/message.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CustomerSearchComponent } from './customer-search/customer-search.component';
 import { Cust2Component } from './cust2/cust2.component';
-import { BookflightComponent } from './bookflight/bookflight.component';
+import { flightComponent } from './flight/flight.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { BookflightComponent } from './bookflight/bookflight.component';
     DashboardComponent,
     CustomerSearchComponent,
     Cust2Component,
-    BookflightComponent
+    flightComponent
   ],
   imports: [
     BrowserModule,

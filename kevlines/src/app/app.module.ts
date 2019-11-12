@@ -11,6 +11,7 @@ import { LoginComponent } from '../app/shared/components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ExternalApiComponent } from './shared/components/external-api/external-api.component';
 import {FormControl, FormsModule} from '@angular/forms/'
+import { Cust2Component } from './cust2/cust2.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +20,8 @@ import {FormControl, FormsModule} from '@angular/forms/'
     RegisterComponent,
     NavbarComponent,
     LoginComponent,
-    ExternalApiComponent
+    ExternalApiComponent,
+    Cust2Component
   ],
   imports: [
     BrowserModule,

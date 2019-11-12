@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { BookflightService } from './bookflight.service';
+import { ApiService } from './api.service';
 
-describe('BookflightService', () => {
+describe('ApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: BookflightService = TestBed.get(BookflightService);
+    const service: ApiService = TestBed.get(ApiService);
     expect(service).toBeTruthy();
   });
 });
