@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
   ping$(): Observable<any> {
     return this.http.get('/api/external');

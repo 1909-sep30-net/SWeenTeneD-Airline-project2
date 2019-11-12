@@ -17,10 +17,13 @@ export class PricehistoryService {
 
   
 
- 
+ getItems(): Observable<IHistoryModel[]> {
 
-  getItems(): Promise<IHistoryModel[]> {
-    const url = 'http://api.travelpayouts.com/v2/prices/latest?currency=usd&period_type=year&page=1&limit=30&show_to_affiliates=true&sorting=price&trip_class=0&token=be7446d916a179506429ff3b30a98b30';
-    return this.http.get<IHistoryModel[]>(url).toPromise();
-  }
+ 
+  return this.http.get<IHistoryModel[]>('http://api.travelpayouts.com/v2/prices/latest?currency=usd&period_type=year&page=1&limit=30&show_to_affiliates=true&sorting=price&trip_class=0&token=be7446d916a179506429ff3b30a98b30');
+  
+}
+
+
+ 
 }

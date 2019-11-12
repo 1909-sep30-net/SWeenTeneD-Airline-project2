@@ -14,24 +14,31 @@ import {HttpClient} from '@angular/common/http'
 })
 export class RegisterComponent implements OnInit {
 
-  items: IHistoryModel[] | null = null;
+ // items: IHistoryModel[] | null = null;
   
-  constructor(private _priceHistoryService: PricehistoryService) { }
+  constructor(public _priceHistoryService: PricehistoryService) { }
+
+  public phs = []
+
+
+  
+
+
+
+
+
 
   //Hold list of tickets of type IHistoryModel
-  listTickets:IHistoryModel[];
+ // listTickets:IHistoryModel[];
 
-  loadItems() {
-    return this._priceHistoryService.getItems()
-      .then(items => this.items = items);
-  }
-
+ 
 
 
 
 
 
   ngOnInit() {
+
 /*
     this._priceHistoryService.recentTickets().subscribe(
       //Data returned from rest API
@@ -43,6 +50,13 @@ export class RegisterComponent implements OnInit {
 
     )
 */
-  }
+
+this._priceHistoryService.getItems().subscribe(data =>{
+  this.phs = data
+})
 
 }
+
+}
+
+
