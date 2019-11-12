@@ -16,7 +16,6 @@ export class Cust2Component implements OnInit {
     })
   }
 
-  
   // show() {
   //   return this.custApi.getItems()
   //   .then(item => this.items = item);

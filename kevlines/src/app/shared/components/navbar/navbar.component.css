@@ -147,8 +147,15 @@ cursor: pointer;
 
 mat-toolbar{
     
-    width: 1283px;
+    width: 1280px;
     margin-top: -8px;
     margin-left: -7.8px;
     overflow: hidden;
+}
+
+#name-site{
+margin-top: 14px;
+font-size: 26px;
+color: #98b5c8;
+
 }
