@@ -4,7 +4,7 @@
 
 export const environment = {
 
-  kevApiBaseUrl: 'https://sweentened.azurewebsites.net',
+  BaseUrl: 'https://localhost:44340',
   production: false
 
 };
