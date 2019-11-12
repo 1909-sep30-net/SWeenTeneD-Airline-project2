@@ -3,6 +3,10 @@
 
 
 <div id='main'> 
-    <h1>Keep contente within div </h1>
+    <div *ngFor="let flight of fs">
+        <span> {{flight.company}} {{flight.origin}}  {{flight.departureTime}} {{flight.arrivalTime}} {{flight.destination}}  </span>
+
+    </div>
+
 
 </div>
