@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Customer from '../customer';
-import { ApiService } from '../api.service';
+import { CustomerApiService } from '../customerapi.service';
 
 @Component({
   selector: 'app-cust2',
@@ -23,7 +23,7 @@ export class Cust2Component implements OnInit {
   // }
 
 
-  constructor(private custApi: ApiService) { }
+  constructor(private custApi: CustomerApiService) { }
 
   ngOnInit() {
     //this.custApi.getItems().subscribe(data => this.customerr = data)

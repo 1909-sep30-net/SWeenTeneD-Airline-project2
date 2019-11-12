@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class CustomerApiService {
    url = `${environment.BaseUrl}/api/customer`;
 
   constructor(private httpClient: HttpClient) { }
